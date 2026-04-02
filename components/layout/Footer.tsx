@@ -72,10 +72,17 @@ export default function Footer() {
   return (
     <footer className="relative bg-ink overflow-hidden rounded-t-3xl">
       <Image
-        src="/images/star.svg"
+        src="/images/mobile_star.svg"
         alt=""
         fill
-        className="object-cover object-top pointer-events-none select-none"
+        className="object-cover object-top pointer-events-none select-none md:hidden"
+        aria-hidden
+      />
+      <Image
+        src="/images/footer_pattern.svg"
+        alt=""
+        fill
+        className="object-cover object-top pointer-events-none select-none hidden md:block"
         aria-hidden
       />
       <Container className="relative">

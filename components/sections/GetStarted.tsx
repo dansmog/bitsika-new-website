@@ -82,7 +82,7 @@ export default function GetStarted() {
               Get started with Bitsika in three easy steps
             </h2>
           </div>
-          <div className="w-full flex flex-col md:flex-row">
+          <div className="w-full flex flex-col lg:flex-row xl:flex-row">
             {/* Left: title + steps */}
             <div className="flex-1 max-w-140 order-2 lg:order-1">
               <div className="flex flex-col">
@@ -211,7 +211,7 @@ export default function GetStarted() {
             </div>
 
             {/* Right: phone mockup with game image */}
-            <div className="flex-1 flex items-center justify-center max-lg:w-full order-1 lg:order-2 mb-10 md:mb-0">
+            <div className="flex-1 flex items-center justify-center max-lg:w-full order-1 lg:order-2 mb-10 lg:mb-0 xl:mb:0">
               <div className="bg-[#F6F6F6] rounded-3xl w-161 overflow-hidden h-66 md:h-112.25 flex items-start justify-center pt-14.25">
                 <div className="relative">
                   {/* Phone frame */}

@@ -10,7 +10,7 @@ import callOfDuty from "@/assets/images/games/call_of_duty.png";
 export default function CtaBanner() {
   return (
     <section className="bg-ink py-10 md:py-14 overflow-hidden">
-      <Container className="flex flex-col md:flex-row items-center justify-between gap-10">
+      <Container className="flex flex-col lg:flex-row xl:flex-row items-center justify-between gap-10">
         <div className="flex flex-col gap-6 md:w-113 shrink-0">
           <div className="flex flex-col gap-4">
             <h2 className="max-w-100.75 text-white font-google-sans text-[32px] md:text-[40px] font-normal leading-[114%] tracking-[-0.4px]">
@@ -29,14 +29,14 @@ export default function CtaBanner() {
         </div>
 
         <div className="relative w-full md:flex-1 rounded-2xl flex md:justify-end items-center min-h-70">
-          <div className="relative w-full md:w-130 h-70 rounded-2xl shrink-0">
+          <div className="relative w-full md:w-160 lg:w-130 xl:w-130 md:h-90 lg:h-70 xl:h-70 rounded-2xl shrink-0">
             <Image
               src={callOfDuty}
               alt="Call of Duty: Mobile"
               fill
               className="object-cover rounded-2xl"
             />
-            <div className="hidden md:flex absolute -left-22 -bottom-2.5 translate-y-0 z-10">
+            <div className="hidden md:flex absolute md:-left-20 lg:-left-22 xl:-left-22 -bottom-2.5 translate-y-0 z-10">
               <Qrcode variant="blue" />
             </div>
           </div>
