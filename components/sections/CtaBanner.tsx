@@ -34,6 +34,8 @@ export default function CtaBanner() {
               src={callOfDuty}
               alt="Call of Duty: Mobile"
               fill
+              sizes="(max-width: 768px) 100vw, 520px"
+              priority
               className="object-cover rounded-2xl"
             />
             <div className="hidden md:flex absolute md:-left-20 lg:-left-22 xl:-left-22 -bottom-2.5 translate-y-0 z-10">
