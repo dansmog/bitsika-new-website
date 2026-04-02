@@ -3,9 +3,25 @@ const Ratings = () => {
     <div className="flex items-center shrink-0 flex-wrap py-2.5">
       <div className="gap-2 flex items-center">
         <div className="flex items-center gap-0.2">
+          {/* Single star on mobile */}
+          <svg
+            className="lg:hidden"
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11.1435 1.55185C10.6833 0.593823 9.31614 0.59382 8.85591 1.55185L6.88748 5.64939L2.35355 6.24305C1.30242 6.38068 0.864738 7.67952 1.64737 8.41748L4.96063 11.5416L4.12912 16.0021C3.93171 17.0611 5.05286 17.8461 5.9791 17.3468L9.99971 15.1792L14.0203 17.3468C14.9466 17.8461 16.0677 17.0611 15.8703 16.0021L15.0388 11.5416L18.352 8.41748C19.1347 7.67952 18.697 6.38068 17.6459 6.24305L13.1119 5.64939L11.1435 1.55185Z"
+              fill="white"
+            />
+          </svg>
+          {/* All stars on desktop */}
           {[...Array(4)].map((_, i) => (
             <svg
               key={i}
+              className="hidden lg:block"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -18,8 +34,9 @@ const Ratings = () => {
               />
             </svg>
           ))}
-          {/* Half star */}
+          {/* Half star — desktop only */}
           <svg
+            className="hidden lg:block"
             width="18"
             height="17"
             viewBox="0 0 18 17"
@@ -39,20 +56,20 @@ const Ratings = () => {
                 y2="8.33375"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="white" />
-                <stop offset="0.442308" stop-color="white" />
-                <stop offset="0.485577" stop-color="#494949" />
-                <stop offset="1" stop-color="#494949" />
+                <stop stopColor="white" />
+                <stop offset="0.442308" stopColor="white" />
+                <stop offset="0.485577" stopColor="#494949" />
+                <stop offset="1" stopColor="#494949" />
               </linearGradient>
             </defs>
           </svg>
         </div>
-        <span className="text-white  tracking-[-0.28px] whitespace-nowrap text-sm font-medium">
+        <span className="text-white  tracking-[-0.28px] whitespace-nowrap text-[13px] md:text-sm font-medium">
           4.4/5.0 Google Play Store
         </span>
       </div>
       <div className="w-px h-4 bg-white/30 mx-2" />
-      <span className="text-white text-sm items-center flex gap-1 font-medium tracking-[-0.28px]">
+      <span className="text-white text-[13px] md:text-sm items-center flex gap-1 font-medium tracking-[-0.28px]">
         <svg
           width="20"
           height="20"

@@ -1,7 +1,6 @@
 "use client";
 
 import { AnimatePresence, cubicBezier, motion } from "motion/react";
-import Image from "next/image";
 import { useState } from "react";
 import Container from "../layout/Container";
 
@@ -12,7 +11,7 @@ const testimonials = [
     name: "James Edward",
     location: "Lagos, Nigeria",
     flag: "🇳🇬",
-    avatar: "/images/avatars/james.jpg",
+    avatar: "",
   },
   {
     quote:
@@ -20,7 +19,7 @@ const testimonials = [
     name: "Kwame Asante",
     location: "Accra, Ghana",
     flag: "🇬🇭",
-    avatar: "/images/avatars/kwame.jpg",
+    avatar: "",
   },
   {
     quote:
@@ -28,7 +27,7 @@ const testimonials = [
     name: "Amara Diallo",
     location: "Dakar, Senegal",
     flag: "🇸🇳",
-    avatar: "/images/avatars/amara.jpg",
+    avatar: "",
   },
 ];
 
@@ -81,7 +80,7 @@ export default function Testimonials() {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.4, ease }}
-                className="font-google-sans font-normal text-[36px] leading-[114%] tracking-[-0.01em] text-black max-w-4xl"
+                className="font-google-sans font-normal text-xl md:text-[36px] leading-[114%] tracking-[-0.01em] text-black max-w-4xl"
               >
                 &ldquo;{t.quote}&rdquo;
               </motion.blockquote>
@@ -90,7 +89,7 @@ export default function Testimonials() {
 
           <div className="w-full h-px my-6 bg-border-default"></div>
 
-          <div className="flex items-end justify-between gap-6 flex-wrap">
+          <div className="flex flex-col md:flex-row md:items-end justify-between md:gap-6 flex-wrap">
             {/* Author */}
             <AnimatePresence mode="wait">
               <motion.div
@@ -101,21 +100,9 @@ export default function Testimonials() {
                 transition={{ duration: 0.3, ease }}
                 className="flex items-center gap-3"
               >
-                <div className="bg-[#E8E8E8] overflow-hidden shrink-0" style={{ width: 48, height: 48, borderRadius: 10.38, border: "1.3px solid #ECECEC" }}>
-                  <Image
-                    src={t.avatar}
-                    alt={t.name}
-                    width={40}
-                    height={40}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).style.display =
-                        "none";
-                    }}
-                  />
-                </div>
+                <div className="bg-[#E8E8E8] shrink-0" style={{ width: 48, height: 48, borderRadius: 10.38, border: "1.3px solid #ECECEC" }} />
                 <div>
-                  <p className="font-google-sans font-medium text-sm text-[#0A0A0A] leading-tight">
+                  <p className="font-google-sans font-medium text-sm text-ink leading-tight">
                     {t.name}
                   </p>
                   <p className="font-google-sans text-sm text-[#6B6B6B] leading-tight mt-0.5">
@@ -125,8 +112,10 @@ export default function Testimonials() {
               </motion.div>
             </AnimatePresence>
 
+            <div className="w-full h-px my-6 bg-border-default flex md:hidden"></div>
+
             {/* Controls */}
-            <div className="flex items-center gap-3">
+            <div className="flex justify-between md:justify-items-start items-center gap-3">
               <button
                 onClick={prev}
                 aria-label="Previous testimonial"

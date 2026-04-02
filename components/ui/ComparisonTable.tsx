@@ -67,8 +67,8 @@ const rows = [
   },
 ]
 
-const cellBase = 'px-5 py-4 text-sm text-ink font-[Inter_Variable] align-top'
-const headerBase = 'px-5 py-4 text-sm font-semibold text-left font-[Inter_Variable]'
+const cellBase = 'px-5 py-4 text-sm text-[#505050]  align-top'
+const headerBase = 'px-5 py-4 text-sm font-semibold text-left '
 
 export default function ComparisonTable() {
   return (

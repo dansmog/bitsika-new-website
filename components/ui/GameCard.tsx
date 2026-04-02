@@ -18,7 +18,7 @@ export default function GameCard({ image, title, subtitle }: GameCardProps) {
         />
       </div>
       <div className="flex flex-col gap-0.5">
-        <span className="text-[#008CDF] font-[Inter_Variable] text-sm font-medium leading-[130%] tracking-[-0.14px]">{title}</span>
+        <span className="text-[#008CDF] font-google-sans text-sm font-medium leading-[130%] tracking-[-0.14px]">{title}</span>
         <span className="text-[#323232] font-google-sans text-base font-normal leading-[120%]">{subtitle}</span>
       </div>
     </div>

@@ -86,7 +86,43 @@ export default function Footer() {
 
         <div className="border-t border-border-dark" />
 
-        <div className="flex gap-16 py-10">
+        {/* Contact Us — top on mobile, right on desktop */}
+        <div className="flex flex-col gap-4 py-10 md:hidden">
+          <span className="text-ink-muted text-xs font-medium leading-none tracking-[-0.24px]">
+            Contact Us
+          </span>
+
+          <div className="flex flex-col gap-1">
+            <span className="text-white text-xs font-medium leading-none tracking-[-0.24px]">
+              E-mail
+            </span>
+            <div className="border-b border-border-dark pb-4 mt-1">
+              <div className="flex items-center gap-2">
+                <span className="text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]">
+                  info@bitsika.com
+                </span>
+                <CopyButton value="info@bitsika.com" />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <span className="text-white text-xs font-medium leading-none tracking-[-0.24px]">
+              Phone Number
+            </span>
+            <div className="border-b border-border-dark pb-4 mt-1">
+              <div className="flex items-center gap-2">
+                <span className="text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]">
+                  +233 (0) 123-249-5839
+                </span>
+                <CopyButton value="+2330123-249-5839" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Links grid */}
+        <div className="flex flex-wrap gap-x-16 gap-y-10 py-10 max-md:pt-0">
           <div className="flex flex-col gap-3 min-w-35">
             <span className="text-white text-xs font-medium leading-none tracking-[-0.24px]">
               Use cases
@@ -146,7 +182,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-3 min-w-35">
+          <div className="flex flex-col gap-3 min-w-35 max-md:w-full">
             <span className="text-white text-xs font-medium leading-none tracking-[-0.24px]">
               Socials
             </span>
@@ -172,9 +208,10 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex-1" />
+          <div className="hidden md:block flex-1" />
 
-          <div className="flex flex-col gap-4 min-w-55">
+          {/* Contact Us — desktop only (inline) */}
+          <div className="hidden md:flex flex-col gap-4 min-w-55">
             <span className="text-ink-muted text-xs font-medium leading-none tracking-[-0.24px]">
               Contact Us
             </span>

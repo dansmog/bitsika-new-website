@@ -76,7 +76,7 @@ export default function BuiltDifferent() {
           <h2 className="font-google-sans font-normal text-[40px] leading-[114%] tracking-[-0.01em] text-ink">
             Built Different. On Purpose.
           </h2>
-          <p className="font-[Inter_Variable] font-normal text-base leading-[130%] tracking-[-0.01em] text-ink-secondary">
+          <p className=" font-normal text-base leading-[130%] tracking-[-0.01em] text-ink-secondary">
             See how Bitsika compares to traditional cards and other virtual card providers
           </p>
         </div>
@@ -88,10 +88,10 @@ export default function BuiltDifferent() {
             >
               <div className="shrink-0">{provider.icon}</div>
               <div className="flex flex-row md:flex-col">
-                <span className="font-[Inter_Variable] font-semibold text-sm leading-[130%] text-ink">
+                <span className=" font-semibold text-sm leading-[130%] text-ink">
                   Bitsika vs.
                 </span>
-                <span className="font-[Inter_Variable] font-semibold text-sm leading-[130%] text-ink">
+                <span className=" font-semibold text-sm leading-[130%] text-ink">
                   {provider.name}
                 </span>
               </div>

@@ -3,7 +3,7 @@ export default function Qrcode({ variant = 'dark' }: { variant?: 'dark' | 'blue'
   const innerBg = variant === 'blue' ? 'bg-[#002975]' : 'bg-[#222222]'
   const shadow = variant === 'blue' ? 'shadow-[0px_4px_12px_2px_#00000040]' : ''
   return (
-    <div className={`flex flex-col items-center px-2.25 pt-2.25 pb-3 gap-3 justify-self-center ${outerBg} ${shadow} rounded-2xl`}>
+    <div className={`hidden md:flex flex-col items-center px-2.25 pt-2.25 pb-3 gap-3 justify-self-center ${outerBg} ${shadow} rounded-2xl`}>
       <div className={`${innerBg} pt-3 pb-[12.95px] pl-2.75 pr-[11.95px] flex justify-center items-center rounded-[10px]`}>
         <svg
           width="142"

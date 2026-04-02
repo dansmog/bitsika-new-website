@@ -57,7 +57,7 @@ export default function InsideBitsika() {
           <h2 className="font-google-sans font-normaln text-2xl md:text-[40px] leading-[114%] tracking-[-0.01em] text-white">
             Inside Bitsika
           </h2>
-          <p className="font-[Inter_Variable] font-normal text-base leading-[130%] tracking-[-0.01em] text-[#8A8A8A] max-w-sm">
+          <p className="font-normal text-base leading-[130%] tracking-[-0.01em] text-[#8A8A8A] max-w-sm">
             Product updates, feature breakdowns, and ideas shaping how people pay online across borders.
           </p>
         </div>
