@@ -15,7 +15,14 @@ export default function HeroBanner() {
         src="/images/hero_star.svg"
         alt=""
         fill
-        className="object-cover object-top pointer-events-none select-none"
+        className="hidden md:block object-cover object-top pointer-events-none select-none"
+        aria-hidden
+      />
+      <Image
+        src="/images/hero_mobile_star.svg"
+        alt=""
+        fill
+        className="block md:hidden object-cover object-top pointer-events-none select-none"
         aria-hidden
       />
       <div className="grid grid-cols-3 gap-5 md:gap-10 items-center max-lg:grid-cols-1 px-5 md:px-19.25">
