@@ -29,7 +29,7 @@ export default function CtaBanner() {
         </div>
 
         <div className="relative w-full md:flex-1 rounded-2xl flex md:justify-end items-center min-h-70">
-          <div className="relative w-full md:w-160 lg:w-130 xl:w-130 md:h-90 lg:h-70 xl:h-70 rounded-2xl shrink-0">
+          <div className="relative w-full md:w-160 lg:w-130 xl:w-130 h-70 md:h-90 lg:h-70 xl:h-70 rounded-2xl shrink-0">
             <Image
               src={callOfDuty}
               alt="Call of Duty: Mobile"

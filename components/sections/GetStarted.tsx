@@ -54,7 +54,11 @@ const imageSizes = [
   { width: 416.857, height: 265.964 },
 ];
 
-const mobileImageSize = { width: 174, height: 111.016 };
+const mobileImageSizes = [
+  { width: 174, height: 111.016 },
+  { width: 204, height: 130.16 },
+  { width: 232, height: 148.02 },
+];
 
 export default function GetStarted() {
   const [activeStep, setActiveStep] = useState(0);
@@ -212,7 +216,7 @@ export default function GetStarted() {
 
             {/* Right: phone mockup with game image */}
             <div className="flex-1 flex items-center justify-center max-lg:w-full order-1 lg:order-2 mb-10 lg:mb-0 xl:mb:0">
-              <div className="bg-[#F6F6F6] rounded-3xl w-161 overflow-hidden h-66 md:h-112.25 flex items-start justify-center pt-14.25">
+              <div className="bg-[#F6F6F6] rounded-3xl w-161 overflow-hidden h-66 md:h-112.25 flex items-start justify-center pt-10 md:pt-14.25">
                 <div className="relative">
                   {/* Phone frame */}
                   <div className="bg-black rounded-3xl w-[193.634px] md:w-82 h-auto md:h-178.25 aspect-328/713 overflow-hidden">
@@ -325,11 +329,11 @@ export default function GetStarted() {
                   {/* Game image overlapping the phone */}
                   <motion.div
                     animate={{
-                      width: isMobile ? mobileImageSize.width : imageSizes[activeStep].width,
-                      height: isMobile ? mobileImageSize.height : imageSizes[activeStep].height,
+                      width: isMobile ? mobileImageSizes[activeStep].width : imageSizes[activeStep].width,
+                      height: isMobile ? mobileImageSizes[activeStep].height : imageSizes[activeStep].height,
                     }}
                     transition={transition}
-                    className="absolute left-1/2 -translate-x-1/2 top-20 md:top-22.5 rounded-2xl overflow-hidden shadow-lg"
+                    className="absolute left-1/2 -translate-x-1/2 top-18 md:top-22.5 rounded-2xl overflow-hidden shadow-lg"
                   >
                     <Image
                       src={callOfDuty}
