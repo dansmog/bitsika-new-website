@@ -12,7 +12,7 @@ export default function InfoCard({
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-4">
-        <h3 className="text-ink text-xl font-google-sans font-semibold">
+        <h3 className="text-ink text-xl font-google-sans font-normal">
           {title}
         </h3>
         <p className="text-ink-secondary text-base font-normal leading-[130%] tracking-[-0.16px]">

@@ -11,7 +11,7 @@ import { GodRays } from "@paper-design/shaders-react";
 
 export default function HeroBanner() {
   return (
-    <section className="relative bg-brand-blue py-8.75 md:py-12 mx-4 rounded-2xl overflow-hidden">
+    <section className="relative bg-brand-blue py-8.75 md:py-12 overflow-hidden">
       {/* Mobile: CSS sun rays from top-right corner */}
       <div className="md:hidden overflow-hidden  absolute inset-0" aria-hidden>
         <GodRays
@@ -40,7 +40,7 @@ export default function HeroBanner() {
         className="hidden md:block object-cover object-top pointer-events-none select-none"
         aria-hidden
       />
-      <div className="relative z-10  grid grid-cols-3 gap-5 md:gap-10 items-center max-lg:grid-cols-1 px-5 md:px-19.25">
+      <div className="relative z-10 max-w-360 mx-auto grid grid-cols-3 gap-5 md:gap-10 items-center max-lg:grid-cols-1 px-5 md:px-19.25">
         <h1 className="text-white text-[28px] md:text-[40px] font-google-sans font-medium leading-[31.92px] md:leading-[45.6px] tracking-[-0.8px] max-xl:text-3xl">
           Directly top-up your favourite mobile games with crypto like Bitcoin,
           USDT and more.

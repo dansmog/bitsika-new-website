@@ -113,7 +113,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-1">
+          {/* <div className="flex flex-col gap-1">
             <span className="text-white text-xs font-medium leading-none tracking-[-0.24px]">
               Phone Number
             </span>
@@ -125,12 +125,12 @@ export default function Footer() {
                 <CopyButton value="+2330123-249-5839" />
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Links grid */}
         <div className="flex flex-wrap gap-x-16 gap-y-10 py-10 max-md:pt-0">
-          <div className="flex flex-col gap-3 min-w-35">
+          {/* <div className="flex flex-col gap-3 min-w-35">
             <span className="text-white text-xs font-medium leading-none tracking-[-0.24px]">
               Use cases
             </span>
@@ -160,7 +160,7 @@ export default function Footer() {
                 Anonymous Payments
               </Link>
             </div>
-          </div>
+          </div> */}
 
           {/* Resources */}
           <div className="flex flex-col gap-3 min-w-35">
@@ -227,7 +227,7 @@ export default function Footer() {
               <span className="text-white text-xs font-medium leading-none tracking-[-0.24px]">
                 E-mail
               </span>
-              <div className="border-b border-border-dark pb-4 mt-1">
+              <div className="border-b border-border-dark md:border-0 pb-4 mt-1">
                 <div className="flex items-center gap-2">
                   <span className="text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]">
                     info@bitsika.com
@@ -237,7 +237,7 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="flex flex-col gap-1">
+            {/* <div className="flex flex-col gap-1">
               <span className="text-white text-xs font-medium leading-none tracking-[-0.24px]">
                 Phone Number
               </span>
@@ -249,7 +249,7 @@ export default function Footer() {
                   <CopyButton value="+2330123-249-5839" />
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 

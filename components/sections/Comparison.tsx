@@ -5,7 +5,7 @@ export default function Comparison() {
   return (
     <section className="bg-white pb-20">
       <Container>
-        <section className="pt-11 md:pt-20.75 pb-10.25 md:pb-26.75 flex flex-col gap-7">
+        <section className="pt-11 md:pt-20.75 pb-10.25 md:pb-13.75 flex flex-col gap-7">
           <h2 className="max-w-180 font-google-sans font-normal text-2xl md:text-[40px] leading-[114%] tracking-[-0.01em]">
             How Bitsika Virtual Cards Compare to Other Virtual Card Apps and
             Bank Apps.

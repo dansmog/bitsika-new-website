@@ -85,12 +85,12 @@ const faqs = [
 ];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="bg-[#F5F5F5] py-11 md:py-20">
+    <section className="bg-[#F5F5F5] py-8 md:py-20">
       <Container>
-        <div className="flex gap-16 max-lg:flex-col md:gap-40">
+        <div className="flex gap-5 max-lg:flex-col md:gap-40">
           <div className="w-86.5 shrink-0 max-lg:w-full">
             <h2 className="font-google-sans font-normal text-2xl md:text-[40px] white leading-[114%] tracking-[-0.4px] text-[#1A1A1A]">
               Frequently asked questions
