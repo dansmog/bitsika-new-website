@@ -3,31 +3,32 @@ import Container from "@/components/layout/Container";
 import blogImage1 from "@/assets/images/blog/blog_image_1.png";
 import blogImage2 from "@/assets/images/blog/blog_image_2.png";
 import blogImage3 from "@/assets/images/blog/blog_image_3.png";
+import blogImage from '@/assets/images/blog/blog_image.jpg';
 
 const articles: { title: string; image: StaticImageData }[] = [
   {
     title: "Introducing Reusable Premium Cards for Ongoing Online Payments",
-    image: blogImage1,
+    image: blogImage,
   },
   {
     title: "How Bitsika Protects Your Card Details When You Pay Online",
-    image: blogImage2,
+    image: blogImage,
   },
   {
     title: "Updates to Our Virtual Cards: What Changed and Why It Matters",
-    image: blogImage3,
+    image: blogImage,
   },
   {
     title: "Bitsika's New Look: A Simpler, More Intuitive Virtual Card Experience",
-    image: blogImage1,
+    image: blogImage,
   },
   {
     title: "Maximize Card Security with Bitsika's Advanced Fraud Protection Features",
-    image: blogImage2,
+    image: blogImage,
   },
   {
     title: "Unlock Global Shopping: How Bitsika Makes Online Payments Easy",
-    image: blogImage3,
+    image: blogImage,
   },
 ];
 

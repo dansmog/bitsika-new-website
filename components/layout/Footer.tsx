@@ -169,22 +169,44 @@ export default function Footer() {
             </span>
             <div className="flex flex-col items-start self-stretch">
               <Link
-                href="#"
+                href="https://www.bitsika.com/bitsika"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
               >
                 Blog
               </Link>
               <Link
-                href="#"
+                href="https://www.bitsika.com/privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
               >
                 Privacy Policy
               </Link>
               <Link
-                href="#"
+                href="https://www.bitsika.com/terms-conditions"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
               >
                 Terms and Conditions
+              </Link>
+              <Link
+                href="https://www.bitsika.com/kyc-aml"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
+              >
+                KYC and AML Policy
+              </Link>
+              <Link
+                href="https://www.bitsika.com/iran-ofac-clarification"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
+              >
+                Sanctions and OFAC Policy
               </Link>
             </div>
           </div>
