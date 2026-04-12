@@ -7,7 +7,7 @@ import Comparison from "@/components/sections/Comparison";
 import CtaBanner from "@/components/sections/CtaBanner";
 import GamesGrid from "@/components/sections/GamesGrid";
 import GetStarted from "@/components/sections/GetStarted";
-import InfoBlock from "@/components/sections/InfoBlock";
+import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
 
 const gamingBlock = {
