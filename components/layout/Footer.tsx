@@ -169,7 +169,7 @@ export default function Footer() {
             </span>
             <div className="flex flex-col items-start self-stretch">
               <Link
-                href="https://www.bitsika.com/bitsika"
+                href="https://www.bitsika.com/user/bitsika"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
