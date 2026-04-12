@@ -1,8 +1,13 @@
-const Ratings = () => {
+type RatingsProps = {
+  googlePlayStat: string;
+  userCount: string;
+};
+
+const Ratings = ({ googlePlayStat, userCount }: RatingsProps) => {
   return (
     <div className="flex items-center shrink-0 flex-wrap py-2.5">
       <div className="gap-2 flex items-center">
-        <div className="flex items-center gap-0.2">
+        <div className="flex items-center gap-0.3">
           {/* Single star on mobile */}
           <svg
             className="lg:hidden"
@@ -22,8 +27,8 @@ const Ratings = () => {
             <svg
               key={i}
               className="hidden lg:block"
-              width="20"
-              height="20"
+              width="16"
+              height="16"
               viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -37,8 +42,8 @@ const Ratings = () => {
           {/* Half star — desktop only */}
           <svg
             className="hidden lg:block"
-            width="18"
-            height="17"
+            width="16"
+            height="15"
             viewBox="0 0 18 17"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -65,14 +70,14 @@ const Ratings = () => {
           </svg>
         </div>
         <span className="text-white  tracking-[-0.28px] whitespace-nowrap text-[13px] md:text-sm font-medium">
-          4.4/5.0 Google Play Store
+          {googlePlayStat}
         </span>
       </div>
-      <div className="w-px h-4 bg-white/30 mx-2" />
+      <div className="w-px h-4 bg-white/30 mx-1" />
       <span className="text-white text-[13px] md:text-sm items-center flex gap-1 font-medium tracking-[-0.28px]">
         <svg
-          width="20"
-          height="20"
+          width="16"
+          height="16"
           viewBox="0 0 20 20"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +99,7 @@ const Ratings = () => {
             fill="white"
           />
         </svg>
-        400,000+ Users
+        {userCount}
       </span>
     </div>
   );

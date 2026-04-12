@@ -8,6 +8,21 @@ import {
   AppStoreButton,
   GooglePlayButton,
 } from "@/components/ui/DownloadButtons";
+import type { FooterContent, HeroContent } from "@/content/shape";
+
+const RESOURCE_URLS = [
+  "https://www.bitsika.com/privacy-policy",
+  "https://www.bitsika.com/terms-conditions",
+  "https://www.bitsika.com/kyc-aml",
+  "https://www.bitsika.com/iran-ofac-clarification",
+  "https://www.bitsika.com/user/bitsika",
+];
+
+const SOCIAL_URLS = [
+  "https://twitter.com/bitsika",
+  "https://www.linkedin.com/company/bitsika",
+  "https://www.instagram.com/bitsika",
+];
 
 function CopyIcon() {
   return (
@@ -68,7 +83,12 @@ function CopyButton({ value }: { value: string }) {
   );
 }
 
-export default function Footer() {
+type FooterProps = {
+  footer: FooterContent;
+  hero: HeroContent;
+};
+
+export default function Footer({ footer, hero }: FooterProps) {
   return (
     <footer className="relative bg-ink overflow-hidden rounded-t-3xl">
       <Image
@@ -87,8 +107,14 @@ export default function Footer() {
       />
       <Container className="relative">
         <div className="flex items-center gap-3 pt-12 pb-10">
-          <AppStoreButton />
-          <GooglePlayButton />
+          <AppStoreButton
+            desktopLabel={hero.desktopAppStoreLabel}
+            mobileLabel={hero.mobileAppStoreLabel}
+          />
+          <GooglePlayButton
+            desktopLabel={hero.desktopGooglePlayLabel}
+            mobileLabel={hero.mobileGooglePlayLabel}
+          />
         </div>
 
         <div className="border-t border-border-dark" />
@@ -96,7 +122,7 @@ export default function Footer() {
         {/* Contact Us — top on mobile, right on desktop */}
         <div className="flex flex-col gap-4 py-10 md:hidden">
           <span className="text-ink-muted text-xs font-medium leading-none tracking-[-0.24px]">
-            Contact Us
+            {footer.contactLabel}
           </span>
 
           <div className="flex flex-col gap-1">
@@ -106,9 +132,9 @@ export default function Footer() {
             <div className="border-b border-border-dark pb-4 mt-1">
               <div className="flex items-center gap-2">
                 <span className="text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]">
-                  info@bitsika.com
+                  {footer.contactEmail}
                 </span>
-                <CopyButton value="info@bitsika.com" />
+                <CopyButton value={footer.contactEmail} />
               </div>
             </div>
           </div>
@@ -165,75 +191,39 @@ export default function Footer() {
           {/* Resources */}
           <div className="flex flex-col gap-3 min-w-35">
             <span className="text-white text-xs font-medium leading-none tracking-[-0.24px]">
-              Resources
+              {footer.resourceLabel}
             </span>
             <div className="flex flex-col items-start self-stretch">
-              <Link
-                href="https://www.bitsika.com/user/bitsika"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
-              >
-                Blog
-              </Link>
-              <Link
-                href="https://www.bitsika.com/privacy-policy"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
-              >
-                Privacy Policy
-              </Link>
-              <Link
-                href="https://www.bitsika.com/terms-conditions"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
-              >
-                Terms and Conditions
-              </Link>
-              <Link
-                href="https://www.bitsika.com/kyc-aml"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
-              >
-                KYC and AML Policy
-              </Link>
-              <Link
-                href="https://www.bitsika.com/iran-ofac-clarification"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
-              >
-                Sanctions and OFAC Policy
-              </Link>
+              {footer.resources.map((label, i) => (
+                <Link
+                  key={i}
+                  href={RESOURCE_URLS[i] ?? "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
+                >
+                  {label}
+                </Link>
+              ))}
             </div>
           </div>
 
           <div className="flex flex-col gap-3 min-w-35 max-md:w-full">
             <span className="text-white text-xs font-medium leading-none tracking-[-0.24px]">
-              Socials
+              {footer.socialLabel}
             </span>
             <div className="flex flex-col items-start self-stretch">
-              <Link
-                href="#"
-                className="flex items-center gap-1 pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
-              >
-                Twitter/X <ExternalLinkIcon />
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-1 pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
-              >
-                LinkedIn <ExternalLinkIcon />
-              </Link>
-              <Link
-                href="#"
-                className="flex items-center gap-1 pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
-              >
-                Instagram <ExternalLinkIcon />
-              </Link>
+              {footer.socials.map((label, i) => (
+                <Link
+                  key={i}
+                  href={SOCIAL_URLS[i] ?? "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]"
+                >
+                  {label} <ExternalLinkIcon />
+                </Link>
+              ))}
             </div>
           </div>
 
@@ -242,7 +232,7 @@ export default function Footer() {
           {/* Contact Us — desktop only (inline) */}
           <div className="hidden md:flex flex-col gap-4 min-w-55">
             <span className="text-ink-muted text-xs font-medium leading-none tracking-[-0.24px]">
-              Contact Us
+              {footer.contactLabel}
             </span>
 
             <div className="flex flex-col gap-1">
@@ -252,9 +242,9 @@ export default function Footer() {
               <div className="border-b border-border-dark md:border-0 pb-4 mt-1">
                 <div className="flex items-center gap-2">
                   <span className="text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]">
-                    info@bitsika.com
+                    {footer.contactEmail}
                   </span>
-                  <CopyButton value="info@bitsika.com" />
+                  <CopyButton value={footer.contactEmail} />
                 </div>
               </div>
             </div>
@@ -279,7 +269,7 @@ export default function Footer() {
 
         <div className="py-5">
           <span className="text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]">
-            © Bitsika 2026. All right reserved.
+            {footer.copyright}
           </span>
         </div>
       </Container>

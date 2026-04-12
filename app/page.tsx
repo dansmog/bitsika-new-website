@@ -9,61 +9,36 @@ import GamesGrid from "@/components/sections/GamesGrid";
 import GetStarted from "@/components/sections/GetStarted";
 import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
+import { getContent, getImageContent } from "@/content";
 
-const gamingBlock = {
-  cards: [
-    {
-      title: "Crypto-Powered Game Top-Ups",
-      description: `Use your crypto balance (USDT, BTC, etc.) to purchase in-game currency directly. No need to sell crypto for fiat money first. It's a seamless bridge between your digital assets and your digital entertainment.`,
-      checklistItems: [
-        "Deposit BTC or USDT into your Bitsika balance.",
-        "Create or Top Up your virtual cards.",
-        "Use from any country, with no restrictions.",
-      ],
-    },
-    {
-      title: "Save on Big purchases",
-      description:
-        "By buying outside of Apple and Google's app stores, you avoid their 30% commission. This saving is passed directly to you, making every gem, coin, and battle pass cheaper than buying in-game.",
-      checklistItems: [
-        "No KYC Documents.",
-        "No phone number.",
-        "No ID verification required.",
-      ],
-    },
-    {
-      title: "Get Verified and Play in Under an Hour (KYC)",
-      description:
-        "Our KYC process is fast and streamlined. In most cases, you'll be fully approved and ready to top up within 60 minutes. We make compliance quick so you can get back to gaming.",
-      checklistItems: [
-        "Generate your virtual card on the Bitsika platform.",
-        "Add the card to your preferred wallet on Apple Pay, Google Pay, or PayPal.",
-        "Once approved, your card will be ready for secure payments through the wallet.",
-      ],
-    },
-  ],
-};
+export default async function HomePage() {
+  const [content, imageContent] = await Promise.all([
+    getContent(),
+    getImageContent(),
+  ]);
 
-export default function HomePage() {
   return (
     <main>
-      <Header />
-      <GamesGrid />
-      <InfoBlock cards={gamingBlock.cards} />
-      <CtaBanner />
-      <Comparison />
-      <InfoBlock cards={gamingBlock.cards} />
-      <CtaBanner />
-      <GetStarted />
-      <InfoBlock cards={gamingBlock.cards} />
-      <CtaBanner />
-      <Testimonials />
-      <InfoBlock cards={gamingBlock.cards} />
-      <CtaBanner />
-      <BuiltDifferent />
-      <InsideBitsika />
-      <FAQ />
-      <Footer />
+      <Header hero={content.hero} />
+      <GamesGrid products={imageContent.products} />
+      <InfoBlock cards={content.infoBoxGroups[0]} />
+      <CtaBanner cta={content.ctas[0]} hero={content.hero} />
+      <Comparison table={content.table} />
+      <InfoBlock cards={content.infoBoxGroups[1]} />
+      <CtaBanner cta={content.ctas[1]} hero={content.hero} />
+      <GetStarted steps={content.steps} />
+      <InfoBlock cards={content.infoBoxGroups[2]} />
+      <CtaBanner cta={content.ctas[2]} hero={content.hero} />
+      <Testimonials
+        testimonials={content.testimonials}
+        testimonialImages={imageContent.testimonialImages}
+      />
+      <InfoBlock cards={content.infoBoxGroups[3]} />
+      <CtaBanner cta={content.ctas[3]} hero={content.hero} />
+      <BuiltDifferent comparison={content.comparison} vrs={imageContent.vrs} />
+      <InsideBitsika blog={content.blog} articles={imageContent.blogs} />
+      <FAQ faq={content.faq} />
+      <Footer footer={content.footer} hero={content.hero} />
     </main>
   );
 }

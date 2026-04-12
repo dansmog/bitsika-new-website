@@ -1,4 +1,12 @@
-function AppStoreButton() {
+import { splitBold } from "@/lib/formatText";
+
+type DownloadButtonProps = {
+  desktopLabel: string;
+  mobileLabel: string;
+};
+
+function AppStoreButton({ desktopLabel, mobileLabel }: DownloadButtonProps) {
+  const mobile = splitBold(mobileLabel);
   return (
     <span
       aria-disabled="true"
@@ -22,19 +30,22 @@ function AppStoreButton() {
         </defs>
       </svg>
 
-      <span className="hidden lg:inline">Download on the App Store</span>
+      <span className="hidden lg:inline">{desktopLabel}</span>
 
       <span className="flex flex-col items-start lg:hidden">
         <span className="text-[10px] font-normal leading-none">
-          Download on the
+          {mobile.prefix}
         </span>
-        <span className="text-base font-semibold leading-tight">App Store</span>
+        <span className="text-base font-semibold leading-tight">
+          {mobile.emphasis}
+        </span>
       </span>
     </span>
   );
 }
 
-function GooglePlayButton() {
+function GooglePlayButton({ desktopLabel, mobileLabel }: DownloadButtonProps) {
+  const mobile = splitBold(mobileLabel);
   return (
     <a
       href="https://play.google.com/store/apps/details?id=africa.bitsika.bitsika_mobile&hl=en_GB&gl=gh"
@@ -74,13 +85,15 @@ function GooglePlayButton() {
       </svg>
 
       {/* Desktop: inline text */}
-      <span className="hidden lg:inline">Get it on Google Play</span>
+      <span className="hidden lg:inline">{desktopLabel}</span>
 
       {/* Mobile: stacked text */}
       <span className="flex flex-col items-start lg:hidden">
-        <span className="text-[10px] font-normal leading-none">Get it on</span>
+        <span className="text-[10px] font-normal leading-none">
+          {mobile.prefix}
+        </span>
         <span className="text-base font-semibold leading-tight">
-          Google Play
+          {mobile.emphasis}
         </span>
       </span>
     </a>

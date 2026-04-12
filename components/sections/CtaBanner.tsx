@@ -6,25 +6,35 @@ import {
 } from "@/components/ui/DownloadButtons";
 import Qrcode from "@/components/ui/Qrcode";
 import callOfDuty from "@/assets/images/games/call_of_duty.png";
+import type { CtaContent, HeroContent } from "@/content/shape";
 
-export default function CtaBanner() {
+type CtaBannerProps = {
+  cta: CtaContent;
+  hero: HeroContent;
+};
+
+export default function CtaBanner({ cta, hero }: CtaBannerProps) {
   return (
     <section className="bg-ink py-10 md:py-14 overflow-hidden">
       <Container className="flex flex-col lg:flex-row xl:flex-row items-center justify-between gap-10">
         <div className="flex flex-col gap-6 md:w-113 shrink-0">
           <div className="flex flex-col gap-4">
             <h2 className="max-w-100.75 text-white font-google-sans text-[32px] md:text-[40px] font-normal leading-[114%] tracking-[-0.4px]">
-              Start spending in over 200 countries, today.
+              {cta.heading}
             </h2>
             <p className="text-[#AAA] text-base font-normal leading-[130%]">
-              Bitsika Virtual Cards can be used in more than 200 countries,
-              allowing users anywhere in the world to shop online, pay for
-              subscriptions, and make secure payments.
+              {cta.text}
             </p>
           </div>
           <div className="flex items-center gap-3 flex-wrap">
-            <AppStoreButton />
-            <GooglePlayButton />
+            <AppStoreButton
+              desktopLabel={hero.desktopAppStoreLabel}
+              mobileLabel={hero.mobileAppStoreLabel}
+            />
+            <GooglePlayButton
+              desktopLabel={hero.desktopGooglePlayLabel}
+              mobileLabel={hero.mobileGooglePlayLabel}
+            />
           </div>
         </div>
 
@@ -39,7 +49,7 @@ export default function CtaBanner() {
               className="object-cover rounded-2xl"
             />
             <div className="hidden md:flex absolute md:-left-20 lg:-left-22 xl:-left-22 -bottom-2.5 translate-y-0 z-10">
-              <Qrcode variant="blue" />
+              <Qrcode variant="blue" label={hero.qrLabel} />
             </div>
           </div>
         </div>
