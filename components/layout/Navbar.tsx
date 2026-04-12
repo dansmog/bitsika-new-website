@@ -6,7 +6,7 @@ import CountrySelector from '@/components/ui/CountrySelector'
 export default function Navbar() {
   return (
     <nav className="">
-      <Container className="flex items-center gap-6 pt-6 pb-7">
+      <Container className="flex items-center gap-3 md:gap-6 pt-5 md:pt-6 pb-5 md:pb-7">
 
         <Image
           src="/images/bitsika-logo.png"

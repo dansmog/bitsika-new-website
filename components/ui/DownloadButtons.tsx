@@ -1,10 +1,18 @@
-function AppStoreButton() {
+import { splitBold } from "@/lib/formatText";
+
+type DownloadButtonProps = {
+  desktopLabel: string;
+  mobileLabel: string;
+};
+
+function AppStoreButton({ desktopLabel, mobileLabel }: DownloadButtonProps) {
+  const mobile = splitBold(mobileLabel);
   return (
     <span
       aria-disabled="true"
-      className="flex items-center whitespace-nowrap tracking-[-0.02em] gap-2 px-3.75 py-2.5 bg-surface-white text-ink text-sm font-medium rounded-xl  max-lg:border max-lg:border-[#E0E0E0] max-lg:px-2.75 max-lg:py-2.75 max-lg:gap-3">
+      className="flex items-center whitespace-nowrap tracking-[-0.02em] gap-2 px-3.75 py-2.5 bg-surface-white text-ink text-sm font-medium rounded-xl  max-md:border max-md:border-[#E0E0E0] max-md:px-2.75 max-md:py-2.75 max-md:gap-3">
       <svg
-        className="order-first lg:order-last w-3.75 h-4.25 max-lg:w-6.25 max-lg:h-7"
+        className="order-first md:order-last w-3.75 h-4.25 max-md:w-6.25 max-md:h-7"
         viewBox="0 0 15 17"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -22,28 +30,31 @@ function AppStoreButton() {
         </defs>
       </svg>
 
-      <span className="hidden lg:inline">Download on the App Store</span>
+      <span className="hidden md:inline">{desktopLabel}</span>
 
-      <span className="flex flex-col items-start lg:hidden">
+      <span className="flex flex-col items-start md:hidden">
         <span className="text-[10px] font-normal leading-none">
-          Download on the
+          {mobile.prefix}
         </span>
-        <span className="text-base font-semibold leading-tight">App Store</span>
+        <span className="text-base font-semibold leading-tight">
+          {mobile.emphasis}
+        </span>
       </span>
     </span>
   );
 }
 
-function GooglePlayButton() {
+function GooglePlayButton({ desktopLabel, mobileLabel }: DownloadButtonProps) {
+  const mobile = splitBold(mobileLabel);
   return (
     <a
       href="https://play.google.com/store/apps/details?id=africa.bitsika.bitsika_mobile&hl=en_GB&gl=gh"
       target="_blank"
       rel="noopener noreferrer"
-      className="flex cursor-pointer items-center whitespace-nowrap gap-2 tracking-[-0.02em] px-3.75 py-2.5 bg-ink text-white text-sm font-medium border border-[#3A3A3A] rounded-xl  max-lg:px-2.75 max-lg:py-2.75 max-lg:gap-3">
+      className="flex cursor-pointer items-center whitespace-nowrap gap-2 tracking-[-0.02em] px-3.75 py-2.5 bg-ink text-white text-sm font-medium border border-[#3A3A3A] rounded-xl  max-md:px-2.75 max-md:py-2.75 max-md:gap-3">
       {/* Icon — shown left on mobile, right on desktop */}
       <svg
-        className="order-first lg:order-last w-4.25 h-4 max-lg:w-7.25 max-lg:h-7"
+        className="order-first md:order-last w-4.25 h-4 max-md:w-7.25 max-md:h-7"
         viewBox="0 0 17 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -74,13 +85,15 @@ function GooglePlayButton() {
       </svg>
 
       {/* Desktop: inline text */}
-      <span className="hidden lg:inline">Get it on Google Play</span>
+      <span className="hidden md:inline">{desktopLabel}</span>
 
       {/* Mobile: stacked text */}
-      <span className="flex flex-col items-start lg:hidden">
-        <span className="text-[10px] font-normal leading-none">Get it on</span>
+      <span className="flex flex-col items-start md:hidden">
+        <span className="text-[10px] font-normal leading-none">
+          {mobile.prefix}
+        </span>
         <span className="text-base font-semibold leading-tight">
-          Google Play
+          {mobile.emphasis}
         </span>
       </span>
     </a>

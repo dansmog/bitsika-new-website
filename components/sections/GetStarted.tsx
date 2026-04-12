@@ -5,30 +5,11 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Container from "../layout/Container";
 import callOfDuty from "@/assets/images/games/call_of_duty.png";
+import type { StepsContent } from "@/content/shape";
 
-const steps = [
-  {
-    number: 1,
-    title: "Sign Up and Fund Your Balance",
-    description:
-      "Download the Bitsika app, create your account, and deposit crypto like Bitcoin and USDT using one of the supported networks. Your balance will be ready as soon as the deposit is confirmed.",
-    opensDownward: true,
-  },
-  {
-    number: 2,
-    title: "Create Your Virtual Card",
-    description:
-      "Once your balance is funded, generate a Bitsika Visa Virtual Card instantly from the app. Pick your card details and it's ready to use right away.",
-    opensDownward: false,
-  },
-  {
-    number: 3,
-    title: "Activate and Start Spending",
-    description:
-      "Activate your card and start spending on games, subscriptions, and more worldwide — directly with your crypto balance.",
-    opensDownward: false,
-  },
-];
+type GetStartedProps = {
+  steps: StepsContent;
+};
 
 const activeTitleClass =
   "font-google-sans font-medium text-base md:text-[20px] leading-[120%] tracking-[0]";
@@ -60,7 +41,8 @@ const mobileImageSizes = [
   { width: 232, height: 148.02 },
 ];
 
-export default function GetStarted() {
+export default function GetStarted({ steps: stepsContent }: GetStartedProps) {
+  const items = stepsContent.steps;
   const [activeStep, setActiveStep] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -81,19 +63,23 @@ export default function GetStarted() {
     <section className="bg-white py-14.25 md:py-20">
       <Container>
         <div className="flex gap-12 items-start flex-col">
-          <div className="w-full">
+          <div className="w-full flex flex-col gap-4">
             <h2 className="font-google-sans font-normal text-[32px] md:text-[40px] leading-[114%] tracking-[-0.01em] max-w-115">
-              Get started with Bitsika in three easy steps
+              {stepsContent.heading}
             </h2>
+            <p className="font-normal text-base leading-[130%] tracking-[-0.01em] text-ink-secondary max-w-180">
+              {stepsContent.description}
+            </p>
           </div>
           <div className="w-full flex flex-col lg:flex-row xl:flex-row">
             {/* Left: title + steps */}
             <div className="flex-1 max-w-140 order-2 lg:order-1">
               <div className="flex flex-col">
-                {steps.map((step, index) => {
+                {items.map((step, index) => {
                   const isActive = activeStep === index;
-                  const isLast = index === steps.length - 1;
-                  const dir = step.opensDownward ? "down" : "up";
+                  const isLast = index === items.length - 1;
+                  const opensDownward = index === 0;
+                  const dir = opensDownward ? "down" : "up";
 
                   return (
                     <div key={index} className="flex">
@@ -110,7 +96,7 @@ export default function GetStarted() {
                           transition={{ duration: 0.2 }}
                           className="w-7 h-7 rounded-full border flex items-center justify-center text-base font-medium shrink-0 mt-3 cursor-pointer"
                         >
-                          {step.number}
+                          {index + 1}
                         </motion.button>
 
                         {!isLast && (
@@ -124,7 +110,7 @@ export default function GetStarted() {
                         style={{ paddingLeft: 19 }}
                       >
                         {/* Card above (steps 2 & 3 open upward) */}
-                        {!step.opensDownward && (
+                        {!opensDownward && (
                           <AnimatePresence initial={false}>
                             {isActive && (
                               <motion.div
@@ -144,7 +130,7 @@ export default function GetStarted() {
                                       {step.title}
                                     </h3>
                                     <p className="text-ink-secondary text-sm leading-[140%] tracking-[-0.01em]">
-                                      {step.description}
+                                      {step.text}
                                     </p>
                                   </div>
                                 </div>
@@ -179,7 +165,7 @@ export default function GetStarted() {
                         </AnimatePresence>
 
                         {/* Card below (step 1 opens downward) */}
-                        {step.opensDownward && (
+                        {opensDownward && (
                           <AnimatePresence initial={false}>
                             {isActive && (
                               <motion.div
@@ -199,7 +185,7 @@ export default function GetStarted() {
                                       {step.title}
                                     </h3>
                                     <p className="text-ink-secondary text-sm leading-[140%] tracking-[-0.01em]">
-                                      {step.description}
+                                      {step.text}
                                     </p>
                                   </div>
                                 </div>

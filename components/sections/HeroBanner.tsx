@@ -8,8 +8,13 @@ import Image from "next/image";
 import Qrcode from "../ui/Qrcode";
 import Ratings from "../ui/Ratings";
 import { GodRays } from "@paper-design/shaders-react";
+import type { HeroContent } from "@/content/shape";
 
-export default function HeroBanner() {
+type HeroBannerProps = {
+  hero: HeroContent;
+};
+
+export default function HeroBanner({ hero }: HeroBannerProps) {
   return (
     <section className="relative bg-brand-blue py-8.75 md:py-12 overflow-hidden">
       {/* Mobile: CSS sun rays from top-right corner */}
@@ -22,7 +27,7 @@ export default function HeroBanner() {
           colors={["#a1a1aa40", "#e4e4e740", "#71717a40", "#52525b40"]}
           colorBloom="#a1a1aa"
           bloom={1}
-          intensity={0.10}
+          intensity={0.1}
           density={0.24}
           spotty={0}
           midSize={0.38}
@@ -42,21 +47,27 @@ export default function HeroBanner() {
       />
       <div className="relative z-10 max-w-360 mx-auto grid grid-cols-3 gap-5 md:gap-10 items-center max-lg:grid-cols-1 px-5 md:px-19.25">
         <h1 className="text-white text-[28px] md:text-[40px] font-google-sans font-medium leading-[31.92px] md:leading-[45.6px] tracking-[-0.8px] max-xl:text-3xl">
-          Directly top-up your favourite mobile games with crypto like Bitcoin,
-          USDT and more.
+          {hero.h1}
         </h1>
-        <Qrcode />
+        <Qrcode label={hero.qrLabel} />
         <div className="flex flex-col">
-          <Ratings />
+          <Ratings
+            googlePlayStat={hero.googlePlayStat}
+            userCount={hero.userCount}
+          />
           <div className="flex items-center gap-2 pt-[13.5px] pb-4.75">
-            <AppStoreButton />
-            <GooglePlayButton />
+            <AppStoreButton
+              desktopLabel={hero.desktopAppStoreLabel}
+              mobileLabel={hero.mobileAppStoreLabel}
+            />
+            <GooglePlayButton
+              desktopLabel={hero.desktopGooglePlayLabel}
+              mobileLabel={hero.mobileGooglePlayLabel}
+            />
           </div>
-          <p className="text-white text-[17px]  tracking-[-0.34px] leading-[24.14px]">
-            Instantly Recharge Your Favorite Mobile Games Using Bitcoin, USDT,
-            and Other Top Cryptocurrencies for a Seamless, Secure, and
-            Reward-Filled Experience.
-          </p>
+          <h2 className="text-white text-[17px]  tracking-[-0.34px] leading-[24.14px]">
+            {hero.h2}
+          </h2>
         </div>
       </div>
     </section>
