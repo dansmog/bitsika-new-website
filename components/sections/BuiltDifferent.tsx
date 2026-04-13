@@ -40,7 +40,7 @@ export default function BuiltDifferent({
                 <span className="md:font-semibold text-lg leading-[130%] text-ink">
                   Bitsika vs.
                 </span>
-                <span className="md:font-semibold text-lg leading-[130%] text-ink">
+                <span className="md:font-semibold pl-1 md:pl-0 text-lg leading-[130%] text-ink">
                   {company.name}
                 </span>
               </div>
