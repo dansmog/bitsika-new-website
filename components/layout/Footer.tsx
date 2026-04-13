@@ -11,11 +11,11 @@ import {
 import type { FooterContent, HeroContent } from "@/content/shape";
 
 const RESOURCE_URLS = [
-  "https://www.bitsika.com/privacy-policy",
-  "https://www.bitsika.com/terms-conditions",
-  "https://www.bitsika.com/kyc-aml",
-  "https://www.bitsika.com/iran-ofac-clarification",
-  "https://www.bitsika.com/user/bitsika",
+  "/terms-conditions",
+  "/privacy-policy",
+  "/kyc-aml",
+  "/iran-ofac-clarification",
+  "/user/bitsika",
 ];
 
 const SOCIAL_URLS = [
