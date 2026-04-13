@@ -1,6 +1,6 @@
 import type { TableContent } from "@/content/shape";
 
-const cellBase = "px-5 py-4 text-sm text-[#505050] align-top whitespace-nowrap md:whitespace-normal ";
+const cellBase = "px-5 py-4 text-sm text-[#505050] align-top";
 const headerBase =
   "px-5 py-4 text-sm font-semibold text-left whitespace-nowrap ";
 

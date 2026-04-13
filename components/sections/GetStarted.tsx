@@ -4,11 +4,12 @@ import { AnimatePresence, cubicBezier, motion } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Container from "../layout/Container";
-import callOfDuty from "@/assets/images/games/call_of_duty.png";
 import type { StepsContent } from "@/content/shape";
+import type { RemoteImage } from "@/content/imageShape";
 
 type GetStartedProps = {
   steps: StepsContent;
+  image: RemoteImage;
 };
 
 const activeTitleClass =
@@ -41,7 +42,10 @@ const mobileImageSizes = [
   { width: 232, height: 148.02 },
 ];
 
-export default function GetStarted({ steps: stepsContent }: GetStartedProps) {
+export default function GetStarted({
+  steps: stepsContent,
+  image,
+}: GetStartedProps) {
   const items = stepsContent.steps;
   const [activeStep, setActiveStep] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -321,12 +325,16 @@ export default function GetStarted({ steps: stepsContent }: GetStartedProps) {
                     transition={transition}
                     className="absolute left-1/2 -translate-x-1/2 top-18 md:top-22.5 rounded-2xl overflow-hidden shadow-lg"
                   >
-                    <Image
-                      src={callOfDuty}
-                      alt="Game screenshot"
-                      className="w-full h-full object-cover"
-                      priority
-                    />
+                    {image.src && (
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        fill
+                        sizes="(max-width: 768px) 232px, 417px"
+                        className="object-cover"
+                        priority
+                      />
+                    )}
                   </motion.div>
                 </div>
               </div>

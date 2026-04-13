@@ -8,15 +8,18 @@ type BuiltDifferentProps = {
   vrs: VrsCompany[];
 };
 
-export default function BuiltDifferent({ comparison, vrs }: BuiltDifferentProps) {
+export default function BuiltDifferent({
+  comparison,
+  vrs,
+}: BuiltDifferentProps) {
   return (
     <section className="bg-white py-20">
       <Container>
         <div className="flex flex-col gap-4 mb-10">
-          <h2 className="font-google-sans font-normal text-[40px] leading-[114%] tracking-[-0.01em] text-ink">
+          <h2 className="max-w-180 font-google-sans font-normal text-[40px] leading-[114%] tracking-[-0.01em] text-ink">
             {comparison.heading}
           </h2>
-          <p className=" font-normal text-base leading-[130%] tracking-[-0.01em] text-ink-secondary">
+          <p className=" max-w-168.5 font-normal text-base leading-[130%] tracking-[-0.01em] text-ink-secondary">
             {comparison.text}
           </p>
         </div>
