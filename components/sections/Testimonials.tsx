@@ -53,7 +53,7 @@ export default function Testimonials({
     <section className="bg-white py-20">
       <Container>
         <div className="max-w-217 mx-auto">
-          <p className="text-[#1A73E8] font-google-sans text-sm md:text-xl font-medium mb-6">
+          <p className="text-[#1A73E8] font-google-sans text-xl font-medium mb-6">
             Testimonials from our Users
           </p>
           <div className=" overflow-hidden">

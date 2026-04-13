@@ -5,15 +5,16 @@ import {
   GooglePlayButton,
 } from "@/components/ui/DownloadButtons";
 import Qrcode from "@/components/ui/Qrcode";
-import callOfDuty from "@/assets/images/games/call_of_duty.png";
 import type { CtaContent, HeroContent } from "@/content/shape";
+import type { RemoteImage } from "@/content/imageShape";
 
 type CtaBannerProps = {
   cta: CtaContent;
   hero: HeroContent;
+  image: RemoteImage;
 };
 
-export default function CtaBanner({ cta, hero }: CtaBannerProps) {
+export default function CtaBanner({ cta, hero, image }: CtaBannerProps) {
   return (
     <section className="bg-ink py-10 md:py-14 overflow-hidden">
       <Container className="flex flex-col lg:flex-row xl:flex-row items-center justify-between gap-10">
@@ -40,14 +41,16 @@ export default function CtaBanner({ cta, hero }: CtaBannerProps) {
 
         <div className="relative w-full md:flex-1 rounded-2xl flex md:justify-end items-center min-h-70">
           <div className="relative w-full md:w-160 lg:w-130 xl:w-130 h-70 md:h-90 lg:h-90 xl:h-90 rounded-2xl shrink-0">
-            <Image
-              src={callOfDuty}
-              alt="Call of Duty: Mobile"
-              fill
-              sizes="(max-width: 768px) 100vw, 520px"
-              priority
-              className="object-cover rounded-2xl"
-            />
+            {image.src && (
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes="(max-width: 768px) 100vw, 520px"
+                priority
+                className="object-cover rounded-2xl"
+              />
+            )}
             <div className="hidden md:flex absolute md:-left-20 lg:-left-22 xl:-left-22 -bottom-2.5 translate-y-0 z-10">
               <Qrcode variant="blue" label={hero.qrLabel} />
             </div>

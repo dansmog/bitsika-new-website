@@ -22,19 +22,35 @@ export default async function HomePage() {
       <Header hero={content.hero} />
       <GamesGrid products={imageContent.products} />
       <InfoBlock cards={content.infoBoxGroups[0]} />
-      <CtaBanner cta={content.ctas[0]} hero={content.hero} />
+      <CtaBanner
+        cta={content.ctas[0]}
+        hero={content.hero}
+        image={imageContent.ctaImages[0]}
+      />
       <Comparison table={content.table} />
       <InfoBlock cards={content.infoBoxGroups[1]} />
-      <CtaBanner cta={content.ctas[1]} hero={content.hero} />
-      <GetStarted steps={content.steps} />
+      <CtaBanner
+        cta={content.ctas[1]}
+        hero={content.hero}
+        image={imageContent.ctaImages[1]}
+      />
+      <GetStarted steps={content.steps} image={imageContent.stepsImage} />
       <InfoBlock cards={content.infoBoxGroups[2]} />
-      <CtaBanner cta={content.ctas[2]} hero={content.hero} />
+      <CtaBanner
+        cta={content.ctas[2]}
+        hero={content.hero}
+        image={imageContent.ctaImages[2]}
+      />
       <Testimonials
         testimonials={content.testimonials}
         testimonialImages={imageContent.testimonialImages}
       />
       <InfoBlock cards={content.infoBoxGroups[3]} />
-      <CtaBanner cta={content.ctas[3]} hero={content.hero} />
+      <CtaBanner
+        cta={content.ctas[3]}
+        hero={content.hero}
+        image={imageContent.ctaImages[3]}
+      />
       <BuiltDifferent comparison={content.comparison} vrs={imageContent.vrs} />
       <InsideBitsika blog={content.blog} articles={imageContent.blogs} />
       <FAQ faq={content.faq} />

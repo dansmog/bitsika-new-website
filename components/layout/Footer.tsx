@@ -19,9 +19,9 @@ const RESOURCE_URLS = [
 ];
 
 const SOCIAL_URLS = [
-  "https://twitter.com/bitsika",
-  "https://www.linkedin.com/company/bitsika",
-  "https://www.instagram.com/bitsika",
+  "https://x.com/bitsikaafrica?lang=en",
+  "https://www.linkedin.com/company/11803195",
+  "https://www.instagram.com/bitsikaafrica/",
 ];
 
 function CopyIcon() {
