@@ -1,0 +1,134 @@
+[
+  {
+    "lang_en": "Spanish",
+    "place_name_en": "Mexico",
+    "place_name_local": "México",
+    "lang_code": "es",
+    "lang_code_local": "es-mx",
+    "slug": "tarjeta-virtual-cripto-mexico",
+    "anchor_text": "Tarjetas Virtuales Cripto en México",
+    "image_name": "mexico.png",
+    "image_alt": "Bandera para Tarjetas Virtuales Cripto en México"
+  },
+  {
+    "lang_en": "Spanish",
+    "place_name_en": "United States",
+    "place_name_local": "Estados Unidos",
+    "lang_code": "es",
+    "lang_code_local": "es-us",
+    "slug": "tarjeta-virtual-cripto-estados-unidos",
+    "anchor_text": "Tarjetas Virtuales Cripto en Estados Unidos",
+    "image_name": "united-states.png",
+    "image_alt": "Bandera para Tarjetas Virtuales Cripto en Estados Unidos"
+  },
+  {
+    "lang_en": "Spanish",
+    "place_name_en": "Colombia",
+    "place_name_local": "Colombia",
+    "lang_code": "es",
+    "lang_code_local": "es-co",
+    "slug": "tarjeta-virtual-cripto-colombia",
+    "anchor_text": "Tarjetas Virtuales Cripto en Colombia",
+    "image_name": "colombia.png",
+    "image_alt": "Bandera para Tarjetas Virtuales Cripto en Colombia"
+  },
+  {
+    "lang_en": "Spanish",
+    "place_name_en": "Argentina",
+    "place_name_local": "Argentina",
+    "lang_code": "es",
+    "lang_code_local": "es-ar",
+    "slug": "tarjeta-virtual-cripto-argentina",
+    "anchor_text": "Tarjetas Virtuales Cripto en Argentina",
+    "image_name": "argentina.png",
+    "image_alt": "Bandera para Tarjetas Virtuales Cripto en Argentina"
+  },
+  {
+    "lang_en": "Spanish",
+    "place_name_en": "Spain",
+    "place_name_local": "España",
+    "lang_code": "es",
+    "lang_code_local": "es-es",
+    "slug": "tarjeta-virtual-cripto-espana",
+    "anchor_text": "Tarjetas Virtuales Cripto en España",
+    "image_name": "spain.png",
+    "image_alt": "Bandera para Tarjetas Virtuales Cripto en España"
+  },
+  {
+    "lang_en": "Spanish",
+    "place_name_en": "Venezuela",
+    "place_name_local": "Venezuela",
+    "lang_code": "es",
+    "lang_code_local": "es-ve",
+    "slug": "tarjeta-virtual-cripto-venezuela",
+    "anchor_text": "Tarjetas Virtuales Cripto Que Funcionan en Venezuela",
+    "image_name": "venezuela.png",
+    "image_alt": "Bandera para Tarjetas Virtuales Cripto en Venezuela"
+  },
+  {
+    "lang_en": "Spanish",
+    "place_name_en": "Peru",
+    "place_name_local": "Perú",
+    "lang_code": "es",
+    "lang_code_local": "es-pe",
+    "slug": "tarjeta-virtual-cripto-peru",
+    "anchor_text": "Tarjetas Virtuales Cripto en Perú",
+    "image_name": "peru.png",
+    "image_alt": "Bandera para Tarjetas Virtuales Cripto en Perú"
+  },
+  {
+    "lang_en": "Spanish",
+    "place_name_en": "Chile",
+    "place_name_local": "Chile",
+    "lang_code": "es",
+    "lang_code_local": "es-cl",
+    "slug": "tarjeta-virtual-cripto-chile",
+    "anchor_text": "Tarjetas Virtuales Cripto en Chile",
+    "image_name": "chile.png",
+    "image_alt": "Bandera para Tarjetas Virtuales Cripto en Chile"
+  },
+  {
+    "lang_en": "Spanish",
+    "place_name_en": "Ecuador",
+    "place_name_local": "Ecuador",
+    "lang_code": "es",
+    "lang_code_local": "es-ec",
+    "slug": "tarjeta-virtual-cripto-ecuador",
+    "anchor_text": "Tarjetas Virtuales Cripto en Ecuador",
+    "image_name": "ecuador.png",
+    "image_alt": "Bandera para Tarjetas Virtuales Cripto en Ecuador"
+  },
+  {
+    "lang_en": "Spanish",
+    "place_name_en": "Guatemala",
+    "place_name_local": "Guatemala",
+    "lang_code": "es",
+    "lang_code_local": "es-gt",
+    "slug": "tarjeta-virtual-cripto-guatemala",
+    "anchor_text": "Tarjetas Virtuales Cripto en Guatemala",
+    "image_name": "guatemala.png",
+    "image_alt": "Bandera para Tarjetas Virtuales Cripto en Guatemala"
+  },
+  {
+    "lang_en": "Spanish",
+    "place_name_en": "Dominican Republic",
+    "place_name_local": "República Dominicana",
+    "lang_code": "es",
+    "lang_code_local": "es-do",
+    "slug": "tarjeta-virtual-cripto-republica-dominicana",
+    "anchor_text": "Tarjetas Virtuales Cripto en República Dominicana",
+    "image_name": "dominican-republic.png",
+    "image_alt": "Bandera para Tarjetas Virtuales Cripto en República Dominicana"
+  },
+  {
+    "lang_en": "Spanish",
+    "place_name_en": "Bolivia",
+    "place_name_local": "Bolivia",
+    "lang_code": "es",
+    "lang_code_local": "es-bo",
+    "slug": "tarjeta-virtual-cripto-bolivia",
+    "anchor_text": "Tarjetas Virtuales Cripto en Bolivia",
+    "image_name": "bolivia.png",
+    "image_alt": "Bandera para Tarjetas Virtuales Cripto en Bolivia"
+  }
+]

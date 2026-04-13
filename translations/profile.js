@@ -1,0 +1,55 @@
+export default {
+  "en": {
+    defaultDetail: `Bitsika is social payments app where you can perform financial transactions - like sending money, intra-African remittances...`,
+    tabs: [
+      { name: 'Posts', href: '#', current: false, locale: "Posts" },
+      { name: 'My Trades', href: '/trade', current: false, locale: "My Trades" },
+    ],
+    greyBox: `You can only view things on this web page. To actually perform actions or use our features, download and install the Bitsika app with the links above.`,
+    followsYou: `Follows You`,
+    following: `Following`,
+    mention: `Mention`,
+    sendMoney: `Send me money on Bitsika`,
+    followers: `Followers`,
+    follow: `Follow`,
+    learn: `Learn more here`,
+    belt: `Belt User`,
+    userTrades: `There are no Trade Ads here.`,
+  },
+  "fr": {
+    defaultDetail: `Bitsika est une application de paiement social qui vous permet d'effectuer des transactions financières, notamment l'envoi et la réception...`,
+    tabs: [
+      { name: 'Posts', href: '#', current: false, locale: "Posts" },
+      { name: 'My Trades', href: '#', current: false, locale: "My Trades" },
+    ],
+    greyBox: `Vous pouvez seulement voir des éléments sur cette page Web. Pour effectuer des actions ou utiliser nos fonctionnalités, téléchargez et installez l'application Bitsika à l'aide des liens ci-dessus.`,
+    followsYou: `Abonné/ vous suit`,
+    following: `Abonnements`,
+    mention: `Mentioner`,
+    sendMoney: `Envoyez-moi de l'argent sur bitsika`,
+    followers: `Abonnés`,
+    follow: `Suivez`,
+    learn: `Plus d’information`,
+    belt: `Couleur de ceinture`,
+    userTrades: `There are no Trade Ads here.`,
+
+  },
+  "fr-FR": {
+    defaultDetail: `Bitsika est une application de paiement social qui vous permet d'effectuer des transactions financières, notamment l'envoi et la réception...`,
+    tabs: [
+      { name: 'Posts', href: '#', current: false, locale: "Posts" },
+      { name: 'My Trades', href: '#', current: false, locale: "My Trades" },
+    ],
+    greyBox: `Vous pouvez seulement voir des éléments sur cette page Web. Pour effectuer des actions ou utiliser nos fonctionnalités, téléchargez et installez l'application Bitsika à l'aide des liens ci-dessus.`,
+    followsYou: `Abonné/ vous suit`,
+    following: `Abonnements`,
+    mention: `Mentioner`,
+    sendMoney: `Envoyez-moi de l'argent sur bitsika`,
+    followers: `Abonnés`,
+    follow: `Suivez`,
+    learn: `Plus d’information`,
+    belt: `Couleur de ceinture`,
+    userTrades: `There are no Trade Ads here.`,
+
+  },
+}

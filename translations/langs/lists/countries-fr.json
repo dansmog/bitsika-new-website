@@ -1,0 +1,134 @@
+[
+  {
+    "lang_en": "French",
+    "place_name_en": "France",
+    "place_name_local": "France",
+    "lang_code": "fr",
+    "lang_code_local": "fr-fr",
+    "slug": "carte-virtuelle-crypto-france",
+    "anchor_text": "Cartes Virtuelles Crypto en France",
+    "image_name": "france.png",
+    "image_alt": "Drapeau pour Cartes Virtuelles Crypto en France"
+  },
+  {
+    "lang_en": "French",
+    "place_name_en": "Algeria",
+    "place_name_local": "Algérie",
+    "lang_code": "fr",
+    "lang_code_local": "fr-dz",
+    "slug": "carte-virtuelle-crypto-algerie",
+    "anchor_text": "Cartes Virtuelles Crypto Qui Fonctionnent en Algérie",
+    "image_name": "algeria.png",
+    "image_alt": "Drapeau pour Cartes Virtuelles Crypto en Algérie"
+  },
+  {
+    "lang_en": "French",
+    "place_name_en": "Morocco",
+    "place_name_local": "Maroc",
+    "lang_code": "fr",
+    "lang_code_local": "fr-ma",
+    "slug": "carte-virtuelle-crypto-maroc",
+    "anchor_text": "Cartes Virtuelles Crypto Qui Fonctionnent au Maroc",
+    "image_name": "morocco.png",
+    "image_alt": "Drapeau pour Cartes Virtuelles Crypto au Maroc"
+  },
+  {
+    "lang_en": "French",
+    "place_name_en": "Canada",
+    "place_name_local": "Canada",
+    "lang_code": "fr",
+    "lang_code_local": "fr-ca",
+    "slug": "carte-virtuelle-crypto-canada",
+    "anchor_text": "Cartes Virtuelles Crypto au Canada",
+    "image_name": "canada.png",
+    "image_alt": "Drapeau pour Cartes Virtuelles Crypto au Canada"
+  },
+  {
+    "lang_en": "French",
+    "place_name_en": "Côte d'Ivoire",
+    "place_name_local": "Côte d'Ivoire",
+    "lang_code": "fr",
+    "lang_code_local": "fr-ci",
+    "slug": "carte-virtuelle-crypto-cote-d-ivoire",
+    "anchor_text": "Cartes Virtuelles Crypto Qui Fonctionnent en Côte d'Ivoire",
+    "image_name": "ivory-coast.png",
+    "image_alt": "Drapeau pour Cartes Virtuelles Crypto en Côte d'Ivoire"
+  },
+  {
+    "lang_en": "French",
+    "place_name_en": "Cameroon",
+    "place_name_local": "Cameroun",
+    "lang_code": "fr",
+    "lang_code_local": "fr-cm",
+    "slug": "carte-virtuelle-crypto-cameroun",
+    "anchor_text": "Cartes Virtuelles Crypto Qui Fonctionnent au Cameroun",
+    "image_name": "cameroon.png",
+    "image_alt": "Drapeau pour Cartes Virtuelles Crypto au Cameroun"
+  },
+  {
+    "lang_en": "French",
+    "place_name_en": "Madagascar",
+    "place_name_local": "Madagascar",
+    "lang_code": "fr",
+    "lang_code_local": "fr-mg",
+    "slug": "carte-virtuelle-crypto-madagascar",
+    "anchor_text": "Cartes Virtuelles Crypto Qui Fonctionnent à Madagascar",
+    "image_name": "madagascar.png",
+    "image_alt": "Drapeau pour Cartes Virtuelles Crypto à Madagascar"
+  },
+  {
+    "lang_en": "French",
+    "place_name_en": "Burkina Faso",
+    "place_name_local": "Burkina Faso",
+    "lang_code": "fr",
+    "lang_code_local": "fr-bf",
+    "slug": "carte-virtuelle-crypto-burkina-faso",
+    "anchor_text": "Cartes Virtuelles Crypto Qui Fonctionnent au Burkina Faso",
+    "image_name": "burkina-faso.png",
+    "image_alt": "Drapeau pour Cartes Virtuelles Crypto au Burkina Faso"
+  },
+  {
+    "lang_en": "French",
+    "place_name_en": "Senegal",
+    "place_name_local": "Sénégal",
+    "lang_code": "fr",
+    "lang_code_local": "fr-sn",
+    "slug": "carte-virtuelle-crypto-senegal",
+    "anchor_text": "Cartes Virtuelles Crypto Qui Fonctionnent au Sénégal",
+    "image_name": "senegal.png",
+    "image_alt": "Drapeau pour Cartes Virtuelles Crypto au Sénégal"
+  },
+  {
+    "lang_en": "French",
+    "place_name_en": "Haiti",
+    "place_name_local": "Haïti",
+    "lang_code": "fr",
+    "lang_code_local": "fr-ht",
+    "slug": "carte-virtuelle-crypto-haiti",
+    "anchor_text": "Cartes Virtuelles Crypto Qui Fonctionnent en Haïti",
+    "image_name": "haiti.png",
+    "image_alt": "Drapeau pour Cartes Virtuelles Crypto en Haïti"
+  },
+  {
+    "lang_en": "French",
+    "place_name_en": "Congo Kinshasa",
+    "place_name_local": "Congo Kinshasa",
+    "lang_code": "fr",
+    "lang_code_local": "fr-cd",
+    "slug": "carte-virtuelle-crypto-congo-kinshasa",
+    "anchor_text": "Cartes Virtuelles Crypto Qui Fonctionnent au Congo Kinshasa",
+    "image_name": "dr-congo.png",
+    "image_alt": "Drapeau pour Cartes Virtuelles Crypto au Congo Kinshasa"
+  },
+  {
+    "lang_en": "French",
+    "place_name_en": "Congo Brazzaville",
+    "place_name_local": "Congo Brazzaville",
+    "lang_code": "fr",
+    "lang_code_local": "fr-cg",
+    "slug": "carte-virtuelle-crypto-congo-brazzaville",
+    "anchor_text": "Cartes Virtuelles Crypto Qui Fonctionnent au Congo Brazzaville",
+    "image_name": "r-congo.png",
+    "image_alt": "Drapeau pour Cartes Virtuelles Crypto au Congo Brazzaville"
+  }
+]

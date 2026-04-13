@@ -1,0 +1,189 @@
+[
+  {
+    "lang_en": "English",
+    "place_name_en": "India",
+    "place_name_local": "India",
+    "lang_code": "en",
+    "lang_code_local": "en-in",
+    "slug": "crypto-virtual-card-india",
+    "anchor_text": "Crypto Virtual Cards That Work in India",
+    "image_name": "india.png",
+    "image_alt": "Flag for Crypto Virtual Cards in India"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "United States",
+    "place_name_local": "United States",
+    "lang_code": "en",
+    "lang_code_local": "en-us",
+    "slug": "crypto-virtual-card-united-states",
+    "anchor_text": "Crypto Virtual Cards in the United States",
+    "image_name": "united-states.png",
+    "image_alt": "Flag for Crypto Virtual Cards in United States"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "Nigeria",
+    "place_name_local": "Nigeria",
+    "lang_code": "en",
+    "lang_code_local": "en-ng",
+    "slug": "crypto-virtual-card-nigeria",
+    "anchor_text": "Crypto Virtual Cards That Work in Nigeria",
+    "image_name": "nigeria.png",
+    "image_alt": "Flag for Crypto Virtual Cards in Nigeria"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "Pakistan",
+    "place_name_local": "Pakistan",
+    "lang_code": "en",
+    "lang_code_local": "en-pk",
+    "slug": "crypto-virtual-card-pakistan",
+    "anchor_text": "Crypto Virtual Cards That Work in Pakistan",
+    "image_name": "pakistan.png",
+    "image_alt": "Flag for Crypto Virtual Cards in Pakistan"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "United Kingdom",
+    "place_name_local": "United Kingdom",
+    "lang_code": "en",
+    "lang_code_local": "en-gb",
+    "slug": "crypto-virtual-card-united-kingdom",
+    "anchor_text": "Crypto Virtual Cards in the United Kingdom",
+    "image_name": "united-kingdom.png",
+    "image_alt": "Flag for Crypto Virtual Cards in United Kingdom"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "South Africa",
+    "place_name_local": "South Africa",
+    "lang_code": "en",
+    "lang_code_local": "en-za",
+    "slug": "crypto-virtual-card-south-africa",
+    "anchor_text": "Crypto Virtual Cards in South Africa",
+    "image_name": "south-africa.png",
+    "image_alt": "Flag for Crypto Virtual Cards in South Africa"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "Kenya",
+    "place_name_local": "Kenya",
+    "lang_code": "en",
+    "lang_code_local": "en-ke",
+    "slug": "crypto-virtual-card-kenya",
+    "anchor_text": "Crypto Virtual Cards That Work in Kenya",
+    "image_name": "kenya.png",
+    "image_alt": "Flag for Crypto Virtual Cards in Kenya"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "Canada",
+    "place_name_local": "Canada",
+    "lang_code": "en",
+    "lang_code_local": "en-ca",
+    "slug": "crypto-virtual-card-canada",
+    "anchor_text": "Crypto Virtual Cards in Canada",
+    "image_name": "canada.png",
+    "image_alt": "Flag for Crypto Virtual Cards in Canada"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "Australia",
+    "place_name_local": "Australia",
+    "lang_code": "en",
+    "lang_code_local": "en-au",
+    "slug": "crypto-virtual-card-australia",
+    "anchor_text": "Crypto Virtual Cards in Australia",
+    "image_name": "australia.png",
+    "image_alt": "Flag for Crypto Virtual Cards in Australia"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "Uganda",
+    "place_name_local": "Uganda",
+    "lang_code": "en",
+    "lang_code_local": "en-ug",
+    "slug": "crypto-virtual-card-uganda",
+    "anchor_text": "Crypto Virtual Cards That Work in Uganda",
+    "image_name": "uganda.png",
+    "image_alt": "Flag for Crypto Virtual Cards in Uganda"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "Ghana",
+    "place_name_local": "Ghana",
+    "lang_code": "en",
+    "lang_code_local": "en-gh",
+    "slug": "crypto-virtual-card-ghana",
+    "anchor_text": "Crypto Virtual Cards That Work in Ghana",
+    "image_name": "ghana.png",
+    "image_alt": "Flag for Crypto Virtual Cards in Ghana"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "Cameroon",
+    "place_name_local": "Cameroon",
+    "lang_code": "en",
+    "lang_code_local": "en-cm",
+    "slug": "crypto-virtual-card-cameroon",
+    "anchor_text": "Crypto Virtual Cards That Work in Cameroon",
+    "image_name": "cameroon.png",
+    "image_alt": "Flag for Crypto Virtual Cards in Cameroon"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "Rwanda",
+    "place_name_local": "Rwanda",
+    "lang_code": "en",
+    "lang_code_local": "en-rw",
+    "slug": "crypto-virtual-card-rwanda",
+    "anchor_text": "Crypto Virtual Cards That Work in Rwanda",
+    "image_name": "rwanda.png",
+    "image_alt": "Flag for Crypto Virtual Cards in Rwanda"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "Jamaica",
+    "place_name_local": "Jamaica",
+    "lang_code": "en",
+    "lang_code_local": "en-jm",
+    "slug": "crypto-virtual-card-jamaica",
+    "anchor_text": "Crypto Virtual Cards in Jamaica",
+    "image_name": "jamaica.png",
+    "image_alt": "Flag for Crypto Virtual Cards in Jamaica"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "Trinidad and Tobago",
+    "place_name_local": "Trinidad and Tobago",
+    "lang_code": "en",
+    "lang_code_local": "en-tt",
+    "slug": "crypto-virtual-card-trinidad-and-tobago",
+    "anchor_text": "Crypto Virtual Cards in Trinidad and Tobago",
+    "image_name": "trinidad-and-tobago.png",
+    "image_alt": "Flag for Crypto Virtual Cards in Trinidad and Tobago"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "Iran",
+    "place_name_local": "Iran",
+    "lang_code": "en",
+    "lang_code_local": "en-ir",
+    "slug": "crypto-virtual-card-iran",
+    "anchor_text": "Crypto Virtual Cards That Work in Iran",
+    "image_name": "iran.png",
+    "image_alt": "Flag for Crypto Virtual Cards in Iran"
+  },
+  {
+    "lang_en": "English",
+    "place_name_en": "China",
+    "place_name_local": "China",
+    "lang_code": "en",
+    "lang_code_local": "en-cn",
+    "slug": "crypto-virtual-card-china",
+    "anchor_text": "Crypto Virtual Cards That Work in China",
+    "image_name": "china.png",
+    "image_alt": "Flag for Crypto Virtual Cards in China"
+  }
+]

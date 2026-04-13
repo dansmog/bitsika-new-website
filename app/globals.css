@@ -7,6 +7,7 @@
   --font-inter : var(--font-inter);
 
   /* Brand */
+  --color-bitsikaBlue: #2F80ED;
   --color-brand-blue: #003985;
   --color-brand-blue-mid: #0050c0;
   --color-brand-blue-light: #1a7de0;
@@ -37,4 +38,10 @@
     50%  { transform: scale(1.025); }
     100% { transform: scale(1); }
   }
+}
+
+
+.page-style {
+  background: url("../public/images/bg-lines.png");
+  background-color: #e4f4ff;
 }

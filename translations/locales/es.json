@@ -1,0 +1,892 @@
+[
+  {
+    "section": "Hreflang of language",
+    "variable": "lang_code",
+    "content": "es"
+  },
+  {
+    "section": "English name of language",
+    "variable": "lang_en",
+    "content": "Spanish"
+  },
+  {
+    "section": "Endonym of language",
+    "variable": "lang_local",
+    "content": "Español"
+  },
+  {
+    "section": "Meta Title",
+    "variable": "meta_title",
+    "content": "Bitsika - Tarjetas Virtuales Cripto - KYC en 1 Hora"
+  },
+  {
+    "section": "Meta Description",
+    "variable": "meta_description",
+    "content": "Obtén una tarjeta de débito Visa virtual con KYC aprobado en 1 hora. Paga con Bitcoin, USDT u otras criptomonedas. Conforme y fácil de usar. Utilizable en más de 200 países. Compatible con Apple Pay, Google Pay y PayPal."
+  },
+  {
+    "section": "Hero section H1",
+    "variable": "hero_h1",
+    "content": "Obtén una **Tarjeta Virtual Cripto** con **KYC Aprobado en 1 Hora**. Recarga con **Bitcoin**, **USDT** u otras criptomonedas."
+  },
+  {
+    "section": "Hero section H2",
+    "variable": "hero_h2",
+    "content": "Las tarjetas virtuales Bitsika son prepagadas, recargables y utilizables en **más de 200 países** para compras en línea. La verificación KYC rápida significa que estás listo para gastar rápidamente. También son compatibles con **Apple Pay, Google Pay y PayPal**."
+  },
+  {
+    "section": "Block 1",
+    "variable": "block_1_title",
+    "content": "Recarga con Criptomonedas como Bitcoin y USDT"
+  },
+  {
+    "section": "Block 1 Paragraph",
+    "variable": "block_1_paragraph",
+    "content": "Puedes financiar tu tarjeta virtual Bitsika usando criptomonedas como Bitcoin y USDT en redes compatibles como BTC, ERC20 o BEP20. Una vez que Bitcoin o USDT se deposita en tu saldo Bitsika, puedes usarlo inmediatamente para crear o recargar tus tarjetas virtuales. El financiamiento con cripto te permite crear y usar tu tarjeta desde cualquier país sin depender de servicios bancarios tradicionales o dinero móvil. Es rápido, flexible y funciona globalmente."
+  },
+  {
+    "section": "Block 2",
+    "variable": "block_2_title",
+    "content": "KYC Aprobado en 1 Hora"
+  },
+  {
+    "section": "Block 2 Paragraph",
+    "variable": "block_2_paragraph",
+    "content": "Bitsika requiere verificación KYC para garantizar el cumplimiento de las regulaciones financieras, pero hemos simplificado el proceso para que sea increíblemente rápido y fácil de usar. En promedio, tu KYC se aprueba dentro de 1 hora después del envío. Simplemente proporciona tu identificación e información básica, y nuestro sistema automatizado verificará tu cuenta rápidamente. Esto significa que puedes pasar de registrarte a tener una tarjeta lista para usar en aproximadamente una hora, combinando el cumplimiento regulatorio con la conveniencia que nuestros usuarios aman. **Conoce más sobre nuestra Política de KYC y AML**"
+  },
+  {
+    "section": "Block 3",
+    "variable": "block_3_title",
+    "content": "Soporte para Apple Pay, Google Pay y PayPal"
+  },
+  {
+    "section": "Block 3 Paragraph",
+    "variable": "block_3_paragraph",
+    "content": "Puedes usar tu tarjeta virtual Bitsika en billeteras digitales como Apple Pay, Google Pay y PayPal para transacciones en línea sin problemas. Así es como configurarla: 1. Genera tu tarjeta virtual en la plataforma Bitsika. 2. Agrega la tarjeta a tu billetera preferida en Apple Pay, Google Pay o PayPal. 3. Una vez aprobada, tu tarjeta estará lista para pagos seguros a través de la billetera. Ahora puedes disfrutar de gastos sin complicaciones donde sea que se acepten estas billeteras."
+  },
+  {
+    "section": "Block 4",
+    "variable": "block_4_title",
+    "content": "Usa en OnlyFans para Mayor Privacidad"
+  },
+  {
+    "section": "Block 4 Paragraph",
+    "variable": "block_4_paragraph",
+    "content": "Una tarjeta Visa virtual Bitsika es una de las formas más seguras y discretas de pagar OnlyFans. Puedes crear tu tarjeta usando un alias, lo que ayuda a proteger tu privacidad al suscribirte. Esto garantiza que OnlyFans no aparezca en tus extractos bancarios personales o de dinero móvil. Financiar la tarjeta con criptomonedas como Bitcoin y USDT agrega otra capa de privacidad, ofreciéndote un método de pago seguro desde cualquier parte del mundo mientras mantienes el cumplimiento a través de nuestro rápido proceso KYC."
+  },
+  {
+    "section": "Block 5",
+    "variable": "block_5_title",
+    "content": "Prepagada y Recargable"
+  },
+  {
+    "section": "Block 5 Paragraph",
+    "variable": "block_5_paragraph",
+    "content": "Las tarjetas virtuales Bitsika son prepagadas, lo que significa que cargas una cantidad personalizada antes de usarlas. Esto te da la flexibilidad de crear tarjetas con los fondos exactos que necesitas. Ofrecemos dos tipos: Tarjetas prepagadas estándar: Ideales para pagos en línea únicos. Generadas instantáneamente, solo se pueden recargar una vez después de la creación. Tarjetas prepagadas premium: Perfectas para transacciones recurrentes y uso a largo plazo. Estas se pueden recargar indefinidamente, ofreciendo una opción de pago conveniente y confiable. Amadas por nuestros usuarios, el 70% elige tarjetas premium por su flexibilidad."
+  },
+  {
+    "section": "Block 6",
+    "variable": "block_6_title",
+    "content": "Las Tarjetas de Débito Visa Bitsika son Virtuales"
+  },
+  {
+    "section": "Block 6 Paragraph",
+    "variable": "block_6_paragraph",
+    "content": "La tarjeta virtual Bitsika es una tarjeta de débito Visa digital con número de tarjeta, fecha de vencimiento y CVV como una tarjeta normal, pero sin forma física. Como tarjeta de débito, cada pago proviene directamente de tu saldo cargado, por lo que solo puedes gastar lo que financias. Las tarjetas son emitidas por Visa, lo que las hace aceptadas globalmente para pagos en línea y billeteras móviles como Apple Pay, Google Pay y PayPal. Puedes recargar instantáneamente con Bitcoin o USDT y administrar todo dentro de la aplicación Bitsika."
+  },
+  {
+    "section": "Block 7",
+    "variable": "block_7_title",
+    "content": "Verificación KYC Rápida (Aprobada en 1 Hora)"
+  },
+  {
+    "section": "Block 7 Paragraph",
+    "variable": "block_7_paragraph",
+    "content": "Bitsika requiere verificación KYC para mantener el cumplimiento de las regulaciones financieras, pero hemos hecho que el proceso sea notablemente rápido. Tu KYC generalmente se aprueba dentro de 1 hora después del envío, permitiéndote comenzar a usar tu tarjeta virtual casi de inmediato. Simplemente envía tu identificación e información básica a través de la aplicación, y nuestro sistema de verificación simplificado procesará tu solicitud rápidamente. Una vez aprobado, recibes tu número de tarjeta, CVV, dirección de facturación y fecha de vencimiento, para que puedas comenzar a pagar en línea de inmediato. La mayoría de los usuarios completan todo el proceso desde la descarga hasta la tarjeta activa en aproximadamente una hora."
+  },
+  {
+    "section": "Block 8",
+    "variable": "block_8_title",
+    "content": "Tarjetas de Regalo Visa Disponibles"
+  },
+  {
+    "section": "Block 8 Paragraph",
+    "variable": "block_8_paragraph",
+    "content": "Bitsika ofrece tanto tarjetas de regalo Visa como tarjetas de débito Visa virtuales. Una tarjeta de regalo Visa viene con un saldo fijo para uso único o limitado y no se puede recargar una vez gastada, pero puedes financiarla con Bitcoin, USDT u otras criptomonedas. Una tarjeta de débito Visa virtual es recargable y flexible, permitiéndote recargar con cripto en cualquier momento para suscripciones, compras en línea y pagos diarios. Con características como gestión de saldo, congelación y descongelación y recargas instantáneas, la tarjeta de débito Visa virtual te da más control, mientras que la tarjeta de regalo es mejor para pagos únicos simples o regalos."
+  },
+  {
+    "section": "Block 9",
+    "variable": "block_9_title",
+    "content": "Límites de Gasto"
+  },
+  {
+    "section": "Block 9 Paragraph",
+    "variable": "block_9_paragraph",
+    "content": "Cada tarjeta Visa virtual Bitsika se puede recargar con hasta $500,000 por mes, dándote la libertad de manejar transacciones de alto valor con facilidad. No hay límite en cuántas tarjetas individuales puedes crear, por lo que puedes separar los gastos en diferentes tarjetas para compras, suscripciones, gastos comerciales o uso personal. Esta combinación de límites altos y creación ilimitada de tarjetas te brinda una flexibilidad que la mayoría de los otros proveedores de tarjetas virtuales simplemente no ofrecen."
+  },
+  {
+    "section": "Block 10",
+    "variable": "block_10_title",
+    "content": "Gasta en Más de 200 Países"
+  },
+  {
+    "section": "Block 10 Paragraph",
+    "variable": "block_10_paragraph",
+    "content": "Las tarjetas virtuales Bitsika se pueden usar en más de 200 países. Se pueden crear y recargar con criptomonedas como Bitcoin y USDT, permitiendo a los usuarios de cualquier parte del mundo comprar en línea, pagar suscripciones y realizar pagos seguros. Esto hace de Bitsika un servicio de tarjetas virtuales verdaderamente global."
+  },
+  {
+    "section": "Block 11",
+    "variable": "block_11_title",
+    "content": "Seguridad y Control"
+  },
+  {
+    "section": "Block 11 Paragraph",
+    "variable": "block_11_paragraph",
+    "content": "Con Bitsika, mantienes el control total de tus tarjetas virtuales. Congélalas o descongélalas instantáneamente, crea tantas como necesites para diferentes propósitos y oculta o revela detalles sensibles como el número de tarjeta o CVV en cualquier momento. La aplicación está protegida con un PIN para acceso seguro, y recibes notificaciones de transacción en tiempo real para que puedas detectar cualquier actividad sospechosa de inmediato. Si los detalles de tu tarjeta se ven comprometidos alguna vez, puedes reemplazarlos instantáneamente para mantener tus pagos seguros. Características clave de seguridad: — Congela y descongela tarjetas instantáneamente — Crea tarjetas virtuales ilimitadas para diferentes propósitos — Oculta o revela detalles sensibles de la tarjeta en cualquier momento — Aplicación protegida con PIN seguro — Notificaciones de transacción en tiempo real — Reemplaza instantáneamente los detalles de la tarjeta si se comprometen"
+  },
+  {
+    "section": "Block 12",
+    "variable": "block_12_title",
+    "content": "Cumplimiento y Socio Emisor"
+  },
+  {
+    "section": "Block 12 Paragraph",
+    "variable": "block_12_paragraph",
+    "content": "Las tarjetas Visa virtuales Bitsika son emitidas por un socio externo bajo licencia de Visa, garantizando aceptación global y cumplimiento de los estándares de la industria. Requerimos verificación KYC para mantener el cumplimiento regulatorio y prevenir delitos financieros. Nuestra plataforma cumple con los requisitos de seguridad PCI DSS y utiliza cifrado SSL para proteger tus datos de pago. Todas las transacciones se procesan de forma segura en la red Visa."
+  },
+  {
+    "section": "Block 13",
+    "variable": "block_13_title",
+    "content": "Usa en Persona"
+  },
+  {
+    "section": "Block 13 Paragraph",
+    "variable": "block_13_paragraph",
+    "content": "Las tarjetas virtuales Bitsika están diseñadas para uso en línea, pero agregarlas a billeteras móviles como Apple Pay, Google Pay o PayPal te permite gastar en tiendas físicas donde se aceptan estas billeteras. De esta manera, tu tarjeta virtual se vuelve utilizable en persona sin necesidad de una tarjeta de plástico, brindándote más flexibilidad mientras mantienes la conveniencia y seguridad de un método de pago virtual."
+  },
+  {
+    "section": "Reasons people use Talkroom",
+    "variable": "reasons_section_title",
+    "content": "Cómo Crear y Activar Tu Tarjeta Virtual Bitsika en 3 Sencillos Pasos"
+  },
+  {
+    "section": "Reason A H3",
+    "variable": "reason_a_h3_title",
+    "content": "Regístrate y Completa el KYC"
+  },
+  {
+    "section": "Reason A Paragraph",
+    "variable": "reason_a_paragraph",
+    "content": "Descarga la aplicación Bitsika, crea tu cuenta y envía tus documentos KYC. Tu verificación generalmente se aprobará dentro de 1 hora. Una vez aprobado, deposita cripto como Bitcoin y USDT usando una de las redes compatibles. Tu saldo estará listo tan pronto como se confirme el depósito."
+  },
+  {
+    "section": "Reason B H3",
+    "variable": "reason_b_h3_title",
+    "content": "Crea Tu Tarjeta Virtual"
+  },
+  {
+    "section": "Reason B Paragraph",
+    "variable": "reason_b_paragraph",
+    "content": "En la aplicación, toca \"Crear tarjeta virtual\" y elige tu tipo de tarjeta. Tu número de tarjeta, fecha de vencimiento, CVV y dirección de facturación aparecerán instantáneamente."
+  },
+  {
+    "section": "Reason C H3",
+    "variable": "reason_c_h3_title",
+    "content": "Activa y Comienza a Gastar"
+  },
+  {
+    "section": "Reason C Paragraph",
+    "variable": "reason_c_paragraph",
+    "content": "Úsala directamente para pagos en línea y suscripciones o agrega tu nueva tarjeta a Apple Pay, Google Pay, PayPal. Comienza a gastar de inmediato con transacciones seguras en todo el mundo."
+  },
+  {
+    "section": "FAQ heading",
+    "variable": "faq_heading",
+    "content": "Preguntas Frecuentes"
+  },
+  {
+    "section": "Question 1",
+    "variable": "faq_q1",
+    "content": "¿Puedo financiar mi tarjeta virtual Bitsika con cripto?"
+  },
+  {
+    "section": "Answer 1",
+    "variable": "faq_a1",
+    "content": "Sí. Puedes financiar la tarjeta virtual Bitsika con cripto como Bitcoin y USDT en redes compatibles como BTC, ERC20 y BEP20."
+  },
+  {
+    "section": "Question 2",
+    "variable": "faq_q2",
+    "content": "¿Necesito enviar KYC para la tarjeta virtual Bitsika?"
+  },
+  {
+    "section": "Answer 2",
+    "variable": "faq_a2",
+    "content": "Sí. Bitsika requiere verificación KYC para el cumplimiento, pero el proceso es rápido y fácil de usar. Tu KYC generalmente se aprueba dentro de 1 hora después del envío."
+  },
+  {
+    "section": "Question 3",
+    "variable": "faq_q3",
+    "content": "¿Puedo agregar mi tarjeta virtual Bitsika a Apple Pay, Google Pay y PayPal?"
+  },
+  {
+    "section": "Answer 3",
+    "variable": "faq_a3",
+    "content": "Sí. Las tarjetas virtuales Bitsika funcionan con Apple Pay, Google Pay y PayPal para pagos sin problemas."
+  },
+  {
+    "section": "Question 4",
+    "variable": "faq_q4",
+    "content": "¿Puedo usar la tarjeta virtual Bitsika en OnlyFans?"
+  },
+  {
+    "section": "Answer 4",
+    "variable": "faq_a4",
+    "content": "Sí. Las tarjetas virtuales Bitsika funcionan en OnlyFans y te permiten suscribirte con mayor privacidad a través del financiamiento cripto y el uso de alias."
+  },
+  {
+    "section": "Question 5",
+    "variable": "faq_q5",
+    "content": "¿La tarjeta virtual Bitsika es prepagada?"
+  },
+  {
+    "section": "Answer 5",
+    "variable": "faq_a5",
+    "content": "Sí. Cargas fondos en la tarjeta virtual Bitsika antes de usarla, dándote control sobre tus gastos."
+  },
+  {
+    "section": "Question 6",
+    "variable": "faq_q6",
+    "content": "¿La tarjeta virtual Bitsika es recargable?"
+  },
+  {
+    "section": "Answer 6",
+    "variable": "faq_a6",
+    "content": "Sí. Las tarjetas virtuales Bitsika premium se pueden recargar indefinidamente, haciéndolas ideales para pagos recurrentes."
+  },
+  {
+    "section": "Question 7",
+    "variable": "faq_q7",
+    "content": "¿Qué es la tarjeta virtual Bitsika?"
+  },
+  {
+    "section": "Answer 7",
+    "variable": "faq_a7",
+    "content": "La tarjeta virtual Bitsika es una tarjeta de débito Visa digital que puedes crear después de una verificación KYC rápida con cripto como Bitcoin y USDT para pagar cosas en línea, suscribirte a servicios o agregar a billeteras móviles."
+  },
+  {
+    "section": "Question 8",
+    "variable": "faq_q8",
+    "content": "¿Qué tan rápido puedo obtener mi tarjeta virtual Bitsika?"
+  },
+  {
+    "section": "Answer 8",
+    "variable": "faq_a8",
+    "content": "Después de completar la verificación KYC (generalmente aprobada dentro de 1 hora), puedes crear y comenzar a usar tu tarjeta virtual Bitsika de inmediato."
+  },
+  {
+    "section": "Question 9",
+    "variable": "faq_q9",
+    "content": "¿Se puede usar la tarjeta virtual Bitsika en persona?"
+  },
+  {
+    "section": "Answer 9",
+    "variable": "faq_a9",
+    "content": "Sí. Cuando se agrega a Apple Pay, Google Pay o PayPal, puedes tocar y pagar en tiendas de todo el mundo con la tarjeta virtual Bitsika."
+  },
+  {
+    "section": "Question 10",
+    "variable": "faq_q10",
+    "content": "¿Cuáles son los límites de gasto en la tarjeta virtual Bitsika?"
+  },
+  {
+    "section": "Answer 10",
+    "variable": "faq_a10",
+    "content": "Cada tarjeta virtual Bitsika admite hasta $500,000 en recargas mensuales, sin límite en la cantidad de tarjetas que creas."
+  },
+  {
+    "section": "Question 11",
+    "variable": "faq_q11",
+    "content": "¿Cuántas tarjetas virtuales Bitsika puedo crear?"
+  },
+  {
+    "section": "Answer 11",
+    "variable": "faq_a11",
+    "content": "Puedes crear tantas tarjetas virtuales Bitsika como necesites, para uso único o pagos continuos."
+  },
+  {
+    "section": "Question 12",
+    "variable": "faq_q12",
+    "content": "¿En cuántos países puedo usar las tarjetas virtuales Bitsika?"
+  },
+  {
+    "section": "Answer 12",
+    "variable": "faq_a12",
+    "content": "Las tarjetas virtuales Bitsika se pueden usar en más de 200 países, en cualquier lugar donde se acepten Visa y billeteras móviles."
+  },
+  {
+    "section": "Question 13",
+    "variable": "faq_q13",
+    "content": "¿La tarjeta virtual Bitsika es internacional?"
+  },
+  {
+    "section": "Answer 13",
+    "variable": "faq_a13",
+    "content": "Sí. Las tarjetas virtuales Bitsika son aceptadas globalmente para pagos en línea y en persona en más de 200 países."
+  },
+  {
+    "section": "Question 14",
+    "variable": "faq_q14",
+    "content": "¿Para quién es la tarjeta virtual Bitsika?"
+  },
+  {
+    "section": "Answer 14",
+    "variable": "faq_a14",
+    "content": "La tarjeta Visa virtual Bitsika está diseñada para una amplia variedad de usuarios que necesitan pagos rápidos, flexibles y seguros. Los freelancers pueden gastar sus ganancias en cripto directamente en línea, mientras que los estudiantes internacionales pueden pagar matrículas, suscripciones y servicios sin estar limitados por restricciones bancarias locales. Los jugadores se benefician del acceso instantáneo a créditos, recargas y artículos dentro del juego en plataformas globales, y los compradores en línea pueden comprar en sitios de comercio electrónico internacionales que pueden no aceptar métodos de pago locales. Los suscriptores de contenido en plataformas como OnlyFans, así como servicios de streaming o SaaS, disfrutan de mayor privacidad al pagar con financiamiento cripto. Los trabajadores remotos y nómadas digitales usan Bitsika en más de 200 países, mientras que los emprendedores y pequeñas empresas pueden crear múltiples tarjetas para administrar personal o gastos de proyectos. Los usuarios conscientes de la privacidad también prefieren Bitsika ya que las transacciones permanecen separadas de sus registros bancarios personales. Con aprobación KYC rápida (generalmente dentro de 1 hora), financiamiento Bitcoin y USDT y aceptación global, Bitsika es una solución moderna y conforme que sirve a cualquiera que quiera una alternativa poderosa a las tarjetas bancarias tradicionales."
+  },
+  {
+    "section": "Question 15",
+    "variable": "faq_q15",
+    "content": "¿Qué tan segura es la tarjeta virtual Bitsika?"
+  },
+  {
+    "section": "Answer 15",
+    "variable": "faq_a15",
+    "content": "Las tarjetas virtuales Bitsika se pueden congelar o eliminar en cualquier momento. Los detalles se pueden ocultar, la aplicación está protegida con PIN y las transacciones usan seguridad SSL y PCI DSS. La verificación KYC agrega una capa adicional de cumplimiento y seguridad."
+  },
+  {
+    "section": "Question 16",
+    "variable": "faq_q16",
+    "content": "¿Qué tarifas se aplican a la tarjeta virtual Bitsika?"
+  },
+  {
+    "section": "Answer 16",
+    "variable": "faq_a16",
+    "content": "Se aplica una pequeña tarifa al crear o recargar tarjetas virtuales Bitsika. No hay cargos ocultos."
+  },
+  {
+    "section": "Question 17",
+    "variable": "faq_q17",
+    "content": "¿Qué sucede si mi tarjeta virtual Bitsika se cobra incorrectamente?"
+  },
+  {
+    "section": "Answer 17",
+    "variable": "faq_a17",
+    "content": "Puedes solicitar un reembolso o disputar la transacción directamente en la aplicación Bitsika con nuestro equipo de soporte."
+  },
+  {
+    "section": "CTA 1",
+    "variable": "cta_1",
+    "content": "Descarga Bitsika hoy y crea tu tarjeta Visa virtual con KYC aprobado en aproximadamente una hora."
+  },
+  {
+    "section": "CTA 2",
+    "variable": "cta_2",
+    "content": "Crea tarjetas Visa virtuales ilimitadas con verificación KYC rápida descargando Bitsika hoy."
+  },
+  {
+    "section": "CTA 3",
+    "variable": "cta_3",
+    "content": "¿Listo para comprar en todo el mundo? Comienza con Bitsika y haz que tu KYC sea aprobado en una hora."
+  },
+  {
+    "section": "premium-card",
+    "variable": "icon_premium_card",
+    "content": "Ejemplo de tarjeta virtual Visa Premium"
+  },
+  {
+    "section": "standard-card",
+    "variable": "icon_standard_card",
+    "content": "Ejemplo de tarjeta virtual Visa Estándar"
+  },
+  {
+    "section": "bank-card",
+    "variable": "icon_bank_card",
+    "content": "Icono de tarjeta bancaria"
+  },
+  {
+    "section": "credit",
+    "variable": "icon_credit",
+    "content": "Icono de crédito"
+  },
+  {
+    "section": "clock",
+    "variable": "icon_clock",
+    "content": "Icono de reloj"
+  },
+  {
+    "section": "globe",
+    "variable": "icon_globe",
+    "content": "Icono de globo"
+  },
+  {
+    "section": "wallet",
+    "variable": "icon_wallet",
+    "content": "Icono de billetera"
+  },
+  {
+    "section": "store",
+    "variable": "icon_store",
+    "content": "Icono de tienda"
+  },
+  {
+    "section": "tether",
+    "variable": "icon_tether",
+    "content": "Icono Tether"
+  },
+  {
+    "section": "lock",
+    "variable": "icon_lock",
+    "content": "Icono de candado"
+  },
+  {
+    "section": "gift-card",
+    "variable": "icon_gift_card",
+    "content": "Icono de tarjeta de regalo"
+  },
+  {
+    "section": "passport",
+    "variable": "icon_passport",
+    "content": "Icono de pasaporte"
+  },
+  {
+    "section": "profile",
+    "variable": "icon_profile",
+    "content": "Icono de perfil"
+  },
+  {
+    "section": "bank",
+    "variable": "icon_bank",
+    "content": "Icono de banco"
+  },
+  {
+    "section": "money",
+    "variable": "icon_money",
+    "content": "Icono de dinero"
+  },
+  {
+    "section": "debit-card",
+    "variable": "icon_debit_card",
+    "content": "Icono de tarjeta de débito"
+  },
+  {
+    "section": "bitsika-logo",
+    "variable": "icon_bitsika_logo",
+    "content": "Logo Bitsika"
+  },
+  {
+    "section": "Comparison table heading",
+    "variable": "comparison_heading",
+    "content": "Cómo se Comparan las Tarjetas Virtuales Bitsika con Otras Aplicaciones de Tarjetas Virtuales, Aplicaciones Bancarias y Tarjetas de Regalo Visa"
+  },
+  {
+    "section": "Comparison table subtitle",
+    "variable": "comparison_subtitle",
+    "content": "Las tarjetas Visa virtuales Bitsika se destacan en comparación con tarjetas de otras plataformas. Mientras que otras aplicaciones de tarjetas virtuales, tarjetas emitidas por bancos y tarjetas de regalo Visa tienen sus fortalezas, Bitsika combina financiamiento cripto instantáneo, verificación KYC rápida (aprobada en 1 hora), alcance global y control total de gastos de una manera que otros no pueden. La tabla a continuación muestra cómo Bitsika se compara en los factores más importantes para elegir una tarjeta de pago virtual."
+  },
+  {
+    "section": "1A",
+    "variable": "comp_1a",
+    "content": "Característica / Beneficio"
+  },
+  {
+    "section": "1B",
+    "variable": "comp_1b",
+    "content": "Tarjeta Visa Virtual Bitsika"
+  },
+  {
+    "section": "1C",
+    "variable": "comp_1c",
+    "content": "Otras Aplicaciones de Tarjetas Virtuales"
+  },
+  {
+    "section": "1D",
+    "variable": "comp_1d",
+    "content": "Aplicaciones Bancarias"
+  },
+  {
+    "section": "1E",
+    "variable": "comp_1e",
+    "content": "Tarjetas de Regalo Visa"
+  },
+  {
+    "section": "2A",
+    "variable": "comp_2a",
+    "content": "Conclusión - Las Tarjetas Virtuales Bitsika son Superiores"
+  },
+  {
+    "section": "2B",
+    "variable": "comp_2b",
+    "content": "✅ Financiamiento cripto (Bitcoin y USDT), creación instantánea, KYC en 1 hora, uso global, controles completos"
+  },
+  {
+    "section": "2C",
+    "variable": "comp_2c",
+    "content": "❌ Sin cripto, configuración más lenta, características limitadas"
+  },
+  {
+    "section": "2D",
+    "variable": "comp_2d",
+    "content": "❌ Requiere cuenta bancaria y KYC prolongado"
+  },
+  {
+    "section": "2E",
+    "variable": "comp_2e",
+    "content": "❌ Solo uso único"
+  },
+  {
+    "section": "3A",
+    "variable": "comp_3a",
+    "content": "Método de Financiamiento"
+  },
+  {
+    "section": "3B",
+    "variable": "comp_3b",
+    "content": "Cripto (Bitcoin y USDT) + saldo instantáneo"
+  },
+  {
+    "section": "3C",
+    "variable": "comp_3c",
+    "content": "Transferencia bancaria, a veces tarjeta"
+  },
+  {
+    "section": "3D",
+    "variable": "comp_3d",
+    "content": "Solo cuenta bancaria"
+  },
+  {
+    "section": "3E",
+    "variable": "comp_3e",
+    "content": "Valor en efectivo precargado"
+  },
+  {
+    "section": "4A",
+    "variable": "comp_4a",
+    "content": "KYC Requerido"
+  },
+  {
+    "section": "4B",
+    "variable": "comp_4b",
+    "content": "Sí, pero aprobado en 1 hora"
+  },
+  {
+    "section": "4C",
+    "variable": "comp_4c",
+    "content": "A menudo sí"
+  },
+  {
+    "section": "4D",
+    "variable": "comp_4d",
+    "content": "Siempre sí"
+  },
+  {
+    "section": "4E",
+    "variable": "comp_4e",
+    "content": "No"
+  },
+  {
+    "section": "5A",
+    "variable": "comp_5a",
+    "content": "Soporte de Billetera"
+  },
+  {
+    "section": "5B",
+    "variable": "comp_5b",
+    "content": "Apple Pay, Google Pay, PayPal y más"
+  },
+  {
+    "section": "5C",
+    "variable": "comp_5c",
+    "content": "A veces"
+  },
+  {
+    "section": "5D",
+    "variable": "comp_5d",
+    "content": "Sí"
+  },
+  {
+    "section": "5E",
+    "variable": "comp_5e",
+    "content": "A veces"
+  },
+  {
+    "section": "6A",
+    "variable": "comp_6a",
+    "content": "Privacidad / Uso de Alias"
+  },
+  {
+    "section": "6B",
+    "variable": "comp_6b",
+    "content": "Sí, alias posible"
+  },
+  {
+    "section": "6C",
+    "variable": "comp_6c",
+    "content": "Raro"
+  },
+  {
+    "section": "6D",
+    "variable": "comp_6d",
+    "content": "No"
+  },
+  {
+    "section": "6E",
+    "variable": "comp_6e",
+    "content": "No"
+  },
+  {
+    "section": "7A",
+    "variable": "comp_7a",
+    "content": "Prepagada"
+  },
+  {
+    "section": "7B",
+    "variable": "comp_7b",
+    "content": "Sí. Los usuarios pueden elegir cuánto cargar en las tarjetas"
+  },
+  {
+    "section": "7C",
+    "variable": "comp_7c",
+    "content": "Generalmente, pero con opciones de financiamiento limitadas"
+  },
+  {
+    "section": "7D",
+    "variable": "comp_7d",
+    "content": "No prepagada, vinculada directamente a una cuenta bancaria"
+  },
+  {
+    "section": "7E",
+    "variable": "comp_7e",
+    "content": "Siempre prepagada pero con saldo fijo único"
+  },
+  {
+    "section": "8A",
+    "variable": "comp_8a",
+    "content": "Recargable"
+  },
+  {
+    "section": "8B",
+    "variable": "comp_8b",
+    "content": "Sí, con un límite alto de $500,000 al mes"
+  },
+  {
+    "section": "8C",
+    "variable": "comp_8c",
+    "content": "Generalmente sí pero con límite pequeño"
+  },
+  {
+    "section": "8D",
+    "variable": "comp_8d",
+    "content": "Sí pero con límite pequeño"
+  },
+  {
+    "section": "8E",
+    "variable": "comp_8e",
+    "content": "No"
+  },
+  {
+    "section": "9A",
+    "variable": "comp_9a",
+    "content": "Velocidad de Creación"
+  },
+  {
+    "section": "9B",
+    "variable": "comp_9b",
+    "content": "KYC aprobado en 1 hora, tarjeta instantánea después"
+  },
+  {
+    "section": "9C",
+    "variable": "comp_9c",
+    "content": "10-30 minutos, a veces días"
+  },
+  {
+    "section": "9D",
+    "variable": "comp_9d",
+    "content": "1-3 días o más"
+  },
+  {
+    "section": "9E",
+    "variable": "comp_9e",
+    "content": "Inmediato después de la compra"
+  },
+  {
+    "section": "10A",
+    "variable": "comp_10a",
+    "content": "Funciona Globalmente"
+  },
+  {
+    "section": "10B",
+    "variable": "comp_10b",
+    "content": "Funciona en más de 200 países"
+  },
+  {
+    "section": "10C",
+    "variable": "comp_10c",
+    "content": "A menudo limitado"
+  },
+  {
+    "section": "10D",
+    "variable": "comp_10d",
+    "content": "A menudo limitado por región"
+  },
+  {
+    "section": "10E",
+    "variable": "comp_10e",
+    "content": "Principalmente limitado por región"
+  },
+  {
+    "section": "11A",
+    "variable": "comp_11a",
+    "content": "Controles de Seguridad"
+  },
+  {
+    "section": "11B",
+    "variable": "comp_11b",
+    "content": "Congelar y descongelar, ocultar detalles, reemplazar instantáneamente"
+  },
+  {
+    "section": "11C",
+    "variable": "comp_11c",
+    "content": "Varía"
+  },
+  {
+    "section": "11D",
+    "variable": "comp_11d",
+    "content": "Varía"
+  },
+  {
+    "section": "11E",
+    "variable": "comp_11e",
+    "content": "Ninguno"
+  },
+  {
+    "section": "12A",
+    "variable": "comp_12a",
+    "content": "Pagos Recurrentes"
+  },
+  {
+    "section": "12B",
+    "variable": "comp_12b",
+    "content": "Sí"
+  },
+  {
+    "section": "12C",
+    "variable": "comp_12c",
+    "content": "Sí"
+  },
+  {
+    "section": "12D",
+    "variable": "comp_12d",
+    "content": "Sí"
+  },
+  {
+    "section": "12E",
+    "variable": "comp_12e",
+    "content": "A veces"
+  },
+  {
+    "section": "13A",
+    "variable": "comp_13a",
+    "content": "Tarifas y Transparencia"
+  },
+  {
+    "section": "13B",
+    "variable": "comp_13b",
+    "content": "Tarifas simples y fijas"
+  },
+  {
+    "section": "13C",
+    "variable": "comp_13c",
+    "content": "A menudo ocultas o complejas"
+  },
+  {
+    "section": "13D",
+    "variable": "comp_13d",
+    "content": "A menudo ocultas"
+  },
+  {
+    "section": "13E",
+    "variable": "comp_13e",
+    "content": "Solo tarifas de compra"
+  },
+  {
+    "section": "Footer topic Resources",
+    "variable": "footer_topic_resources",
+    "content": "Recursos"
+  },
+  {
+    "section": "Footer topic Products",
+    "variable": "footer_topic_products",
+    "content": "Productos"
+  },
+  {
+    "section": "Footer topic Download",
+    "variable": "footer_topic_download",
+    "content": "Descargar"
+  },
+  {
+    "section": "Footer item Bitsika Updates",
+    "variable": "footer_item_bitsika_updates",
+    "content": "Actualizaciones Bitsika"
+  },
+  {
+    "section": "Footer item CEO's Blog",
+    "variable": "footer_item_ceo_blog",
+    "content": "Blog del CEO"
+  },
+  {
+    "section": "Footer item Bitsika Documentary",
+    "variable": "footer_item_bitsika_documentary",
+    "content": "Documental Bitsika"
+  },
+  {
+    "section": "Footer item Privacy Policy",
+    "variable": "footer_item_privacy_policy",
+    "content": "Política de Privacidad"
+  },
+  {
+    "section": "Footer item Terms and Conditions",
+    "variable": "footer_item_terms_and_conditions",
+    "content": "Términos y Condiciones"
+  },
+  {
+    "section": "Footer item Delete Account",
+    "variable": "footer_item_delete_account",
+    "content": "Eliminar Cuenta"
+  },
+  {
+    "section": "Footer item Contact Us",
+    "variable": "footer_item_contact_us",
+    "content": "Contáctanos"
+  },
+  {
+    "section": "Footer item KYC and AML Policy",
+    "variable": "footer_item_kyc_policy",
+    "content": "Política de KYC y AML"
+  },
+  {
+    "section": "Android link",
+    "variable": "android_link_text",
+    "content": "Disponible en **Google Play**"
+  },
+  {
+    "section": "Apple link",
+    "variable": "apple_link_text",
+    "content": "Descargar en **App Store**"
+  },
+  {
+    "section": "Virtual card type (Standard)",
+    "variable": "card_type_standard",
+    "content": "Estándar"
+  },
+  {
+    "section": "Virtual card type (Premium)",
+    "variable": "card_type_premium",
+    "content": "Premium"
+  },
+  {
+    "section": "Virtual card owner name placeholder",
+    "variable": "name_on_card_placeholder",
+    "content": "Tu Nombre Aquí"
+  }
+]

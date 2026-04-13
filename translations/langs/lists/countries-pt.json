@@ -1,0 +1,57 @@
+[
+  {
+    "lang_en": "Portuguese",
+    "place_name_en": "Brazil",
+    "place_name_local": "Brasil",
+    "lang_code": "pt",
+    "lang_code_local": "pt-br",
+    "slug": "cartao-virtual-cripto-brasil",
+    "anchor_text": "Cartões Virtuais Cripto no Brasil",
+    "image_name": "brazil.png",
+    "image_alt": "Bandeira para Cartões Virtuais Cripto no Brasil"
+  },
+  {
+    "lang_en": "Portuguese",
+    "place_name_en": "Angola",
+    "place_name_local": "Angola",
+    "lang_code": "pt",
+    "lang_code_local": "pt-ao",
+    "slug": "cartao-virtual-cripto-angola",
+    "anchor_text": "Cartões Virtuais Cripto Que Funcionam em Angola",
+    "image_name": "angola.png",
+    "image_alt": "Bandeira para Cartões Virtuais Cripto em Angola"
+  },
+  {
+    "lang_en": "Portuguese",
+    "place_name_en": "Mozambique",
+    "place_name_local": "Moçambique",
+    "lang_code": "pt",
+    "lang_code_local": "pt-mz",
+    "slug": "cartao-virtual-cripto-mocambique",
+    "anchor_text": "Cartões Virtuais Cripto Que Funcionam em Moçambique",
+    "image_name": "mozambique.png",
+    "image_alt": "Bandeira para Cartões Virtuais Cripto em Moçambique"
+  },
+  {
+    "lang_en": "Portuguese",
+    "place_name_en": "Portugal",
+    "place_name_local": "Portugal",
+    "lang_code": "pt",
+    "lang_code_local": "pt-pt",
+    "slug": "cartao-virtual-cripto-portugal",
+    "anchor_text": "Cartões Virtuais Cripto em Portugal",
+    "image_name": "portugal.png",
+    "image_alt": "Bandeira para Cartões Virtuais Cripto em Portugal"
+  },
+  {
+    "lang_en": "Portuguese",
+    "place_name_en": "Cape Verde",
+    "place_name_local": "Cabo Verde",
+    "lang_code": "pt",
+    "lang_code_local": "pt-cv",
+    "slug": "cartao-virtual-cripto-cabo-verde",
+    "anchor_text": "Cartões Virtuais Cripto Que Funcionam em Cabo Verde",
+    "image_name": "cape-verde.png",
+    "image_alt": "Bandeira para Cartões Virtuais Cripto em Cabo Verde"
+  }
+]
