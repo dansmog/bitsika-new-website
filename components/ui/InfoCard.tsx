@@ -15,7 +15,7 @@ export default function InfoCard({
         <h3 className="text-ink text-xl font-google-sans font-normal">
           {title}
         </h3>
-        <p className="text-ink-secondary text-base font-normal leading-[130%] tracking-[-0.16px]">
+        <p className="text-ink-secondary font-inter text-base font-normal leading-[130%] tracking-[-0.16px]">
           {description}
         </p>
       </div>

@@ -65,7 +65,7 @@ export default function HeroBanner({ hero }: HeroBannerProps) {
               mobileLabel={hero.mobileGooglePlayLabel}
             />
           </div>
-          <h2 className="text-white text-[17px]  tracking-[-0.34px] leading-[24.14px]">
+          <h2 className="text-white text-[17px] font-inter tracking-[-0.34px] leading-[24.14px]">
             {hero.h2}
           </h2>
         </div>
