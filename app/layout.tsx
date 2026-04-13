@@ -47,6 +47,9 @@ export default async function RootLayout({
       lang={content.meta.hreflang}
       className={` ${googleSans.variable} ${inter.variable} h-full antialiased`}
     >
+      <meta property="og:image" content="" />
+      <meta property="og:image:width" content="150" />
+      <meta property="og:image:height" content="150" />
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );

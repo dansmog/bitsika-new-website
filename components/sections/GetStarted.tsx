@@ -71,7 +71,7 @@ export default function GetStarted({
             <h2 className="font-google-sans font-normal text-[32px] md:text-[40px] leading-[114%] tracking-[-0.01em] max-w-115">
               {stepsContent.heading}
             </h2>
-            <p className="font-normal text-base leading-[130%] tracking-[-0.01em] text-ink-secondary max-w-180">
+            <p className="font-normal font-inter text-base leading-[130%] tracking-[-0.01em] text-ink-secondary max-w-180">
               {stepsContent.description}
             </p>
           </div>
