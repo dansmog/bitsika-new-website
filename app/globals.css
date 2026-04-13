@@ -4,6 +4,7 @@
 @theme {
   /* Fonts */
   --font-google-sans: var(--font-google-sans);
+  --font-inter : var(--font-inter);
 
   /* Brand */
   --color-brand-blue: #003985;

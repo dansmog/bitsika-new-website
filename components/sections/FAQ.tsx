@@ -124,7 +124,7 @@ export default function FAQ({ faq }: FAQProps) {
                         transition={{ duration: 0.25, ease: "easeInOut" }}
                         className="overflow-hidden"
                       >
-                        <p className="pl-16 pr-4 py-5 font-normal text-sm leading-[160%] text-ink-secondary">
+                        <p className="pl-16 pr-4 py-5 font-normal font-inter text-sm leading-[160%] text-ink-secondary">
                           {faq.answer}
                         </p>
                       </motion.div>
