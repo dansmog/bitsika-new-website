@@ -28,10 +28,29 @@ const inter = Inter({
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
   return {
+    metadataBase: new URL("https://www.bitsika.com"),
     title: content.meta.title,
     description: content.meta.description,
     icons: {
       shortcut: "/favicon.ico",
+    },
+    openGraph: {
+      title: content.meta.title,
+      description: content.meta.description,
+      images: [
+        {
+          url: "/images/bitsika-logo-blue.png",
+          width: 1200,
+          height: 630,
+          alt: "Bitsika",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: content.meta.title,
+      description: content.meta.description,
+      images: ["/images/bitsika-logo-blue.png"],
     },
   };
 }
@@ -47,9 +66,6 @@ export default async function RootLayout({
       lang={content.meta.hreflang}
       className={` ${googleSans.variable} ${inter.variable} h-full antialiased`}
     >
-      <meta property="og:image" content="" />
-      <meta property="og:image:width" content="150" />
-      <meta property="og:image:height" content="150" />
       <body className="min-h-full flex flex-col">{children}</body>
     </html>
   );
