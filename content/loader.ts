@@ -15,7 +15,11 @@ type ContentEntry = {
 };
 
 async function fetchEntries(url: string, locale: Locale): Promise<Map<string, string>> {
-  const res = await fetch(url, { next: { revalidate: 3600 } });
+  const bustUrl = `${url}${url.includes("?") ? "&" : "?"}t=${Date.now()}`;
+  const res = await fetch(bustUrl, {
+    cache: "no-store",
+    headers: { "cache-control": "no-cache" },
+  });
   if (!res.ok) {
     throw new Error(
       `Failed to load content from ${url} for locale "${locale}" (${res.status})`,
