@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Inter, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import localFont from "next/font/local";
-import { getContent } from "@/content";
+import { headers } from "next/headers";
 import "./globals.css";
 
 const googleSans = localFont({
@@ -25,34 +25,18 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-  const content = await getContent();
-  return {
-    metadataBase: new URL("https://www.bitsika.com"),
-    title: content.meta.title,
-    description: content.meta.description,
-    icons: {
-      shortcut: "/favicon.ico",
-    },
-    openGraph: {
-      title: content.meta.title,
-      description: content.meta.description,
-      images: [
-        {
-          url: "/images/bitsika-logo-blue.png",
-          width: 1200,
-          height: 630,
-          alt: "Bitsika",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: content.meta.title,
-      description: content.meta.description,
-      images: ["/images/bitsika-logo-blue.png"],
-    },
-  };
+export const metadata: Metadata = {
+  metadataBase: new URL("https://www.bitsika.com"),
+  icons: {
+    shortcut: "/favicon.ico",
+  },
+};
+
+const LOCALE_PATTERN = /^[a-z]{2}-[a-z]{2}$/;
+
+function localeFromPathname(pathname: string): string {
+  const seg = pathname.split("/").filter(Boolean)[0] ?? "";
+  return LOCALE_PATTERN.test(seg) ? seg : "en-us";
 }
 
 export default async function RootLayout({
@@ -60,10 +44,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const content = await getContent();
+  const hdrs = await headers();
+  const pathname = hdrs.get("x-pathname") ?? "/";
+  const lang = localeFromPathname(pathname);
+
   return (
     <html
-      lang={content.meta.hreflang}
+      lang={lang}
       className={` ${googleSans.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>

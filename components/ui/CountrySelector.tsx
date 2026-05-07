@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import Image from "next/image";
+import { useMemo, useState, useRef, useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import Image, { type StaticImageData } from "next/image";
 
 import flagUK from "@/assets/images/countryflag/UK.svg";
 import flagNG from "@/assets/images/countryflag/NG.svg";
@@ -15,23 +16,38 @@ import flagKOR from "@/assets/images/countryflag/KOR.svg";
 import flagJPN from "@/assets/images/countryflag/JPN.svg";
 import flagRUS from "@/assets/images/countryflag/RUS.svg";
 import flagUSA from "@/assets/images/countryflag/USA.png";
+import type { SeoLanguage } from "@/content/api";
 
-const countries = [
-  { code: "us", locale: "en-us", flag: flagUSA },
-  { code: "gb", locale: "en-gb", flag: flagUK },
-  { code: "ng", locale: "ng-ig", flag: flagNG },
-  { code: "cm", locale: "fr-cm", flag: flagXOF },
-  { code: "tz", locale: "en-gb", flag: flagTZS },
-  { code: "lr", locale: "en-gb", flag: flagLIB },
-  { code: "mw", locale: "en-gb", flag: flagMLW },
-  { code: "gh", locale: "en-gb", flag: flagGHS },
-  { code: "cn", locale: "en-gb", flag: flagCHN },
-  { code: "kr", locale: "en-gb", flag: flagKOR },
-  { code: "jp", locale: "en-gb", flag: flagJPN },
-  { code: "ru", locale: "en-gb", flag: flagRUS },
-];
+const FLAGS_BY_COUNTRY: Record<string, StaticImageData> = {
+  us: flagUSA,
+  gb: flagUK,
+  ng: flagNG,
+  cm: flagXOF,
+  sn: flagXOF,
+  tz: flagTZS,
+  lr: flagLIB,
+  mw: flagMLW,
+  gh: flagGHS,
+  cn: flagCHN,
+  kr: flagKOR,
+  jp: flagJPN,
+  ru: flagRUS,
+};
 
-function FlagIcon({ flag }: { flag: typeof flagNG | null }) {
+const HOME_LANGUAGE = "en";
+const HOME_COUNTRY = "us";
+const LOCALE_PATTERN = /^[a-z]{2}-[a-z]{2}$/;
+
+type CountryOption = {
+  id: string;
+  language: string;
+  country: string;
+  locale: string;
+  href: string;
+  flag: StaticImageData | null;
+};
+
+function FlagIcon({ flag }: { flag: StaticImageData | null }) {
   if (!flag) {
     return <div className="w-5 h-5 rounded-full bg-border-input shrink-0" />;
   }
@@ -46,8 +62,44 @@ function FlagIcon({ flag }: { flag: typeof flagNG | null }) {
   );
 }
 
-export default function CountrySelector() {
-  const [selected, setSelected] = useState(countries[0]);
+function activeLocaleFromPath(pathname: string): string {
+  const seg = pathname.split("/").filter(Boolean)[0] ?? "";
+  return LOCALE_PATTERN.test(seg) ? seg : `${HOME_LANGUAGE}-${HOME_COUNTRY}`;
+}
+
+type CountrySelectorProps = {
+  languages: SeoLanguage[];
+};
+
+export default function CountrySelector({ languages }: CountrySelectorProps) {
+  const pathname = usePathname();
+  const router = useRouter();
+
+  console.log({languages})
+
+  const countries = useMemo<CountryOption[]>(
+    () =>
+      languages
+        .filter((l) => l.is_display)
+        .map((l) => {
+          const isHome =
+            l.language === HOME_LANGUAGE && l.country === HOME_COUNTRY;
+          return {
+            id: l.id,
+            language: l.language,
+            country: l.country,
+            locale: `${l.language}-${l.country}`,
+            href: isHome ? "/" : `/${l.language}-${l.country}`,
+            flag: FLAGS_BY_COUNTRY[l.country] ?? null,
+          };
+        }),
+    [languages],
+  );
+
+  const activeLocale = activeLocaleFromPath(pathname ?? "/");
+  const selected =
+    countries.find((c) => c.locale === activeLocale) ?? countries[0] ?? null;
+
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -61,12 +113,14 @@ export default function CountrySelector() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  if (!selected) return null;
+
   return (
     <div ref={ref} className="relative shrink-0">
       <button
         type="button"
-        disabled
-        className="flex items-center gap-2.25 px-3 py-2 rounded-lg border border-border-input bg-surface-white cursor-default"
+        onClick={() => setOpen((o) => !o)}
+        className="flex items-center gap-2.25 px-3 py-2 rounded-lg border border-border-input bg-surface-white cursor-pointer"
       >
         <FlagIcon flag={selected.flag} />
         <span className="hidden lg:block w-px h-4 bg-[#E1E1E1]" />
@@ -96,13 +150,15 @@ export default function CountrySelector() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
             {countries.map((country) => (
               <button
-                key={country.code}
+                key={country.id}
                 onClick={() => {
-                  setSelected(country);
                   setOpen(false);
+                  if (country.locale !== selected.locale) {
+                    router.push(country.href);
+                  }
                 }}
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm cursor-pointer whitespace-nowrap transition-colors ${
-                  selected.code === country.code
+                  selected.id === country.id
                     ? "border border-[#DFDFDF] bg-surface-white"
                     : "hover:bg-surface-secondary"
                 }`}

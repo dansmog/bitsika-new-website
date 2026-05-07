@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound, redirect } from "next/navigation";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BuiltDifferent from "@/components/sections/BuiltDifferent";
@@ -11,25 +12,51 @@ import GetStarted from "@/components/sections/GetStarted";
 import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
 import { getContent, getImageContent } from "@/content";
-import { getSeoLanguages, getSeoProducts } from "@/content/api";
-import { buildLocaleAlternates } from "@/content/seo";
+import {
+  getSeoLanguages,
+  getSeoProducts,
+  type SeoLanguage,
+} from "@/content/api";
+import { buildLocaleAlternates, isHomeLocale } from "@/content/seo";
 
-const HOME_LANGUAGE = "en";
-const HOME_COUNTRY = "us";
+type RouteParams = { locale: string };
 
-export async function generateMetadata(): Promise<Metadata> {
-  const [content, languages] = await Promise.all([
-    getContent(HOME_LANGUAGE, HOME_COUNTRY),
-    getSeoLanguages(),
-  ]);
+const LOCALE_PATTERN = /^([a-z]{2})-([a-z]{2})$/;
+
+async function resolveLocale(rawLocale: string): Promise<{
+  language: string;
+  country: string;
+  languages: SeoLanguage[];
+}> {
+  const match = LOCALE_PATTERN.exec(rawLocale);
+  if (!match) notFound();
+
+  const [, language, country] = match;
+
+  if (isHomeLocale(language, country)) redirect("/");
+
+  const { data: languages } = await getSeoLanguages();
+  const entry = languages.find(
+    (l) => l.language === language && l.country === country,
+  );
+  if (!entry || !entry.is_display) notFound();
+
+  return { language, country, languages };
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<RouteParams>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const { language, country, languages } = await resolveLocale(locale);
+  const content = await getContent(language, country);
+
   return {
     title: content.meta.title,
     description: content.meta.description,
-    alternates: buildLocaleAlternates(
-      HOME_LANGUAGE,
-      HOME_COUNTRY,
-      languages.data,
-    ),
+    alternates: buildLocaleAlternates(language, country, languages),
     openGraph: {
       title: content.meta.title,
       description: content.meta.description,
@@ -51,9 +78,15 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function HomePage() {
+export default async function LocaleHomePage({
+  params,
+}: {
+  params: Promise<RouteParams>;
+}) {
+  const { locale } = await params;
+  const { language, country } = await resolveLocale(locale);
   const [content, imageContent, productsRes] = await Promise.all([
-    getContent(HOME_LANGUAGE, HOME_COUNTRY),
+    getContent(language, country),
     getImageContent(),
     getSeoProducts(),
   ]);
@@ -62,16 +95,10 @@ export default async function HomePage() {
     .filter((p) => p.is_display)
     .sort((a, b) => a.order - b.order);
 
-  console.log("[SEO] /seo/products →", JSON.stringify(products, null, 2));
-
   return (
     <main>
       <Header hero={content.hero} />
-      <GamesGrid
-        products={products}
-        language={HOME_LANGUAGE}
-        country={HOME_COUNTRY}
-      />
+      <GamesGrid products={products} language={language} country={country} />
       <InfoBlock cards={content.infoBoxGroups[0]} />
       <CtaBanner
         cta={content.ctas[0]}

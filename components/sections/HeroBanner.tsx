@@ -46,7 +46,7 @@ export default function HeroBanner({ hero }: HeroBannerProps) {
         aria-hidden
       />
       <div className="relative z-10 max-w-360 mx-auto grid grid-cols-3 gap-5 md:gap-10 items-center max-lg:grid-cols-1 px-5 md:px-19.25">
-        <h1 className="text-white text-[28px] md:text-[40px] font-google-sans font-medium leading-[31.92px] md:leading-[45.6px] tracking-[-0.8px] max-xl:text-3xl">
+        <h1 className="text-white text-[22px] leading-7.5 md:leading-10  md:text-[28px] font-google-sans font-medium  tracking-[-0.8px] xl:text-[32px]">
           {hero.h1}
         </h1>
         <Qrcode label={hero.qrLabel} />
