@@ -92,7 +92,7 @@ export default async function LocaleHomePage({
   ]);
 
   const products = productsRes.data
-    .filter((p) => p.is_display)
+    .filter((p) => p.is_display && p.is_popular)
     .sort((a, b) => a.order - b.order);
 
   return (
