@@ -56,7 +56,7 @@ export type SeoProduct = {
 async function fetchJson<T>(path: string): Promise<ApiEnvelope<T>> {
   const url = `${API_BASE_URL}${path}`;
   const res = await fetch(url, {
-    next: { revalidate: 3600 },
+    cache: "no-store",
   });
   if (!res.ok) {
     throw new Error(`Failed to fetch ${url} (${res.status})`);
