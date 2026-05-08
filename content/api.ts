@@ -15,6 +15,7 @@ export type SeoLanguage = {
   en_lang: string;
   endo_lang: string;
   is_display: boolean;
+  logo_url: string | null;
   translations: unknown[];
 };
 
@@ -76,4 +77,10 @@ export function getSeoTranslations(language: string, country: string) {
 
 export function getSeoProducts() {
   return fetchJson<SeoProduct[]>("/seo/products");
+}
+
+export function getSeoProduct(slug: string) {
+  return fetchJson<SeoProduct>(
+    `/seo/product?slug=${encodeURIComponent(slug)}`,
+  );
 }

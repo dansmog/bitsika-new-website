@@ -2,37 +2,9 @@
 
 import { useMemo, useState, useRef, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 
-import flagUK from "@/assets/images/countryflag/UK.svg";
-import flagNG from "@/assets/images/countryflag/NG.svg";
-import flagXOF from "@/assets/images/countryflag/XOF.svg";
-import flagTZS from "@/assets/images/countryflag/TZS.svg";
-import flagLIB from "@/assets/images/countryflag/LIB.svg";
-import flagMLW from "@/assets/images/countryflag/MLW.svg";
-import flagGHS from "@/assets/images/countryflag/GHS.svg";
-import flagCHN from "@/assets/images/countryflag/CHN.svg";
-import flagKOR from "@/assets/images/countryflag/KOR.svg";
-import flagJPN from "@/assets/images/countryflag/JPN.svg";
-import flagRUS from "@/assets/images/countryflag/RUS.svg";
-import flagUSA from "@/assets/images/countryflag/USA.png";
 import type { SeoLanguage } from "@/content/api";
-
-const FLAGS_BY_COUNTRY: Record<string, StaticImageData> = {
-  us: flagUSA,
-  gb: flagUK,
-  ng: flagNG,
-  cm: flagXOF,
-  sn: flagXOF,
-  tz: flagTZS,
-  lr: flagLIB,
-  mw: flagMLW,
-  gh: flagGHS,
-  cn: flagCHN,
-  kr: flagKOR,
-  jp: flagJPN,
-  ru: flagRUS,
-};
 
 const HOME_LANGUAGE = "en";
 const HOME_COUNTRY = "us";
@@ -44,17 +16,17 @@ type CountryOption = {
   country: string;
   locale: string;
   href: string;
-  flag: StaticImageData | null;
+  logoUrl: string | null;
 };
 
-function FlagIcon({ flag }: { flag: StaticImageData | null }) {
-  if (!flag) {
+function FlagIcon({ src, alt }: { src: string | null; alt: string }) {
+  if (!src) {
     return <div className="w-5 h-5 rounded-full bg-border-input shrink-0" />;
   }
   return (
     <Image
-      src={flag}
-      alt=""
+      src={src}
+      alt={alt}
       width={20}
       height={20}
       className="w-5 h-5 rounded-full object-cover shrink-0"
@@ -75,8 +47,6 @@ export default function CountrySelector({ languages }: CountrySelectorProps) {
   const pathname = usePathname();
   const router = useRouter();
 
-  console.log({languages})
-
   const countries = useMemo<CountryOption[]>(
     () =>
       languages
@@ -90,7 +60,7 @@ export default function CountrySelector({ languages }: CountrySelectorProps) {
             country: l.country,
             locale: `${l.language}-${l.country}`,
             href: isHome ? "/" : `/${l.language}-${l.country}`,
-            flag: FLAGS_BY_COUNTRY[l.country] ?? null,
+            logoUrl: l.logo_url ?? null,
           };
         }),
     [languages],
@@ -122,7 +92,7 @@ export default function CountrySelector({ languages }: CountrySelectorProps) {
         onClick={() => setOpen((o) => !o)}
         className="flex items-center gap-2.25 px-3 py-2 rounded-lg border border-border-input bg-surface-white cursor-pointer"
       >
-        <FlagIcon flag={selected.flag} />
+        <FlagIcon src={selected.logoUrl} alt={`${selected.locale} flag`} />
         <span className="hidden lg:block w-px h-4 bg-[#E1E1E1]" />
         <span className="hidden lg:block text-sm font-medium leading-none tracking-[-0.28px] text-black">
           {selected.locale}
@@ -163,7 +133,7 @@ export default function CountrySelector({ languages }: CountrySelectorProps) {
                     : "hover:bg-surface-secondary"
                 }`}
               >
-                <FlagIcon flag={country.flag} />
+                <FlagIcon src={country.logoUrl} alt={`${country.locale} flag`} />
                 <span className="border border-[#E1E1E1] h-full"></span>
                 <span className="text-ink">{country.locale}</span>
               </button>

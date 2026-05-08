@@ -14,8 +14,10 @@ import Testimonials from "@/components/sections/Testimonials";
 import { getContent, getImageContent } from "@/content";
 import {
   getSeoLanguages,
+  getSeoProduct,
   getSeoProducts,
   type SeoLanguage,
+  type SeoProduct,
 } from "@/content/api";
 import { buildLocaleAlternates, isHomeLocale } from "@/content/seo";
 
@@ -85,15 +87,41 @@ export default async function LocaleHomePage({
 }) {
   const { locale } = await params;
   const { language, country } = await resolveLocale(locale);
-  const [content, imageContent, productsRes] = await Promise.all([
+  const [
+    content,
+    imageContent,
+    productsRes,
+    pubgMobileRes,
+    freeFireRes,
+    codMobileRes,
+    afkJourneyRes,
+    mlbbRes,
+  ] = await Promise.all([
     getContent(language, country),
     getImageContent(),
     getSeoProducts(),
+    getSeoProduct("pubg-mobile"),
+    getSeoProduct("free-fire"),
+    getSeoProduct("call-of-duty-mobile"),
+    getSeoProduct("afk-journey"),
+    getSeoProduct("mobile-legends-bang-bang"),
   ]);
 
   const products = productsRes.data
-    .filter((p) => p.is_display && p.is_popular)
+    .filter((p) => p.is_popular)
     .sort((a, b) => a.order - b.order);
+
+  const productImage = (p: SeoProduct) => ({
+    src: p.logo_url,
+    alt: `${p.name} game`,
+  });
+  const ctaImages = [
+    productImage(freeFireRes.data),
+    productImage(codMobileRes.data),
+    productImage(afkJourneyRes.data),
+    productImage(mlbbRes.data),
+  ];
+  const stepsImage = productImage(pubgMobileRes.data);
 
   return (
     <main>
@@ -103,21 +131,21 @@ export default async function LocaleHomePage({
       <CtaBanner
         cta={content.ctas[0]}
         hero={content.hero}
-        image={imageContent.ctaImages[0]}
+        image={ctaImages[0]}
       />
       <Comparison table={content.table} />
       <InfoBlock cards={content.infoBoxGroups[1]} />
       <CtaBanner
         cta={content.ctas[1]}
         hero={content.hero}
-        image={imageContent.ctaImages[1]}
+        image={ctaImages[1]}
       />
-      <GetStarted steps={content.steps} image={imageContent.stepsImage} />
+      <GetStarted steps={content.steps} image={stepsImage} />
       <InfoBlock cards={content.infoBoxGroups[2]} />
       <CtaBanner
         cta={content.ctas[2]}
         hero={content.hero}
-        image={imageContent.ctaImages[2]}
+        image={ctaImages[2]}
       />
       <Testimonials
         testimonials={content.testimonials}
@@ -127,7 +155,7 @@ export default async function LocaleHomePage({
       <CtaBanner
         cta={content.ctas[3]}
         hero={content.hero}
-        image={imageContent.ctaImages[3]}
+        image={ctaImages[3]}
       />
       <BuiltDifferent comparison={content.comparison} vrs={imageContent.vrs} />
       <InsideBitsika blog={content.blog} articles={imageContent.blogs} />
