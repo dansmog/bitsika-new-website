@@ -83,7 +83,7 @@ export default async function HomePage() {
 
   const productImage = (p: SeoProduct) => ({
     src: p.logo_url,
-    alt: `${p.name} game`,
+    alt: `${p.name} game icon`,
   });
   const ctaImages = [
     productImage(freeFireRes.data),
