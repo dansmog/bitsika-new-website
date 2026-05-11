@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState, useRef, useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import Image from "next/image";
 
 import type { SeoLanguage } from "@/content/api";

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import { headers } from "next/headers";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
 const googleSans = localFont({
@@ -53,7 +54,10 @@ export default async function RootLayout({
       lang={lang}
       className={` ${googleSans.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <NextTopLoader color="#2F80ED" showSpinner={false} />
+        {children}
+      </body>
     </html>
   );
 }
