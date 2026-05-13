@@ -40,18 +40,18 @@ export async function generateMetadata(): Promise<Metadata> {
       description: content.meta.description,
       images: [
         {
-          url: "/images/bitsika-logo-blue.png",
-          width: 1200,
-          height: 630,
+          url: "/images/bitsika-og-thumbnail.png",
+          width: 256,
+          height: 256,
           alt: "Bitsika",
         },
       ],
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary",
       title: content.meta.title,
       description: content.meta.description,
-      images: ["/images/bitsika-logo-blue.png"],
+      images: ["/images/bitsika-og-thumbnail.png"],
     },
   };
 }
