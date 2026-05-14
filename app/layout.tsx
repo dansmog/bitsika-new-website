@@ -26,8 +26,13 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const metadataBaseUrl =
+  process.env.VERCEL_ENV !== "production" && process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "https://www.bitsika.com";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.bitsika.com"),
+  metadataBase: new URL(metadataBaseUrl),
   icons: {
     shortcut: "/favicon.ico",
   },

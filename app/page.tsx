@@ -41,8 +41,8 @@ export async function generateMetadata(): Promise<Metadata> {
       images: [
         {
           url: "/images/bitsika-og-thumbnail.png",
-          width: 256,
-          height: 256,
+          width: 156,
+          height: 156,
           alt: "Bitsika",
         },
       ],
