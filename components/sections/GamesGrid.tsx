@@ -8,12 +8,14 @@ type GamesGridProps = {
   products: SeoProduct[];
   language: string;
   country: string;
+  isProductView?: boolean;
 };
 
 export default function GamesGrid({
   products,
   language,
   country,
+  isProductView,
 }: GamesGridProps) {
   const productHref = (slug: string) =>
     isHomeLocale(language, country)
@@ -23,6 +25,11 @@ export default function GamesGrid({
   return (
     <section className="bg-surface-white pt-5.75 md:pt-13.5 pb-13.25 md:pb-20">
       <Container>
+        {isProductView && (
+          <h2 className="text-2xl md:text-3xl font-google-sans font-medium text-left mb-8">
+            More Games on Bitsika
+          </h2>
+        )}
         <div className="grid grid-cols-5 gap-y-8.75 gap-x-2.5 max-xl:grid-cols-4 max-lg:grid-cols-3 max-sm:grid-cols-2">
           {products.map((product) => (
             <Link key={product.id} href={productHref(product.slug)}>

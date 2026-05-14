@@ -11,6 +11,7 @@ import GamesGrid from "@/components/sections/GamesGrid";
 import GetStarted from "@/components/sections/GetStarted";
 import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
+import ProductDetailsView from "@/components/pages/ProductDetailsView";
 import { getContent, getImageContent } from "@/content";
 import {
   getSeoLanguages,
@@ -19,31 +20,50 @@ import {
   type SeoLanguage,
   type SeoProduct,
 } from "@/content/api";
-import { buildLocaleAlternates, isHomeLocale } from "@/content/seo";
+import {
+  buildLocaleAlternates,
+  buildProductMetadata,
+  isHomeLocale,
+} from "@/content/seo";
 
 type RouteParams = { locale: string };
 
+const HOME_LANGUAGE = "en";
+const HOME_COUNTRY = "us";
 const LOCALE_PATTERN = /^([a-z]{2})-([a-z]{2})$/;
 
-async function resolveLocale(rawLocale: string): Promise<{
-  language: string;
-  country: string;
-  languages: SeoLanguage[];
-}> {
-  const match = LOCALE_PATTERN.exec(rawLocale);
-  if (!match) notFound();
+type ResolvedSegment =
+  | {
+      kind: "locale";
+      language: string;
+      country: string;
+      languages: SeoLanguage[];
+    }
+  | { kind: "product"; product: SeoProduct };
 
-  const [, language, country] = match;
+async function resolveSegment(segment: string): Promise<ResolvedSegment> {
+  const match = LOCALE_PATTERN.exec(segment);
+  if (match) {
+    const [, language, country] = match;
+    if (isHomeLocale(language, country)) redirect("/");
 
-  if (isHomeLocale(language, country)) redirect("/");
+    const { data: languages } = await getSeoLanguages();
+    const entry = languages.find(
+      (l) => l.language === language && l.country === country,
+    );
+    if (!entry || !entry.is_display) notFound();
 
-  const { data: languages } = await getSeoLanguages();
-  const entry = languages.find(
-    (l) => l.language === language && l.country === country,
-  );
-  if (!entry || !entry.is_display) notFound();
+    return { kind: "locale", language, country, languages };
+  }
 
-  return { language, country, languages };
+  let product: SeoProduct;
+  try {
+    product = (await getSeoProduct(segment)).data;
+  } catch {
+    notFound();
+  }
+  if (!product.is_display) notFound();
+  return { kind: "product", product };
 }
 
 export async function generateMetadata({
@@ -52,7 +72,13 @@ export async function generateMetadata({
   params: Promise<RouteParams>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const { language, country, languages } = await resolveLocale(locale);
+  const resolved = await resolveSegment(locale);
+
+  if (resolved.kind === "product") {
+    return buildProductMetadata(HOME_LANGUAGE, HOME_COUNTRY, resolved.product);
+  }
+
+  const { language, country, languages } = resolved;
   const content = await getContent(language, country);
 
   return {
@@ -86,7 +112,19 @@ export default async function LocaleHomePage({
   params: Promise<RouteParams>;
 }) {
   const { locale } = await params;
-  const { language, country } = await resolveLocale(locale);
+  const resolved = await resolveSegment(locale);
+
+  if (resolved.kind === "product") {
+    return (
+      <ProductDetailsView
+        language={HOME_LANGUAGE}
+        country={HOME_COUNTRY}
+        product={resolved.product}
+      />
+    );
+  }
+
+  const { language, country } = resolved;
   const [
     content,
     imageContent,

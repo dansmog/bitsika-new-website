@@ -5,7 +5,11 @@ import SearchBar from "@/components/ui/SearchBar";
 import CountrySelector from "@/components/ui/CountrySelector";
 import { getSeoLanguages } from "@/content/api";
 
-export default async function Navbar() {
+type NavbarProps = {
+  productSlug?: string;
+};
+
+export default async function Navbar({ productSlug }: NavbarProps) {
   const { data: languages } = await getSeoLanguages();
 
   return (
@@ -26,7 +30,7 @@ export default async function Navbar() {
           <SearchBar />
         </div>
 
-        <CountrySelector languages={languages} />
+        <CountrySelector languages={languages} productSlug={productSlug} />
       </Container>
     </nav>
   );

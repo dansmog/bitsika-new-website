@@ -42,9 +42,13 @@ function activeLocaleFromPath(pathname: string): string {
 
 type CountrySelectorProps = {
   languages: SeoLanguage[];
+  productSlug?: string;
 };
 
-export default function CountrySelector({ languages }: CountrySelectorProps) {
+export default function CountrySelector({
+  languages,
+  productSlug,
+}: CountrySelectorProps) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -55,16 +59,20 @@ export default function CountrySelector({ languages }: CountrySelectorProps) {
         .map((l) => {
           const isHome =
             l.language === HOME_LANGUAGE && l.country === HOME_COUNTRY;
+          const base = isHome ? "" : `/${l.language}-${l.country}`;
+          const href = productSlug
+            ? `${base}/${productSlug}`
+            : base || "/";
           return {
             id: l.id,
             language: l.language,
             country: l.country,
             locale: `${l.language}-${l.country}`,
-            href: isHome ? "/" : `/${l.language}-${l.country}`,
+            href,
             logoUrl: l.logo_url ?? null,
           };
         }),
-    [languages],
+    [languages, productSlug],
   );
 
   const activeLocale = activeLocaleFromPath(pathname ?? "/");
