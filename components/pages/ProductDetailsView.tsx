@@ -10,8 +10,13 @@ import ProductSkusGrid from "@/components/sections/ProductSkusGrid";
 import GetStarted from "@/components/sections/GetStarted";
 import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
-import { getContent, getImageContent } from "@/content";
-import { getSeoProducts, type SeoProduct } from "@/content/api";
+import { getImageContent } from "@/content";
+import { buildContent } from "@/content/shape";
+import {
+  getSeoLanguageProduct,
+  getSeoProduct,
+  type SeoProduct,
+} from "@/content/api";
 import { pathForLocale } from "@/content/seo";
 
 type ProductDetailsViewProps = {
@@ -25,26 +30,31 @@ export default async function ProductDetailsView({
   country,
   product,
 }: ProductDetailsViewProps) {
-  const [content, imageContent, productsRes] = await Promise.all([
-    getContent(language, country),
+  const [imageContent, productRes, languageProductRes] = await Promise.all([
     getImageContent(),
-    getSeoProducts(),
+    getSeoProduct(product.slug),
+    getSeoLanguageProduct(product.slug, language, country),
   ]);
 
-  const products = productsRes.data
+  const products = (productRes.other_products ?? [])
     .filter((p) => p.is_popular)
     .sort((a, b) => a.order - b.order);
 
+  const localizedProduct = languageProductRes.data.product;
+  const content = buildContent(
+    `${language}-${country}`,
+    new Map(Object.entries(languageProductRes.data.translations)),
+  );
+
   const productImage = {
-    src: product.logo_url,
-    alt: `${product.name} game icon`,
+    src: localizedProduct.logo_url,
+    alt: `${localizedProduct.name} game icon`,
   };
+
+  console.log("Localized product:", productImage);
   const ctaImages = [productImage, productImage, productImage, productImage];
   const stepsImage = productImage;
 
-  console.log("the content", content)
-  console.log("the product", products)
-  console.log("the image content", imageContent)
 
   return (
     <main>
@@ -54,9 +64,9 @@ export default async function ProductDetailsView({
         h2Href={pathForLocale(language, country)}
       />
       <ProductSkusGrid
-        skus={product.skus}
-        productName={product.name}
-        productImage={product.logo_url}
+        skus={localizedProduct.skus}
+        productName={localizedProduct.name}
+        productImage={localizedProduct.logo_url}
       />
       <InfoBlock cards={content.infoBoxGroups[0]} />
       <CtaBanner

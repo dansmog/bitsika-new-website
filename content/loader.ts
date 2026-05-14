@@ -1,6 +1,6 @@
 import { buildContent, type Content } from "./shape";
 import { buildImageContent, type ImageContent } from "./imageShape";
-import { getSeoTranslations } from "./api";
+import { getSeoLanguageProduct, getSeoTranslations } from "./api";
 import {
   IMAGE_CONTENT_SOURCES,
   DEFAULT_LOCALE,
@@ -19,6 +19,16 @@ export async function getContent(
   country: string,
 ): Promise<Content> {
   const res = await getSeoTranslations(language, country);
+  const map = new Map(Object.entries(res.data.translations));
+  return buildContent(`${language}-${country}`, map);
+}
+
+export async function getProductContent(
+  slug: string,
+  language: string,
+  country: string,
+): Promise<Content> {
+  const res = await getSeoLanguageProduct(slug, language, country);
   const map = new Map(Object.entries(res.data.translations));
   return buildContent(`${language}-${country}`, map);
 }

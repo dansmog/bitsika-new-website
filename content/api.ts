@@ -79,8 +79,39 @@ export function getSeoProducts() {
   return fetchJson<SeoProduct[]>("/seo/products");
 }
 
-export function getSeoProduct(slug: string) {
+export type SeoProductResponse = ApiEnvelope<SeoProduct> & {
+  other_products?: SeoProduct[];
+};
+
+export function getSeoProduct(slug: string): Promise<SeoProductResponse> {
   return fetchJson<SeoProduct>(
     `/seo/product?slug=${encodeURIComponent(slug)}`,
+  ) as Promise<SeoProductResponse>;
+}
+
+export type SeoLanguageProduct = {
+  id: string;
+  product: SeoProduct;
+  language: {
+    id: string;
+    language: string;
+    country: string;
+    logo_url: string | null;
+    en_country: string;
+    endo_country: string;
+    en_lang: string;
+    endo_lang: string;
+    is_display: boolean;
+  };
+  translations: Record<string, string>;
+};
+
+export function getSeoLanguageProduct(
+  slug: string,
+  language: string,
+  country: string,
+) {
+  return fetchJson<SeoLanguageProduct>(
+    `/seo/language/product?slug=${encodeURIComponent(slug)}&lang=${encodeURIComponent(language)}&country=${encodeURIComponent(country)}`,
   );
 }
