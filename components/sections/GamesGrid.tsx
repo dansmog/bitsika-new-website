@@ -9,12 +9,14 @@ type GamesGridProps = {
   language: string;
   country: string;
   isProductView?: boolean;
+  title?: string;
 };
 
 export default function GamesGrid({
   products,
   language,
   country,
+  title,
   isProductView,
 }: GamesGridProps) {
   const productHref = (slug: string) =>
@@ -25,9 +27,9 @@ export default function GamesGrid({
   return (
     <section className="bg-surface-white pt-5.75 md:pt-13.5 pb-13.25 md:pb-20">
       <Container>
-        {isProductView && (
+        {title && (
           <h2 className="text-2xl md:text-3xl font-google-sans font-medium text-left mb-8">
-            More Games on Bitsika
+            {title}
           </h2>
         )}
         <div className="grid grid-cols-5 gap-y-8.75 gap-x-2.5 max-xl:grid-cols-4 max-lg:grid-cols-3 max-sm:grid-cols-2">

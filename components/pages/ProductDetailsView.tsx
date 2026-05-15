@@ -51,7 +51,7 @@ export default async function ProductDetailsView({
     alt: `${localizedProduct.name} game icon`,
   };
 
-  console.log("more games:", productRes);
+  console.log("Language product:", languageProductRes);
   const ctaImages = [productImage, productImage, productImage, productImage];
   const stepsImage = productImage;
 
@@ -76,7 +76,7 @@ export default async function ProductDetailsView({
       />
       <Comparison table={content.table} />
       <InfoBlock cards={content.infoBoxGroups[1]} />
-      <GamesGrid isProductView products={products} language={language} country={country} />
+      <GamesGrid isProductView products={products} title={languageProductRes?.data?.translations['more-games-heading']} language={language} country={country}/>
       <CtaBanner
         cta={content.ctas[1]}
         hero={content.hero}
