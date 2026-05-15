@@ -27,7 +27,7 @@ export function buildLocaleAlternates(
   productSlug?: string,
 ): NonNullable<Metadata["alternates"]> {
   const visible = languages.filter((l) => l.is_display);
-  const homeKey = HOME_LANGUAGE;
+  const homeKey = `${HOME_LANGUAGE}-${HOME_COUNTRY}`;
   const defaultPath = pathForLocale(HOME_LANGUAGE, HOME_COUNTRY, productSlug);
 
   const ordered: Record<string, string> = {};
