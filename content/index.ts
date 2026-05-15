@@ -1,5 +1,6 @@
 export {
   getContent,
+  getProductContent,
   getImageContent,
   type Content,
   type ImageContent,
