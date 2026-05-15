@@ -9,7 +9,7 @@ export function splitAsteriskLink(text: string): {
   link: string;
   suffix: string;
 } {
-  const match = text.match(/^(.*?)(?<!\*)\*(?!\*)([^*]+?)\*(?!\*)(.*)$/);
+  const match = text.match(/^(.*?)\*\*([^*]+?)\*\*(.*)$/);
   if (!match) return { prefix: text, link: "", suffix: "" };
   return { prefix: match[1], link: match[2], suffix: match[3] };
 }

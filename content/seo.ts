@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import type { SeoLanguage, SeoProduct } from "./api";
 import { getSeoLanguages } from "./api";
-import { getContent } from "./loader";
+import { getProductContent } from "./loader";
 
 const HOME_LANGUAGE = "en";
 const HOME_COUNTRY = "us";
@@ -58,12 +58,12 @@ export async function buildProductMetadata(
   country: string,
   product: SeoProduct,
 ): Promise<Metadata> {
-  const [content, languages] = await Promise.all([
-    getContent(language, country),
+  const [productContent, languages] = await Promise.all([
+    getProductContent(product.slug, language, country),
     getSeoLanguages(),
   ]);
-  const title = `${product.name} - ${content.meta.title}`;
-  const description = product.description || content.meta.description;
+  const title = productContent.meta.title;
+  const description = productContent.meta.description;
   return {
     title,
     description,

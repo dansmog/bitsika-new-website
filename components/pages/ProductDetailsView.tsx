@@ -51,7 +51,7 @@ export default async function ProductDetailsView({
     alt: `${localizedProduct.name} game icon`,
   };
 
-  console.log("Localized product:", productImage);
+  console.log("more games:", productRes);
   const ctaImages = [productImage, productImage, productImage, productImage];
   const stepsImage = productImage;
 

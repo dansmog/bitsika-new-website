@@ -145,25 +145,6 @@ export default async function LocaleHomePage({
     getSeoProduct("mobile-legends-bang-bang"),
   ]);
 
-  console.log(
-    "[page.tsx] image content URL:",
-    "https://bitsika.github.io/game-homepage/image-content.json",
-    "\nresponse:",
-    imageContent,
-  );
-  console.log(
-    "[page.tsx] content URL:",
-    `https://transaction-api.bartelssneath.com/api/v2/seo/languages/translation?language=${encodeURIComponent(language)}&country=${encodeURIComponent(country)}`,
-    "\nresponse:",
-    content,
-  );
-  console.log(
-    "[page.tsx] seo products URL:",
-    "https://transaction-api.bartelssneath.com/api/v2/seo/products",
-    "\nresponse:",
-    productsRes,
-  );
-
   const products = productsRes.data
     .filter((p) => p.is_popular)
     .sort((a, b) => a.order - b.order);
