@@ -36,9 +36,7 @@ export default async function ProductDetailsView({
     getSeoLanguageProduct(product.slug, language, country),
   ]);
 
-  const products = (productRes.other_products ?? [])
-    .filter((p) => p.is_popular)
-    .sort((a, b) => a.order - b.order);
+  const products = productRes.other_products || [];
 
   const localizedProduct = languageProductRes.data.product;
   const content = buildContent(
@@ -52,6 +50,15 @@ export default async function ProductDetailsView({
   };
 
   console.log("Language product:", languageProductRes);
+  console.log(
+    "[ProductDetailsView] more-games (GamesGrid) URL:",
+    `https://transaction-api.bartelssneath.com/api/v2/seo/product?slug=${encodeURIComponent(product.slug)}`,
+    "\nresponse:",
+    productRes,
+    "\nrendered products count:",
+    products.length,
+    productRes.other_products?.length
+  );
   const ctaImages = [productImage, productImage, productImage, productImage];
   const stepsImage = productImage;
 
