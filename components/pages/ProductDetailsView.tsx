@@ -49,19 +49,8 @@ export default async function ProductDetailsView({
     alt: `${localizedProduct.name} game icon`,
   };
 
-  console.log("Language product:", languageProductRes);
-  console.log(
-    "[ProductDetailsView] more-games (GamesGrid) URL:",
-    `https://transaction-api.bartelssneath.com/api/v2/seo/product?slug=${encodeURIComponent(product.slug)}`,
-    "\nresponse:",
-    productRes,
-    "\nrendered products count:",
-    products.length,
-    productRes.other_products?.length
-  );
   const ctaImages = [productImage, productImage, productImage, productImage];
   const stepsImage = productImage;
-
 
   return (
     <main>
@@ -83,7 +72,13 @@ export default async function ProductDetailsView({
       />
       <Comparison table={content.table} />
       <InfoBlock cards={content.infoBoxGroups[1]} />
-      <GamesGrid isProductView products={products} title={languageProductRes?.data?.translations['more-games-heading']} language={language} country={country}/>
+      <GamesGrid
+        isProductView
+        products={products}
+        title={languageProductRes?.data?.translations["more-games-heading"]}
+        language={language}
+        country={country}
+      />
       <CtaBanner
         cta={content.ctas[1]}
         hero={content.hero}
