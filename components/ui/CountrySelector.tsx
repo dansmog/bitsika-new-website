@@ -2,8 +2,8 @@
 
 import { useMemo, useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { useRouter } from "nextjs-toploader/app";
 import Image from "next/image";
+import Link from "next/link";
 
 import type { SeoLanguage } from "@/content/api";
 
@@ -50,7 +50,6 @@ export default function CountrySelector({
   productSlug,
 }: CountrySelectorProps) {
   const pathname = usePathname();
-  const router = useRouter();
 
   const countries = useMemo<CountryOption[]>(
     () =>
@@ -124,32 +123,31 @@ export default function CountrySelector({
         </svg>
       </button>
 
-      {open && (
-        <div className="absolute right-0 top-full mt-2 p-3 bg-[#F0F0F0] rounded-xl border border-[#DCDCDC] shadow-lg z-50 w-61.5 lg:w-117">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-            {countries.map((country) => (
-              <button
-                key={country.id}
-                onClick={() => {
-                  setOpen(false);
-                  if (country.locale !== selected.locale) {
-                    router.push(country.href);
-                  }
-                }}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm cursor-pointer whitespace-nowrap transition-colors ${
-                  selected.id === country.id
-                    ? "border border-[#DFDFDF] bg-surface-white"
-                    : "hover:bg-surface-secondary"
-                }`}
-              >
-                <FlagIcon src={country.logoUrl} alt={`${country.locale} flag`} />
-                <span className="border border-[#E1E1E1] h-full"></span>
-                <span className="text-ink">{country.locale}</span>
-              </button>
-            ))}
-          </div>
+      <div
+        className={`absolute right-0 top-full mt-2 p-3 bg-[#F0F0F0] rounded-xl border border-[#DCDCDC] shadow-lg z-50 w-61.5 lg:w-117 ${
+          open ? "block" : "hidden"
+        }`}
+      >
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+          {countries.map((country) => (
+            <Link
+              key={country.id}
+              href={country.href}
+              hrefLang={country.locale}
+              onClick={() => setOpen(false)}
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm cursor-pointer whitespace-nowrap transition-colors ${
+                selected.id === country.id
+                  ? "border border-[#DFDFDF] bg-surface-white"
+                  : "hover:bg-surface-secondary"
+              }`}
+            >
+              <FlagIcon src={country.logoUrl} alt={`${country.locale} flag`} />
+              <span className="border border-[#E1E1E1] h-full"></span>
+              <span className="text-ink">{country.locale}</span>
+            </Link>
+          ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }
