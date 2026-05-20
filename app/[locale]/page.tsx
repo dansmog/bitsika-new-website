@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound, redirect } from "next/navigation";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import BuiltDifferent from "@/components/sections/BuiltDifferent";
@@ -10,39 +11,88 @@ import GamesGrid from "@/components/sections/GamesGrid";
 import GetStarted from "@/components/sections/GetStarted";
 import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
+import ProductDetailsView from "@/components/pages/ProductDetailsView";
 import { getContent, getImageContent } from "@/content";
 import {
   getSeoLanguages,
   getSeoProduct,
   getSeoProducts,
+  type SeoLanguage,
   type SeoProduct,
 } from "@/content/api";
-import { buildLocaleAlternates } from "@/content/seo";
+import {
+  buildLocaleAlternates,
+  buildProductMetadata,
+  isHomeLocale,
+} from "@/content/seo";
+
+type RouteParams = { locale: string };
 
 const HOME_LANGUAGE = "en";
 const HOME_COUNTRY = "us";
+const LOCALE_PATTERN = /^([a-z]{2})-([a-z]{2})$/;
 
-export async function generateMetadata(): Promise<Metadata> {
-  const [content, languages] = await Promise.all([
-    getContent(HOME_LANGUAGE, HOME_COUNTRY),
-    getSeoLanguages(),
-  ]);
+type ResolvedSegment =
+  | {
+      kind: "locale";
+      language: string;
+      country: string;
+      languages: SeoLanguage[];
+    }
+  | { kind: "product"; product: SeoProduct };
+
+async function resolveSegment(segment: string): Promise<ResolvedSegment> {
+  const match = LOCALE_PATTERN.exec(segment);
+  if (match) {
+    const [, language, country] = match;
+    if (isHomeLocale(language, country)) redirect("/");
+
+    const { data: languages } = await getSeoLanguages();
+    const entry = languages.find(
+      (l) => l.language === language && l.country === country,
+    );
+    if (!entry || !entry.is_display) notFound();
+
+    return { kind: "locale", language, country, languages };
+  }
+
+  let product: SeoProduct;
+  try {
+    product = (await getSeoProduct(segment)).data;
+  } catch {
+    notFound();
+  }
+  if (!product.is_display) notFound();
+  return { kind: "product", product };
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<RouteParams>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const resolved = await resolveSegment(locale);
+
+  if (resolved.kind === "product") {
+    return buildProductMetadata(HOME_LANGUAGE, HOME_COUNTRY, resolved.product);
+  }
+
+  const { language, country, languages } = resolved;
+  const content = await getContent(language, country);
+
   return {
     title: content.meta.title,
     description: content.meta.description,
-    alternates: buildLocaleAlternates(
-      HOME_LANGUAGE,
-      HOME_COUNTRY,
-      languages.data,
-    ),
+    alternates: buildLocaleAlternates(language, country, languages),
     openGraph: {
       title: content.meta.title,
       description: content.meta.description,
       images: [
         {
           url: "/images/bitsika-og-thumbnail.png",
-          width: 100,
-          height: 100,
+          width: 256,
+          height: 256,
           alt: "Bitsika",
         },
       ],
@@ -56,7 +106,25 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function HomePage() {
+export default async function LocaleHomePage({
+  params,
+}: {
+  params: Promise<RouteParams>;
+}) {
+  const { locale } = await params;
+  const resolved = await resolveSegment(locale);
+
+  if (resolved.kind === "product") {
+    return (
+      <ProductDetailsView
+        language={HOME_LANGUAGE}
+        country={HOME_COUNTRY}
+        product={resolved.product}
+      />
+    );
+  }
+
+  const { language, country } = resolved;
   const [
     content,
     imageContent,
@@ -67,7 +135,7 @@ export default async function HomePage() {
     afkJourneyRes,
     mlbbRes,
   ] = await Promise.all([
-    getContent(HOME_LANGUAGE, HOME_COUNTRY),
+    getContent(language, country),
     getImageContent(),
     getSeoProducts(),
     getSeoProduct("pubg-mobile"),
@@ -96,11 +164,7 @@ export default async function HomePage() {
   return (
     <main>
       <Header hero={content.hero} />
-      <GamesGrid
-        products={products}
-        language={HOME_LANGUAGE}
-        country={HOME_COUNTRY}
-      />
+      <GamesGrid products={products} language={language} country={country} />
       <InfoBlock cards={content.infoBoxGroups[0]} />
       <CtaBanner
         cta={content.ctas[0]}

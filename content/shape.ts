@@ -206,7 +206,7 @@ export function buildContent(
     },
     steps: {
       heading: get("steps-heading"),
-      description: get("steps-description"),
+      description: get("steps-text"),
       steps: stepsItems,
     },
     testimonials: {

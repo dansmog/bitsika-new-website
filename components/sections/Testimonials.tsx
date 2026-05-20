@@ -86,25 +86,6 @@ export default function Testimonials({
                 transition={{ duration: 0.3, ease }}
                 className="flex items-center gap-3"
               >
-                <div
-                  className="bg-[#E8E8E8] shrink-0 relative overflow-hidden"
-                  style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: 10.38,
-                    border: "1.3px solid #ECECEC",
-                  }}
-                >
-                  {avatar?.src && (
-                    <Image
-                      src={avatar.src}
-                      alt={avatar.alt || t.user}
-                      fill
-                      sizes="48px"
-                      className="object-cover"
-                    />
-                  )}
-                </div>
                 <div>
                   <p className="font-google-sans font-medium text-sm text-ink leading-tight">
                     {t.user}
