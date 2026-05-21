@@ -49,8 +49,8 @@ export default function HeroBanner({ hero, h2Href }: HeroBannerProps) {
         className="hidden md:block object-cover object-top pointer-events-none select-none"
         aria-hidden
       />
-      <div className="relative z-10 max-w-360 mx-auto grid grid-cols-3 gap-5 md:gap-10 items-center max-lg:grid-cols-1 px-5 md:px-19.25">
-        <h1 className="text-white text-[22px] leading-7.5 md:leading-10  md:text-[28px] font-google-sans font-medium  tracking-[-0.8px] xl:text-[32px]">
+      <div className="relative z-10 max-w-360 mx-auto grid grid-cols-[1fr_auto_1fr] gap-x-24 gap-y-5  items-center max-lg:grid-cols-1 px-5 md:px-24">
+        <h1 className="text-white text-[22px] leading-7.5 md:leading-9  md:text-[24px] font-google-sans font-medium  tracking-[-0.8px]">
           {hero.h1}
         </h1>
         <Qrcode label={hero.qrLabel} />
@@ -69,7 +69,7 @@ export default function HeroBanner({ hero, h2Href }: HeroBannerProps) {
               mobileLabel={hero.mobileGooglePlayLabel}
             />
           </div>
-          <h2 className="text-white text-base font-inter tracking-[-0.34px] leading-[24.14px]">
+          <h2 className="text-white text-sm font-inter tracking-[-0.34px] leading-[24.14px]">
             {h2Parts && h2Parts.link ? (
               <>
                 {h2Parts.prefix}
