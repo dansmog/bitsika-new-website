@@ -69,7 +69,7 @@ export default function HeroBanner({ hero, h2Href }: HeroBannerProps) {
               mobileLabel={hero.mobileGooglePlayLabel}
             />
           </div>
-          <h2 className="text-white text-base font-inter tracking-[-0.34px] leading-[24.14px]">
+          <h2 className="text-white text-base md:text-[17px] font-inter tracking-[-0.34px] leading-[24.14px]">
             {h2Parts && h2Parts.link ? (
               <>
                 {h2Parts.prefix}
