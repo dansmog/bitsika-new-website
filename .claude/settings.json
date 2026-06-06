@@ -32,7 +32,8 @@
       "Bash(curl -s --max-time 60 \"http://localhost:3000/en-ug/codashop-alternative\" -o /tmp/cug.html)",
       "Bash(python3 -c 'import json;d=json.load\\(open\\(\"/tmp/l1.json\"\\)\\);print\\(sorted\\(p[\"locale\"] for p in d if p[\"competitor\"]==\"codashop\"\\)\\)')",
       "Bash(awk '!seen[$0]++')",
-      "Bash(curl -s --max-time 60 \"http://localhost:3000/codashop-alternative\" -o /tmp/cus.html)"
+      "Bash(curl -s --max-time 60 \"http://localhost:3000/codashop-alternative\" -o /tmp/cus.html)",
+      "Bash(curl -s --max-time 60 \"http://localhost:3000/\" -o /tmp/home2.html)"
     ]
   }
 }
