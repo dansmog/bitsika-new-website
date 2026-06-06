@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { SeoLanguage, SeoProduct } from "./api";
+import type { CompetitorPageEntry } from "./competitors";
 import { getSeoLanguages } from "./api";
 import { getProductContent } from "./loader";
 
@@ -18,6 +19,57 @@ export function pathForLocale(
   const base = isHomeLocale(language, country) ? "" : `/${language}-${country}`;
   if (productSlug) return `${base}/${productSlug}`;
   return base || "/";
+}
+
+export function pathForCompetitor(
+  language: string,
+  country: string,
+  competitorSlug: string,
+): string {
+  const base = isHomeLocale(language, country) ? "" : `/${language}-${country}`;
+  return `${base}/${competitorSlug}-alternative`;
+}
+
+/**
+ * hreflang alternates for a competitor page. Unlike locale/product pages, a
+ * competitor only exists in the lang-countries listed for it, so we build the
+ * alternate set from those entries rather than from every display locale.
+ */
+export function buildCompetitorAlternates(
+  competitor: string,
+  currentLanguage: string,
+  currentCountry: string,
+  pages: CompetitorPageEntry[],
+): NonNullable<Metadata["alternates"]> {
+  const homeKey = `${HOME_LANGUAGE}-${HOME_COUNTRY}`;
+  const localeEntries = pages
+    .filter((p) => p.competitor === competitor)
+    .map((p) => {
+      const [language, country] = p.locale.toLowerCase().split("-");
+      return {
+        key: `${language}-${country}`,
+        language,
+        country,
+        path: pathForCompetitor(language, country, competitor),
+      };
+    });
+
+  const ordered: Record<string, string> = {};
+  const home = localeEntries.find((e) => e.key === homeKey);
+  if (home) ordered[homeKey] = home.path;
+
+  for (const { key, path } of localeEntries
+    .filter((e) => e.key !== homeKey)
+    .sort((a, b) => a.key.localeCompare(b.key))) {
+    ordered[key] = path;
+  }
+
+  if (home) ordered["x-default"] = home.path;
+
+  return {
+    canonical: pathForCompetitor(currentLanguage, currentCountry, competitor),
+    languages: ordered,
+  };
 }
 
 export function buildLocaleAlternates(

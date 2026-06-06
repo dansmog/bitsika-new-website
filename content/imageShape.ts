@@ -13,6 +13,7 @@ export type ProductCard = {
 
 export type VrsCompany = {
   name: string;
+  slug: string;
   anchor: string;
   image: RemoteImage;
 };
@@ -79,6 +80,7 @@ export function buildImageContent(
     const n = i + 1;
     return {
       name: get(`vrs-company-name-${n}`),
+      slug: get(`vrs-company-slug-${n}`),
       anchor: get(`vrs-company-anchor-${n}`),
       image: {
         src: toSrc(get(`vrs-company-image-${n}`)),

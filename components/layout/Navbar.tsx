@@ -7,9 +7,15 @@ import { getSeoLanguages } from "@/content/api";
 
 type NavbarProps = {
   productSlug?: string;
+  competitorSlug?: string;
+  competitorLocales?: string[];
 };
 
-export default async function Navbar({ productSlug }: NavbarProps) {
+export default async function Navbar({
+  productSlug,
+  competitorSlug,
+  competitorLocales,
+}: NavbarProps) {
   const { data: languages } = await getSeoLanguages();
 
   return (
@@ -30,7 +36,12 @@ export default async function Navbar({ productSlug }: NavbarProps) {
           <SearchBar />
         </div>
 
-        <CountrySelector languages={languages} productSlug={productSlug} />
+        <CountrySelector
+          languages={languages}
+          productSlug={productSlug}
+          competitorSlug={competitorSlug}
+          competitorLocales={competitorLocales}
+        />
       </Container>
     </nav>
   );
