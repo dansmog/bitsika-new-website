@@ -52,10 +52,8 @@ export default function BuiltDifferent({
                   className="shrink-0 w-12 h-12 rounded-[10px] object-contain"
                 />
                 <div className="flex flex-row md:flex-col">
-                  <span className={labelClassName}>Bitsika vs.</span>
-                  <span className={`pl-1 md:pl-0 ${labelClassName}`}>
-                    {company.name}
-                  </span>
+                  <span className={labelClassName}>Bitsika vs.&nbsp;</span>
+                  <span className={labelClassName}>{company.name}</span>
                 </div>
               </>
             );
