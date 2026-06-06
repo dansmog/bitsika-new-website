@@ -5,16 +5,20 @@ import {
   GooglePlayButton,
 } from "@/components/ui/DownloadButtons";
 import Image from "next/image";
+import Link from "next/link";
 import Qrcode from "../ui/Qrcode";
 import Ratings from "../ui/Ratings";
 import { GodRays } from "@paper-design/shaders-react";
 import type { HeroContent } from "@/content/shape";
+import { splitAsteriskLink } from "@/lib/formatText";
 
 type HeroBannerProps = {
   hero: HeroContent;
+  h2Href?: string;
 };
 
-export default function HeroBanner({ hero }: HeroBannerProps) {
+export default function HeroBanner({ hero, h2Href }: HeroBannerProps) {
+  const h2Parts = h2Href ? splitAsteriskLink(hero.h2) : null;
   return (
     <section className="relative bg-brand-blue py-8.75 md:py-12 overflow-hidden">
       {/* Mobile: CSS sun rays from top-right corner */}
@@ -45,8 +49,8 @@ export default function HeroBanner({ hero }: HeroBannerProps) {
         className="hidden md:block object-cover object-top pointer-events-none select-none"
         aria-hidden
       />
-      <div className="relative z-10 max-w-360 mx-auto grid grid-cols-3 gap-5 md:gap-10 items-center max-lg:grid-cols-1 px-5 md:px-19.25">
-        <h1 className="text-white text-[28px] md:text-[40px] font-google-sans font-medium leading-[31.92px] md:leading-[45.6px] tracking-[-0.8px] max-xl:text-3xl">
+      <div className="relative z-10 max-w-360 mx-auto grid grid-cols-[1fr_auto_1fr] gap-x-24 gap-y-5  items-center max-lg:grid-cols-1 px-5 md:px-24">
+        <h1 className="text-white text-[22px] leading-7.5 md:leading-9  md:text-[24px] font-google-sans font-medium  tracking-[-0.8px]">
           {hero.h1}
         </h1>
         <Qrcode label={hero.qrLabel} />
@@ -65,8 +69,18 @@ export default function HeroBanner({ hero }: HeroBannerProps) {
               mobileLabel={hero.mobileGooglePlayLabel}
             />
           </div>
-          <h2 className="text-white text-[17px] font-inter tracking-[-0.34px] leading-[24.14px]">
-            {hero.h2}
+          <h2 className="text-white text-sm font-inter tracking-[-0.34px] leading-[24.14px]">
+            {h2Parts && h2Parts.link ? (
+              <>
+                {h2Parts.prefix}
+                <Link href={h2Href!} className="underline">
+                  {h2Parts.link}
+                </Link>
+                {h2Parts.suffix}
+              </>
+            ) : (
+              hero.h2
+            )}
           </h2>
         </div>
       </div>

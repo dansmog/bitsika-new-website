@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s \"https://bitsika.github.io/game-homepage/image-content.json\")",
+      "Bash(python3 -c \"import json,sys; data=json.load\\(sys.stdin\\); vrs=[e for e in data if 'vrs-company-image' in e.get\\('variable',''\\)]; print\\(json.dumps\\(vrs, indent=2\\)\\)\")",
+      "Bash(python3 -c ' *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"https://bitsika.github.io/game-homepage/competitor-pages/competitors/carry1st-shop/level-1/en-ng.json\")",
+      "Bash(curl -s \"https://bitsika.github.io/game-homepage/competitor-pages/competitors/carry1st-shop/level-1/en-ng.json\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"https://bitsika.github.io/game-homepage/competitor-pages/lists/all-level-1-pages.json\")",
+      "Bash(curl -s \"https://bitsika.github.io/game-homepage/competitor-pages/lists/all-level-1-pages.json\")",
+      "Bash(python3 -c 'import json;print\\(len\\(json.load\\(open\\(\"/tmp/l1.json\"\\)\\)\\)\\)')",
+      "Bash(echo \"entries: $\\(python3 -c 'import json;print\\(len\\(json.load\\(open\\(\"/tmp/l1.json\"\\)\\)\\)\\)'\\)\")",
+      "Bash(python3 -c 'import json;d=json.load\\(open\\(\"/tmp/l1.json\"\\)\\);import collections;c=sorted\\(set\\(x[\"competitor\"] for x in d\\)\\);print\\(len\\(c\\),\"->\"\\);[print\\(\" \",x\\) for x in c]')",
+      "Bash(curl -s -o /dev/null -w \"all-level-2-pages.json -> %{http_code}\\\\n\" \"https://bitsika.github.io/game-homepage/competitor-pages/lists/all-level-2-pages.json\")",
+      "Bash(gh api *)",
+      "Bash(curl -s \"https://bitsika.github.io/game-homepage/competitor-pages/competitors/codashop/level-1/en-ug.json\")",
+      "Bash(python3)",
+      "Bash(echo \"---EXIT $?---\")",
+      "Bash(python3 -c 'import json,sys;print\\(json.load\\(sys.stdin\\)[\"scripts\"]\\)')",
+      "Bash(curl -s -o /tmp/home.html -w \"%{http_code}\\\\n\" --max-time 90 \"http://localhost:3137/\")",
+      "Bash(curl -s -o /tmp/coda.html -w \"%{http_code}\\\\n\" --max-time 90 \"http://localhost:3137/codashop-alternative\")",
+      "Bash(curl -s -o /tmp/coda_ug.html -w \"%{http_code}\\\\n\" --max-time 90 \"http://localhost:3137/en-ug/codashop-alternative\")",
+      "Bash(lsof -iTCP:3137 -sTCP:LISTEN -n -P)",
+      "Bash(curl -s -o /tmp/home.html -w \"%{http_code}\\\\n\" --max-time 90 \"http://localhost:3000/\")",
+      "Bash(curl -s -o /tmp/coda.html -w \"%{http_code}\\\\n\" --max-time 90 \"http://localhost:3000/codashop-alternative\")",
+      "Bash(curl -s -o /tmp/coda_ug.html -w \"%{http_code}\\\\n\" --max-time 90 \"http://localhost:3000/en-ug/codashop-alternative\")",
+      "Bash(curl -s -o /tmp/c1.html -w \"%{http_code}\\\\n\" --max-time 90 \"http://localhost:3000/carry1st-shop-alternative\")",
+      "Bash(python3 -c 'import json;d=json.load\\(open\\(\"/tmp/l1.json\"\\)\\);print\\(sorted\\(p[\"competitor\"] for p in d if p[\"locale\"]==\"en-us\"\\)\\)')",
+      "Bash(python3 -c 'import json;d=json.load\\(open\\(\"/tmp/l1.json\"\\)\\);print\\(sorted\\(p[\"competitor\"] for p in d if p[\"locale\"]==\"en-ug\"\\)\\)')",
+      "Bash(echo \"exit $?\")",
+      "Bash(curl -s --max-time 60 \"http://localhost:3000/codashop-alternative\")",
+      "Bash(curl -s --max-time 60 \"http://localhost:3000/en-ug/codashop-alternative\" -o /tmp/cug.html)",
+      "Bash(python3 -c 'import json;d=json.load\\(open\\(\"/tmp/l1.json\"\\)\\);print\\(sorted\\(p[\"locale\"] for p in d if p[\"competitor\"]==\"codashop\"\\)\\)')",
+      "Bash(awk '!seen[$0]++')",
+      "Bash(curl -s --max-time 60 \"http://localhost:3000/codashop-alternative\" -o /tmp/cus.html)"
+    ]
+  }
+}
