@@ -9,6 +9,7 @@ import type { SeoLanguage } from "@/content/api";
 
 const HOME_LANGUAGE = "en";
 const HOME_COUNTRY = "us";
+const HOME_LOCALE = `${HOME_LANGUAGE}-${HOME_COUNTRY}`;
 const LOCALE_PATTERN = /^[a-z]{2}-[a-z]{2}$/;
 
 type CountryOption = {
@@ -43,36 +44,64 @@ function activeLocaleFromPath(pathname: string): string {
 type CountrySelectorProps = {
   languages: SeoLanguage[];
   productSlug?: string;
+  /** When set, the selector lists this competitor's lang-country pages. */
+  competitorSlug?: string;
+  /** Locales (lang-country) the competitor has a page for. */
+  competitorLocales?: string[];
 };
 
 export default function CountrySelector({
   languages,
   productSlug,
+  competitorSlug,
+  competitorLocales,
 }: CountrySelectorProps) {
   const pathname = usePathname();
 
-  const countries = useMemo<CountryOption[]>(
-    () =>
-      languages
-        .filter((l) => l.is_display)
-        .map((l) => {
-          const isHome =
-            l.language === HOME_LANGUAGE && l.country === HOME_COUNTRY;
-          const base = isHome ? "" : `/${l.language}-${l.country}`;
-          const href = productSlug
-            ? `${base}/${productSlug}`
-            : base || "/";
+  const countries = useMemo<CountryOption[]>(() => {
+    if (competitorSlug && competitorLocales) {
+      const byLocale = new Map(
+        languages.map((l) => [`${l.language}-${l.country}`, l]),
+      );
+      return competitorLocales
+        .map((locale) => {
+          const [language, country] = locale.split("-");
+          const isHome = locale === HOME_LOCALE;
+          const base = isHome ? "" : `/${locale}`;
+          const lang = byLocale.get(locale);
           return {
-            id: l.id,
-            language: l.language,
-            country: l.country,
-            locale: `${l.language}-${l.country}`,
-            href,
-            logoUrl: l.logo_url ?? null,
+            id: lang?.id ?? locale,
+            language,
+            country,
+            locale,
+            href: `${base}/${competitorSlug}-alternative`,
+            logoUrl: lang?.logo_url ?? null,
           };
-        }),
-    [languages, productSlug],
-  );
+        })
+        .sort((a, b) => {
+          if (a.locale === HOME_LOCALE) return -1;
+          if (b.locale === HOME_LOCALE) return 1;
+          return a.locale.localeCompare(b.locale);
+        });
+    }
+
+    return languages
+      .filter((l) => l.is_display)
+      .map((l) => {
+        const isHome =
+          l.language === HOME_LANGUAGE && l.country === HOME_COUNTRY;
+        const base = isHome ? "" : `/${l.language}-${l.country}`;
+        const href = productSlug ? `${base}/${productSlug}` : base || "/";
+        return {
+          id: l.id,
+          language: l.language,
+          country: l.country,
+          locale: `${l.language}-${l.country}`,
+          href,
+          logoUrl: l.logo_url ?? null,
+        };
+      });
+  }, [languages, productSlug, competitorSlug, competitorLocales]);
 
   const activeLocale = activeLocaleFromPath(pathname ?? "/");
   const selected =

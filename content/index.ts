@@ -10,6 +10,7 @@ export {
   getCompetitorPageEntry,
   getCompetitorContent,
   getCompetitorSlugsForLocale,
+  getCompetitorLocales,
   competitorSlugFromRoute,
   type CompetitorPageEntry,
 } from "./competitors";

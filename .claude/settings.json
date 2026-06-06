@@ -28,7 +28,11 @@
       "Bash(python3 -c 'import json;d=json.load\\(open\\(\"/tmp/l1.json\"\\)\\);print\\(sorted\\(p[\"competitor\"] for p in d if p[\"locale\"]==\"en-us\"\\)\\)')",
       "Bash(python3 -c 'import json;d=json.load\\(open\\(\"/tmp/l1.json\"\\)\\);print\\(sorted\\(p[\"competitor\"] for p in d if p[\"locale\"]==\"en-ug\"\\)\\)')",
       "Bash(echo \"exit $?\")",
-      "Bash(curl -s --max-time 60 \"http://localhost:3000/codashop-alternative\")"
+      "Bash(curl -s --max-time 60 \"http://localhost:3000/codashop-alternative\")",
+      "Bash(curl -s --max-time 60 \"http://localhost:3000/en-ug/codashop-alternative\" -o /tmp/cug.html)",
+      "Bash(python3 -c 'import json;d=json.load\\(open\\(\"/tmp/l1.json\"\\)\\);print\\(sorted\\(p[\"locale\"] for p in d if p[\"competitor\"]==\"codashop\"\\)\\)')",
+      "Bash(awk '!seen[$0]++')",
+      "Bash(curl -s --max-time 60 \"http://localhost:3000/codashop-alternative\" -o /tmp/cus.html)"
     ]
   }
 }

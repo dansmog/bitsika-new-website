@@ -59,6 +59,16 @@ export async function getCompetitorSlugsForLocale(
   );
 }
 
+/** All lang-country locales this competitor has a page for, lowercased. */
+export async function getCompetitorLocales(
+  competitor: string,
+): Promise<string[]> {
+  const pages = await getCompetitorPages();
+  return pages
+    .filter((p) => p.competitor.toLowerCase() === competitor.toLowerCase())
+    .map((p) => p.locale.toLowerCase());
+}
+
 export async function getCompetitorPageEntry(
   competitor: string,
   language: string,

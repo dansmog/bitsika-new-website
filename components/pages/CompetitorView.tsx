@@ -12,10 +12,12 @@ import Testimonials from "@/components/sections/Testimonials";
 import { getImageContent } from "@/content";
 import {
   getCompetitorContent,
+  getCompetitorLocales,
   getCompetitorSlugsForLocale,
   type CompetitorPageEntry,
 } from "@/content/competitors";
 import { getSeoProduct, getSeoProducts, type SeoProduct } from "@/content/api";
+import { pathForLocale } from "@/content/seo";
 
 type CompetitorViewProps = {
   language: string;
@@ -38,6 +40,7 @@ export default async function CompetitorView({
     afkJourneyRes,
     mlbbRes,
     linkedSlugs,
+    competitorLocales,
   ] = await Promise.all([
     getCompetitorContent(entry),
     getImageContent(),
@@ -48,6 +51,7 @@ export default async function CompetitorView({
     getSeoProduct("afk-journey"),
     getSeoProduct("mobile-legends-bang-bang"),
     getCompetitorSlugsForLocale(language, country),
+    getCompetitorLocales(entry.competitor),
   ]);
 
   const products = productsRes.data
@@ -68,7 +72,12 @@ export default async function CompetitorView({
 
   return (
     <main>
-      <Header hero={content.hero} />
+      <Header
+        hero={content.hero}
+        h2Href={pathForLocale(language, country)}
+        competitorSlug={entry.competitor}
+        competitorLocales={competitorLocales}
+      />
       <GamesGrid products={products} language={language} country={country} />
       <InfoBlock cards={content.infoBoxGroups[0]} />
       <CtaBanner cta={content.ctas[0]} hero={content.hero} image={ctaImages[0]} />
