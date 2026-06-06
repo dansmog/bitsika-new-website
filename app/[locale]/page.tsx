@@ -12,6 +12,7 @@ import GetStarted from "@/components/sections/GetStarted";
 import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
 import ProductDetailsView from "@/components/pages/ProductDetailsView";
+import CompetitorView from "@/components/pages/CompetitorView";
 import { getContent, getImageContent } from "@/content";
 import {
   getSeoLanguages,
@@ -21,6 +22,15 @@ import {
   type SeoProduct,
 } from "@/content/api";
 import {
+  competitorSlugFromRoute,
+  getCompetitorContent,
+  getCompetitorPageEntry,
+  getCompetitorPages,
+  getCompetitorSlugsForLocale,
+  type CompetitorPageEntry,
+} from "@/content/competitors";
+import {
+  buildCompetitorAlternates,
   buildLocaleAlternates,
   buildProductMetadata,
   isHomeLocale,
@@ -39,7 +49,14 @@ type ResolvedSegment =
       country: string;
       languages: SeoLanguage[];
     }
-  | { kind: "product"; product: SeoProduct };
+  | { kind: "product"; product: SeoProduct }
+  | {
+      kind: "competitor";
+      language: string;
+      country: string;
+      competitor: string;
+      entry: CompetitorPageEntry;
+    };
 
 async function resolveSegment(segment: string): Promise<ResolvedSegment> {
   const match = LOCALE_PATTERN.exec(segment);
@@ -54,6 +71,23 @@ async function resolveSegment(segment: string): Promise<ResolvedSegment> {
     if (!entry || !entry.is_display) notFound();
 
     return { kind: "locale", language, country, languages };
+  }
+
+  const competitor = competitorSlugFromRoute(segment);
+  if (competitor) {
+    const entry = await getCompetitorPageEntry(
+      competitor,
+      HOME_LANGUAGE,
+      HOME_COUNTRY,
+    );
+    if (!entry) notFound();
+    return {
+      kind: "competitor",
+      language: HOME_LANGUAGE,
+      country: HOME_COUNTRY,
+      competitor,
+      entry,
+    };
   }
 
   let product: SeoProduct;
@@ -76,6 +110,42 @@ export async function generateMetadata({
 
   if (resolved.kind === "product") {
     return buildProductMetadata(HOME_LANGUAGE, HOME_COUNTRY, resolved.product);
+  }
+
+  if (resolved.kind === "competitor") {
+    const { language, country, competitor, entry } = resolved;
+    const [content, pages] = await Promise.all([
+      getCompetitorContent(entry),
+      getCompetitorPages(),
+    ]);
+    return {
+      title: content.meta.title,
+      description: content.meta.description,
+      alternates: buildCompetitorAlternates(
+        competitor,
+        language,
+        country,
+        pages,
+      ),
+      openGraph: {
+        title: content.meta.title,
+        description: content.meta.description,
+        images: [
+          {
+            url: "/images/bitsika-og-thumbnail.png",
+            width: 256,
+            height: 256,
+            alt: "Bitsika",
+          },
+        ],
+      },
+      twitter: {
+        card: "summary",
+        title: content.meta.title,
+        description: content.meta.description,
+        images: ["/images/bitsika-og-thumbnail.png"],
+      },
+    };
   }
 
   const { language, country, languages } = resolved;
@@ -124,6 +194,16 @@ export default async function LocaleHomePage({
     );
   }
 
+  if (resolved.kind === "competitor") {
+    return (
+      <CompetitorView
+        language={resolved.language}
+        country={resolved.country}
+        entry={resolved.entry}
+      />
+    );
+  }
+
   const { language, country } = resolved;
   const [
     content,
@@ -134,6 +214,7 @@ export default async function LocaleHomePage({
     codMobileRes,
     afkJourneyRes,
     mlbbRes,
+    linkedSlugs,
   ] = await Promise.all([
     getContent(language, country),
     getImageContent(),
@@ -143,6 +224,7 @@ export default async function LocaleHomePage({
     getSeoProduct("call-of-duty-mobile"),
     getSeoProduct("afk-journey"),
     getSeoProduct("mobile-legends-bang-bang"),
+    getCompetitorSlugsForLocale(language, country),
   ]);
 
   const products = productsRes.data
@@ -195,7 +277,13 @@ export default async function LocaleHomePage({
         hero={content.hero}
         image={ctaImages[3]}
       />
-      <BuiltDifferent comparison={content.comparison} vrs={imageContent.vrs} />
+      <BuiltDifferent
+        comparison={content.comparison}
+        vrs={imageContent.vrs}
+        language={language}
+        country={country}
+        linkedSlugs={linkedSlugs}
+      />
       <InsideBitsika blog={content.blog} articles={imageContent.blogs} />
       <FAQ faq={content.faq} />
       <Footer footer={content.footer} hero={content.hero} />

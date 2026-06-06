@@ -3,6 +3,7 @@ import { buildImageContent, type ImageContent } from "./imageShape";
 import { getSeoLanguageProduct, getSeoTranslations } from "./api";
 import {
   IMAGE_CONTENT_SOURCES,
+  IMAGE_BASE_PATH,
   DEFAULT_LOCALE,
   type ImageLocale,
 } from "./sources";
@@ -37,6 +38,7 @@ export async function getImageContent(
   locale: ImageLocale = DEFAULT_LOCALE,
 ): Promise<ImageContent> {
   const url = IMAGE_CONTENT_SOURCES[locale];
+  console.log({url})
   const bustUrl = `${url}${url.includes("?") ? "&" : "?"}t=${Date.now()}`;
   const res = await fetch(bustUrl, {
     cache: "no-store",
@@ -48,6 +50,25 @@ export async function getImageContent(
     );
   }
   const entries = (await res.json()) as ImageContentEntry[];
+
+  console.log({entries})
+
+  const vrsImages = entries.filter((e) =>
+    e.variable.startsWith("vrs-company-image-"),
+  );
+  console.log(
+    "[getImageContent] vrs-company-image-* entries from image-content.json:",
+    vrsImages,
+  );
+  console.log(
+    "[getImageContent] resolved vrs image URLs:",
+    vrsImages.map((e) => ({
+      variable: e.variable,
+      text: e.text,
+      url: e.text ? `${IMAGE_BASE_PATH}/${e.text}` : "",
+    })),
+  );
+
   const map = new Map(entries.map((e) => [e.variable, e.text]));
   return buildImageContent(locale, map);
 }
