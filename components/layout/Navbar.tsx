@@ -3,23 +3,35 @@ import Link from "next/link";
 import Container from "@/components/layout/Container";
 import SearchBar from "@/components/ui/SearchBar";
 import CountrySelector from "@/components/ui/CountrySelector";
+import GameNav from "@/components/layout/GameNav";
 import { getSeoLanguages } from "@/content/api";
+import { getFeatureNav, type FeatureNavKey } from "@/content/features";
 
 type NavbarProps = {
+  language: string;
+  country: string;
   productSlug?: string;
   competitorSlug?: string;
   competitorLocales?: string[];
+  /** Feature whose level-1 page is currently open (highlighted in the nav). */
+  activeFeature?: FeatureNavKey;
 };
 
 export default async function Navbar({
+  language,
+  country,
   productSlug,
   competitorSlug,
   competitorLocales,
+  activeFeature = "top-ups",
 }: NavbarProps) {
-  const { data: languages } = await getSeoLanguages();
+  const [{ data: languages }, featureNav] = await Promise.all([
+    getSeoLanguages(),
+    getFeatureNav(language),
+  ]);
 
   return (
-    <nav className="">
+    <nav className="pb-8.75">
       <Container className="flex items-center gap-3 md:gap-6 pt-5 md:pt-6 pb-5 md:pb-7">
         <Link href="/" aria-label="Bitsika home" className="shrink-0">
           <Image
@@ -43,6 +55,13 @@ export default async function Navbar({
           competitorLocales={competitorLocales}
         />
       </Container>
+
+      <GameNav
+        items={featureNav}
+        language={language}
+        country={country}
+        activeKey={activeFeature}
+      />
     </nav>
   );
 }

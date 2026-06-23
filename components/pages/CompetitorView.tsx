@@ -74,6 +74,8 @@ export default async function CompetitorView({
     <main>
       <Header
         hero={content.hero}
+        language={language}
+        country={country}
         h2Href={pathForLocale(language, country)}
         competitorSlug={entry.competitor}
         competitorLocales={competitorLocales}

@@ -59,6 +59,8 @@ export default async function ProductDetailsView({
     <main>
       <Header
         hero={content.hero}
+        language={language}
+        country={country}
         productSlug={product.slug}
         h2Href={pathForLocale(language, country)}
       />

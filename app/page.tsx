@@ -98,7 +98,11 @@ export default async function HomePage() {
 
   return (
     <main>
-      <Header hero={content.hero} />
+      <Header
+        hero={content.hero}
+        language={HOME_LANGUAGE}
+        country={HOME_COUNTRY}
+      />
       <GamesGrid
         products={products}
         language={HOME_LANGUAGE}

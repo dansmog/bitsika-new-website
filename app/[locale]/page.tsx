@@ -245,7 +245,7 @@ export default async function LocaleHomePage({
 
   return (
     <main>
-      <Header hero={content.hero} />
+      <Header hero={content.hero} language={language} country={country} />
       <GamesGrid products={products} language={language} country={country} />
       <InfoBlock cards={content.infoBoxGroups[0]} />
       <CtaBanner
