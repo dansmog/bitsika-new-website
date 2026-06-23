@@ -18,6 +18,7 @@ import {
   type SeoProduct,
 } from "@/content/api";
 import { getCompetitorSlugsForLocale } from "@/content/competitors";
+import { getFeatureNav } from "@/content/features";
 import { pathForLocale } from "@/content/seo";
 
 type ProductDetailsViewProps = {
@@ -31,12 +32,13 @@ export default async function ProductDetailsView({
   country,
   product,
 }: ProductDetailsViewProps) {
-  const [imageContent, productRes, languageProductRes, linkedSlugs] =
+  const [imageContent, productRes, languageProductRes, linkedSlugs, featureNav] =
     await Promise.all([
       getImageContent(),
       getSeoProduct(product.slug),
       getSeoLanguageProduct(product.slug, language, country),
       getCompetitorSlugsForLocale(language, country),
+      getFeatureNav(language),
     ]);
 
   const products = productRes.other_products || [];
@@ -116,7 +118,13 @@ export default async function ProductDetailsView({
       />
       <InsideBitsika blog={content.blog} articles={imageContent.blogs} />
       <FAQ faq={content.faq} />
-      <Footer footer={content.footer} hero={content.hero} />
+      <Footer
+        footer={content.footer}
+        hero={content.hero}
+        featureNav={featureNav}
+        language={language}
+        country={country}
+      />
     </main>
   );
 }

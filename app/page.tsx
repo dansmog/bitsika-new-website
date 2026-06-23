@@ -18,6 +18,7 @@ import {
   type SeoProduct,
 } from "@/content/api";
 import { getCompetitorSlugsForLocale } from "@/content/competitors";
+import { getFeatureNav } from "@/content/features";
 import { buildLocaleAlternates } from "@/content/seo";
 
 const HOME_LANGUAGE = "en";
@@ -68,6 +69,7 @@ export default async function HomePage() {
     afkJourneyRes,
     mlbbRes,
     linkedSlugs,
+    featureNav,
   ] = await Promise.all([
     getContent(HOME_LANGUAGE, HOME_COUNTRY),
     getImageContent(),
@@ -78,6 +80,7 @@ export default async function HomePage() {
     getSeoProduct("afk-journey"),
     getSeoProduct("mobile-legends-bang-bang"),
     getCompetitorSlugsForLocale(HOME_LANGUAGE, HOME_COUNTRY),
+    getFeatureNav(HOME_LANGUAGE),
   ]);
 
   const products = productsRes.data
@@ -147,7 +150,13 @@ export default async function HomePage() {
       />
       <InsideBitsika blog={content.blog} articles={imageContent.blogs} />
       <FAQ faq={content.faq} />
-      <Footer footer={content.footer} hero={content.hero} />
+      <Footer
+        footer={content.footer}
+        hero={content.hero}
+        featureNav={featureNav}
+        language={HOME_LANGUAGE}
+        country={HOME_COUNTRY}
+      />
     </main>
   );
 }

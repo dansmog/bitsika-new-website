@@ -29,6 +29,7 @@ import {
   getCompetitorSlugsForLocale,
   type CompetitorPageEntry,
 } from "@/content/competitors";
+import { getFeatureNav } from "@/content/features";
 import {
   buildCompetitorAlternates,
   buildLocaleAlternates,
@@ -215,6 +216,7 @@ export default async function LocaleHomePage({
     afkJourneyRes,
     mlbbRes,
     linkedSlugs,
+    featureNav,
   ] = await Promise.all([
     getContent(language, country),
     getImageContent(),
@@ -225,6 +227,7 @@ export default async function LocaleHomePage({
     getSeoProduct("afk-journey"),
     getSeoProduct("mobile-legends-bang-bang"),
     getCompetitorSlugsForLocale(language, country),
+    getFeatureNav(language),
   ]);
 
   const products = productsRes.data
@@ -286,7 +289,13 @@ export default async function LocaleHomePage({
       />
       <InsideBitsika blog={content.blog} articles={imageContent.blogs} />
       <FAQ faq={content.faq} />
-      <Footer footer={content.footer} hero={content.hero} />
+      <Footer
+        footer={content.footer}
+        hero={content.hero}
+        featureNav={featureNav}
+        language={language}
+        country={country}
+      />
     </main>
   );
 }

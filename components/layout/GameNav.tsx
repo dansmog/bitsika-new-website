@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Container from "@/components/layout/Container";
-import type { FeatureNavItem } from "@/content/features";
-import { pathForLocale } from "@/content/seo";
+import { featureHref, type FeatureNavItem } from "@/content/features";
 
 type GameNavProps = {
   items: FeatureNavItem[];
@@ -9,16 +8,6 @@ type GameNavProps = {
   country: string;
   /** Which nav item is currently active (highlighted). */
   activeKey?: FeatureNavItem["key"];
-};
-
-/**
- * Route segment each feature links to, relative to the locale. `top-ups` maps
- * to the locale home (empty segment). Keys not listed here are not yet
- * linkable and render as plain text.
- */
-const FEATURE_SLUGS: Partial<Record<FeatureNavItem["key"], string>> = {
-  "top-ups": "",
-  "gift-cards": "gift-card",
 };
 
 export default function GameNav({
@@ -35,15 +24,15 @@ export default function GameNav({
         {items.map((item) => {
           const isActive = item.key === activeKey;
           const baseClass = "shrink-0 whitespace-nowrap text-sm tracking-tight";
-          const slug = FEATURE_SLUGS[item.key];
           const colorClass = isActive ? "text-bitsikaBlue" : "text-black/50";
+          const href = featureHref(item.key, language, country);
 
-          if (slug !== undefined) {
+          if (href) {
             return (
               <Link
                 key={item.key}
-                href={pathForLocale(language, country, slug || undefined)}
-                className={`${baseClass} font-medium ${colorClass}`}
+                href={href}
+                className={`${baseClass} ${colorClass}`}
               >
                 {item.label}
               </Link>

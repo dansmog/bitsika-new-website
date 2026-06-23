@@ -1,7 +1,33 @@
 import { GAME_HOMEPAGE_BASE } from "./sources";
+import { pathForLocale } from "./seo";
 
 const FEATURE_LIST_URL = `${GAME_HOMEPAGE_BASE}/general-tools/feature-list.json`;
 const FALLBACK_LANGUAGE = "en";
+
+/**
+ * Route segment each feature links to, relative to the locale. `top-ups` maps
+ * to the locale home (empty segment). Keys not listed here are not yet
+ * linkable and render as plain text.
+ */
+const FEATURE_SLUGS: Partial<Record<FeatureNavKey, string>> = {
+  "top-ups": "",
+  "gift-cards": "gift-card",
+};
+
+/**
+ * Returns the href for a feature in the given locale, or `null` when the
+ * feature isn't linkable yet. Shared by the header nav and the footer so they
+ * stay in sync.
+ */
+export function featureHref(
+  key: FeatureNavKey,
+  language: string,
+  country: string,
+): string | null {
+  const slug = FEATURE_SLUGS[key];
+  if (slug === undefined) return null;
+  return pathForLocale(language, country, slug || undefined);
+}
 
 /** Keys to render, in display order. `top-ups` is the only clickable one. */
 export const FEATURE_NAV_KEYS = [

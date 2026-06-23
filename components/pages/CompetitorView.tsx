@@ -17,6 +17,7 @@ import {
   type CompetitorPageEntry,
 } from "@/content/competitors";
 import { getSeoProduct, getSeoProducts, type SeoProduct } from "@/content/api";
+import { getFeatureNav } from "@/content/features";
 import { pathForLocale } from "@/content/seo";
 
 type CompetitorViewProps = {
@@ -41,6 +42,7 @@ export default async function CompetitorView({
     mlbbRes,
     linkedSlugs,
     competitorLocales,
+    featureNav,
   ] = await Promise.all([
     getCompetitorContent(entry),
     getImageContent(),
@@ -52,6 +54,7 @@ export default async function CompetitorView({
     getSeoProduct("mobile-legends-bang-bang"),
     getCompetitorSlugsForLocale(language, country),
     getCompetitorLocales(entry.competitor),
+    getFeatureNav(language),
   ]);
 
   const products = productsRes.data
@@ -104,7 +107,13 @@ export default async function CompetitorView({
       />
       <InsideBitsika blog={content.blog} articles={imageContent.blogs} />
       <FAQ faq={content.faq} />
-      <Footer footer={content.footer} hero={content.hero} />
+      <Footer
+        footer={content.footer}
+        hero={content.hero}
+        featureNav={featureNav}
+        language={language}
+        country={country}
+      />
     </main>
   );
 }
