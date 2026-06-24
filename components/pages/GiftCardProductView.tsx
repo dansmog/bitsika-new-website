@@ -6,6 +6,7 @@ import InsideBitsika from "@/components/sections/InsideBitsika";
 import Comparison from "@/components/sections/Comparison";
 import CtaBanner from "@/components/sections/CtaBanner";
 import GiftCardGamesGrid from "@/components/sections/GiftCardGamesGrid";
+import GiftCardSkuGrid from "@/components/sections/GiftCardSkuGrid";
 import GetStarted from "@/components/sections/GetStarted";
 import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
@@ -13,28 +14,31 @@ import { getImageContent } from "@/content";
 import { getSeoProduct, type SeoProduct } from "@/content/api";
 import { getFeatureNav } from "@/content/features";
 import {
-  getGiftCardContent,
-  getGiftCardCountries,
-  getGiftCardProducts,
+  getGiftCardProductCountries,
+  getGiftCardProductExtras,
   getGiftCardSecondary,
-  type LangCountryEntry,
+  giftCardPath,
 } from "@/content/giftcard";
+import type { Content } from "@/content/shape";
 
-type GiftCardViewProps = {
+type GiftCardProductViewProps = {
   language: string;
   country: string;
-  entry: LangCountryEntry;
+  slug: string;
+  content: Content;
+  moreGamesHeading: string;
 };
 
-export default async function GiftCardView({
+export default async function GiftCardProductView({
   language,
   country,
-  entry,
-}: GiftCardViewProps) {
+  slug,
+  content,
+  moreGamesHeading,
+}: GiftCardProductViewProps) {
   const [
-    content,
     imageContent,
-    products,
+    extras,
     secondary,
     pubgMobileRes,
     freeFireRes,
@@ -44,18 +48,19 @@ export default async function GiftCardView({
     giftCardCountries,
     featureNav,
   ] = await Promise.all([
-    getGiftCardContent(entry),
     getImageContent(),
-    getGiftCardProducts(),
+    getGiftCardProductExtras(slug),
     getGiftCardSecondary(),
     getSeoProduct("pubg-mobile"),
     getSeoProduct("free-fire"),
     getSeoProduct("call-of-duty-mobile"),
     getSeoProduct("afk-journey"),
     getSeoProduct("mobile-legends-bang-bang"),
-    getGiftCardCountries(),
+    getGiftCardProductCountries(slug),
     getFeatureNav(language),
   ]);
+
+  const langCountry = `${language}-${country}`;
 
   const productImage = (p: SeoProduct) => ({
     src: p.logo_url,
@@ -77,15 +82,18 @@ export default async function GiftCardView({
         country={country}
         giftCardCountries={giftCardCountries}
         activeFeature="gift-cards"
+        h2Href={giftCardPath(langCountry)}
       />
-      <GiftCardGamesGrid
-        products={products}
-        langCountry={`${language}-${country}`}
-      />
+      <GiftCardSkuGrid skus={extras.skus} />
       <InfoBlock cards={content.infoBoxGroups[0]} />
       <CtaBanner cta={content.ctas[0]} hero={content.hero} image={ctaImages[0]} />
       <Comparison table={content.table} />
       <InfoBlock cards={content.infoBoxGroups[1]} />
+      <GiftCardGamesGrid
+        products={extras.moreProducts}
+        langCountry={langCountry}
+        title={moreGamesHeading}
+      />
       <CtaBanner cta={content.ctas[1]} hero={content.hero} image={ctaImages[1]} />
       <GetStarted steps={content.steps} image={stepsImage} />
       <InfoBlock cards={content.infoBoxGroups[2]} />

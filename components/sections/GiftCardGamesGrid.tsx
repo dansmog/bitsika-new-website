@@ -1,19 +1,24 @@
+import Link from "next/link";
 import Container from "@/components/layout/Container";
 import GameCard from "@/components/ui/GameCard";
-import type { GiftCardProduct } from "@/content/giftcard";
+import { giftCardProductPath, type GiftCardProduct } from "@/content/giftcard";
 
 type GiftCardGamesGridProps = {
   products: GiftCardProduct[];
+  /** lang-country (href-code) of the current page, used to build product links. */
+  langCountry: string;
   title?: string;
 };
 
 /**
  * Product grid for the gift-card pages. Mirrors the homepage GamesGrid layout
  * but renders gift-card brands (image, alt, brand name — no in-game currency)
- * sourced from GitHub, and the cards do not link anywhere.
+ * sourced from GitHub. Each card links to that product's level-2 page for the
+ * current lang-country.
  */
 export default function GiftCardGamesGrid({
   products,
+  langCountry,
   title,
 }: GiftCardGamesGridProps) {
   return (
@@ -26,12 +31,16 @@ export default function GiftCardGamesGrid({
         )}
         <div className="grid grid-cols-5 gap-y-8.75 gap-x-2.5 max-xl:grid-cols-4 max-lg:grid-cols-3 max-sm:grid-cols-2">
           {products.map((product) => (
-            <GameCard
+            <Link
               key={product.slug}
-              image={product.image}
-              alt={product.alt}
-              title={product.brandName}
-            />
+              href={giftCardProductPath(langCountry, product.slug)}
+            >
+              <GameCard
+                image={product.image}
+                alt={product.alt}
+                title={product.brandName}
+              />
+            </Link>
           ))}
         </div>
       </Container>

@@ -16,6 +16,8 @@ const DISPLAY_ON = "on";
 const PRODUCT_LIMIT = 20;
 const VRS_COUNT = 8;
 const BLOG_COUNT = 6;
+/** Placeholder in level-2 content replaced with the product's brand name. */
+const PRODUCT_NAME_PLACEHOLDER = "[Product Name]";
 
 /** A single entry from general-tools/lang-country-list.json. */
 export type LangCountryEntry = {
@@ -71,6 +73,27 @@ export type GiftCardSecondary = {
   blogs: BlogArticle[];
 };
 
+/** A single SKU card for a level-2 product page. */
+export type GiftCardSku = {
+  brandName: string;
+  image: string;
+  sku: string;
+  alt: string;
+};
+
+/** Level-2 content plus the heading for its "more gift cards" section. */
+export type GiftCardProductPage = {
+  content: Content;
+  moreGamesHeading: string;
+};
+
+/** Product-list-derived data for a level-2 page: this product's SKU cards and
+ * the "more gift cards" carousel. */
+export type GiftCardProductExtras = {
+  skus: GiftCardSku[];
+  moreProducts: GiftCardProduct[];
+};
+
 async function fetchJson<T>(url: string): Promise<T> {
   const bustUrl = `${url}${url.includes("?") ? "&" : "?"}t=${Date.now()}`;
   const res = await fetch(bustUrl, {
@@ -86,6 +109,11 @@ async function fetchJson<T>(url: string): Promise<T> {
 /** Path to a gift-card level-1 page: en-us is bare, others are prefixed. */
 export function giftCardPath(hrefCode: string): string {
   return hrefCode === HOME_HREF_CODE ? "/gift-card" : `/${hrefCode}/gift-card`;
+}
+
+/** Path to a gift-card level-2 product page for a lang-country. */
+export function giftCardProductPath(hrefCode: string, slug: string): string {
+  return `${giftCardPath(hrefCode)}/${slug}`;
 }
 
 /** Flag image URL for a lang-country entry, keyed by its country code. */
@@ -128,6 +156,101 @@ export async function getGiftCardContent(
   );
   const map = new Map(entries.map((e) => [e.variable, e.text]));
   return buildContent(code, map);
+}
+
+/**
+ * Localized level-2 gift-card product content for a display-on entry, or null
+ * when the lang-country has no content for this product yet (the file exists
+ * but is empty / invalid). Callers should treat null as a 404. Also returns the
+ * "more gift cards" section heading, which buildContent does not carry.
+ */
+export async function getGiftCardProductContent(
+  entry: LangCountryEntry,
+  slug: string,
+  productName: string,
+): Promise<GiftCardProductPage | null> {
+  const code = entry["href-code"].toLowerCase();
+  const url = `${GIFT_CARD_PAGES_BASE}/${code}/level-2/${slug}.json`;
+  const bustUrl = `${url}?t=${Date.now()}`;
+  const res = await fetch(bustUrl, {
+    cache: "no-store",
+    headers: { "cache-control": "no-cache" },
+  });
+  if (!res.ok) return null;
+
+  const text = await res.text();
+  if (!text.trim()) return null;
+
+  let entries: ContentEntry[];
+  try {
+    entries = JSON.parse(text) as ContentEntry[];
+  } catch {
+    return null;
+  }
+  if (!Array.isArray(entries) || entries.length === 0) return null;
+
+  const fill = (t: string) => t.split(PRODUCT_NAME_PLACEHOLDER).join(productName);
+  const map = new Map(entries.map((e) => [e.variable, fill(e.text)]));
+  return {
+    content: buildContent(code, map),
+    moreGamesHeading: map.get("more-games-heading") ?? "",
+  };
+}
+
+/**
+ * The SKU cards for a product plus its "more gift cards" carousel. The carousel
+ * is the next `moreCount` display-on products after the focus product in list
+ * order, wrapping around to the top of the list when needed.
+ */
+export async function getGiftCardProductExtras(
+  slug: string,
+  moreCount = PRODUCT_LIMIT,
+): Promise<GiftCardProductExtras> {
+  const all = await fetchJson<RawGiftCardProduct[]>(PRODUCT_LIST_URL);
+  const visible = all.filter(
+    (p) => (p["display-status"] ?? "").toLowerCase() === DISPLAY_ON,
+  );
+
+  const focus = visible.find((p) => p.slug === slug);
+  const skus: GiftCardSku[] = focus
+    ? focus.skus.map((sku) => ({
+        brandName: focus["brand-name"],
+        image: `${PRODUCT_IMAGE_BASE}/${focus["image-name"]}`,
+        sku,
+        alt: `${focus["brand-name"]} Gift Card ${sku} icon`,
+      }))
+    : [];
+
+  const moreProducts: GiftCardProduct[] = [];
+  const focusIndex = visible.findIndex((p) => p.slug === slug);
+  if (focusIndex !== -1) {
+    for (let i = 1; i <= moreCount; i++) {
+      const p = visible[(focusIndex + i) % visible.length];
+      if (p.slug === slug) break; // list shorter than moreCount; avoid the focus
+      moreProducts.push({
+        brandName: p["brand-name"],
+        slug: p.slug,
+        image: `${PRODUCT_IMAGE_BASE}/${p["image-name"]}`,
+        alt: `${p["brand-name"]} Gift Card icon`,
+      });
+    }
+  }
+
+  return { skus, moreProducts };
+}
+
+/**
+ * Maps each display-on product slug to its brand name (every product, not just
+ * popular). Used to validate level-2 slugs and to fill the "[Product Name]"
+ * placeholder in level-2 content.
+ */
+export async function getGiftCardProductNames(): Promise<Map<string, string>> {
+  const all = await fetchJson<RawGiftCardProduct[]>(PRODUCT_LIST_URL);
+  return new Map(
+    all
+      .filter((p) => (p["display-status"] ?? "").toLowerCase() === DISPLAY_ON)
+      .map((p) => [p.slug, p["brand-name"]]),
+  );
 }
 
 /**
@@ -191,10 +314,13 @@ export async function getGiftCardSecondary(): Promise<GiftCardSecondary> {
 }
 
 /**
- * Country-dropdown options for the gift-card pages: display-on entries only,
- * en-us first, the rest in alphabetical order by href-code.
+ * Country-dropdown options built from display-on entries: en-us first, the rest
+ * in alphabetical order by href-code. `hrefFor` maps each entry to its target
+ * page (level-1 home or a level-2 product page).
  */
-export async function getGiftCardCountries(): Promise<GiftCardCountry[]> {
+async function buildGiftCardCountries(
+  hrefFor: (hrefCode: string) => string,
+): Promise<GiftCardCountry[]> {
   const visible = await getGiftCardLangCountries();
   return visible
     .map((e) => {
@@ -203,7 +329,7 @@ export async function getGiftCardCountries(): Promise<GiftCardCountry[]> {
         hrefCode,
         country: e.country.toLowerCase(),
         flagUrl: flagUrl(e.country),
-        href: giftCardPath(hrefCode),
+        href: hrefFor(hrefCode),
         isHome: hrefCode === HOME_HREF_CODE,
       };
     })
@@ -212,4 +338,21 @@ export async function getGiftCardCountries(): Promise<GiftCardCountry[]> {
       if (b.hrefCode === HOME_HREF_CODE) return 1;
       return a.hrefCode.localeCompare(b.hrefCode);
     });
+}
+
+/** Country-dropdown options linking to each entry's level-1 gift-card page. */
+export function getGiftCardCountries(): Promise<GiftCardCountry[]> {
+  return buildGiftCardCountries(giftCardPath);
+}
+
+/**
+ * Country-dropdown options linking to each entry's level-2 page for the given
+ * product slug.
+ */
+export function getGiftCardProductCountries(
+  slug: string,
+): Promise<GiftCardCountry[]> {
+  return buildGiftCardCountries((hrefCode) =>
+    giftCardProductPath(hrefCode, slug),
+  );
 }

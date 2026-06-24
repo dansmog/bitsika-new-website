@@ -3,6 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import ProductDetailsView from "@/components/pages/ProductDetailsView";
 import CompetitorView from "@/components/pages/CompetitorView";
 import GiftCardView from "@/components/pages/GiftCardView";
+import GiftCardProductView from "@/components/pages/GiftCardProductView";
 import {
   getSeoLanguages,
   getSeoProduct,
@@ -19,11 +20,15 @@ import {
   getGiftCardContent,
   getGiftCardEntry,
   getGiftCardLangCountries,
+  getGiftCardProductContent,
+  getGiftCardProductNames,
   type LangCountryEntry,
 } from "@/content/giftcard";
+import type { Content } from "@/content/shape";
 import {
   buildCompetitorAlternates,
   buildGiftCardAlternates,
+  buildGiftCardProductMetadata,
   buildProductMetadata,
   isHomeLocale,
 } from "@/content/seo";
@@ -31,6 +36,8 @@ import {
 type RouteParams = { locale: string; product: string };
 
 const LOCALE_PATTERN = /^([a-z]{2})-([a-z]{2})$/;
+const HOME_LANGUAGE = "en";
+const HOME_COUNTRY = "us";
 
 type ResolvedRoute =
   | { kind: "product"; language: string; country: string; product: SeoProduct }
@@ -46,12 +53,40 @@ type ResolvedRoute =
       language: string;
       country: string;
       entry: LangCountryEntry;
+    }
+  | {
+      kind: "giftcard-product";
+      language: string;
+      country: string;
+      slug: string;
+      content: Content;
+      moreGamesHeading: string;
     };
 
 async function resolveLocaleAndSegment(
   rawLocale: string,
   segment: string,
 ): Promise<ResolvedRoute> {
+  // en-us level-2 gift-card product page: /gift-card/<product-slug>
+  if (rawLocale === "gift-card") {
+    const [entry, names] = await Promise.all([
+      getGiftCardEntry(HOME_LANGUAGE, HOME_COUNTRY),
+      getGiftCardProductNames(),
+    ]);
+    const productName = names.get(segment);
+    if (!entry || !productName) notFound();
+    const page = await getGiftCardProductContent(entry, segment, productName);
+    if (!page) notFound();
+    return {
+      kind: "giftcard-product",
+      language: HOME_LANGUAGE,
+      country: HOME_COUNTRY,
+      slug: segment,
+      content: page.content,
+      moreGamesHeading: page.moreGamesHeading,
+    };
+  }
+
   const match = LOCALE_PATTERN.exec(rawLocale);
   if (!match) notFound();
 
@@ -171,6 +206,15 @@ export async function generateMetadata({
     };
   }
 
+  if (resolved.kind === "giftcard-product") {
+    return buildGiftCardProductMetadata(
+      resolved.language,
+      resolved.country,
+      resolved.content,
+      resolved.slug,
+    );
+  }
+
   return buildProductMetadata(
     resolved.language,
     resolved.country,
@@ -202,6 +246,18 @@ export default async function LocaleProductPage({
         language={resolved.language}
         country={resolved.country}
         entry={resolved.entry}
+      />
+    );
+  }
+
+  if (resolved.kind === "giftcard-product") {
+    return (
+      <GiftCardProductView
+        language={resolved.language}
+        country={resolved.country}
+        slug={resolved.slug}
+        content={resolved.content}
+        moreGamesHeading={resolved.moreGamesHeading}
       />
     );
   }
