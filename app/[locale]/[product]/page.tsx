@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import ProductDetailsView from "@/components/pages/ProductDetailsView";
 import CompetitorView from "@/components/pages/CompetitorView";
+import GiftCardView from "@/components/pages/GiftCardView";
 import {
   getSeoLanguages,
   getSeoProduct,
@@ -15,7 +16,14 @@ import {
   type CompetitorPageEntry,
 } from "@/content/competitors";
 import {
+  getGiftCardContent,
+  getGiftCardEntry,
+  getGiftCardLangCountries,
+  type LangCountryEntry,
+} from "@/content/giftcard";
+import {
   buildCompetitorAlternates,
+  buildGiftCardAlternates,
   buildProductMetadata,
   isHomeLocale,
 } from "@/content/seo";
@@ -32,6 +40,12 @@ type ResolvedRoute =
       country: string;
       competitor: string;
       entry: CompetitorPageEntry;
+    }
+  | {
+      kind: "giftcard";
+      language: string;
+      country: string;
+      entry: LangCountryEntry;
     };
 
 async function resolveLocaleAndSegment(
@@ -44,6 +58,12 @@ async function resolveLocaleAndSegment(
   const [, language, country] = match;
 
   if (isHomeLocale(language, country)) redirect(`/${segment}`);
+
+  if (segment === "gift-card") {
+    const giftCardEntry = await getGiftCardEntry(language, country);
+    if (!giftCardEntry) notFound();
+    return { kind: "giftcard", language, country, entry: giftCardEntry };
+  }
 
   const { data: languages } = await getSeoLanguages();
   const entry = languages.find(
@@ -117,6 +137,40 @@ export async function generateMetadata({
     };
   }
 
+  if (resolved.kind === "giftcard") {
+    const { language, country, entry } = resolved;
+    const [content, visible] = await Promise.all([
+      getGiftCardContent(entry),
+      getGiftCardLangCountries(),
+    ]);
+    return {
+      title: content.meta.title,
+      description: content.meta.description,
+      alternates: buildGiftCardAlternates(
+        `${language}-${country}`,
+        visible.map((e) => e["href-code"]),
+      ),
+      openGraph: {
+        title: content.meta.title,
+        description: content.meta.description,
+        images: [
+          {
+            url: "/images/bitsika-og-thumbnail.png",
+            width: 256,
+            height: 256,
+            alt: "Bitsika",
+          },
+        ],
+      },
+      twitter: {
+        card: "summary",
+        title: content.meta.title,
+        description: content.meta.description,
+        images: ["/images/bitsika-og-thumbnail.png"],
+      },
+    };
+  }
+
   return buildProductMetadata(
     resolved.language,
     resolved.country,
@@ -135,6 +189,16 @@ export default async function LocaleProductPage({
   if (resolved.kind === "competitor") {
     return (
       <CompetitorView
+        language={resolved.language}
+        country={resolved.country}
+        entry={resolved.entry}
+      />
+    );
+  }
+
+  if (resolved.kind === "giftcard") {
+    return (
+      <GiftCardView
         language={resolved.language}
         country={resolved.country}
         entry={resolved.entry}

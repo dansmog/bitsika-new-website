@@ -6,6 +6,7 @@ import CountrySelector from "@/components/ui/CountrySelector";
 import GameNav from "@/components/layout/GameNav";
 import { getSeoLanguages } from "@/content/api";
 import { getFeatureNav, type FeatureNavKey } from "@/content/features";
+import type { GiftCardCountry } from "@/content/giftcard";
 
 type NavbarProps = {
   language: string;
@@ -13,6 +14,8 @@ type NavbarProps = {
   productSlug?: string;
   competitorSlug?: string;
   competitorLocales?: string[];
+  /** When set, the country selector lists the gift-card lang-country pages. */
+  giftCardCountries?: GiftCardCountry[];
   /** Feature whose level-1 page is currently open (highlighted in the nav). */
   activeFeature?: FeatureNavKey;
 };
@@ -23,6 +26,7 @@ export default async function Navbar({
   productSlug,
   competitorSlug,
   competitorLocales,
+  giftCardCountries,
   activeFeature = "top-ups",
 }: NavbarProps) {
   const [{ data: languages }, featureNav] = await Promise.all([
@@ -53,6 +57,7 @@ export default async function Navbar({
           productSlug={productSlug}
           competitorSlug={competitorSlug}
           competitorLocales={competitorLocales}
+          giftCardCountries={giftCardCountries}
         />
       </Container>
 

@@ -72,6 +72,38 @@ export function buildCompetitorAlternates(
   };
 }
 
+/**
+ * hreflang alternates for a gift-card page. en-us is listed first and also as
+ * x-default; the rest follow in alphabetical order by href-code. Only display-on
+ * entries are passed in, so all of them are emitted.
+ */
+export function buildGiftCardAlternates(
+  currentHrefCode: string,
+  hrefCodes: string[],
+): NonNullable<Metadata["alternates"]> {
+  const homeKey = `${HOME_LANGUAGE}-${HOME_COUNTRY}`;
+  const giftCardPath = (code: string) =>
+    code === homeKey ? "/gift-card" : `/${code}/gift-card`;
+
+  const ordered: Record<string, string> = {};
+  ordered[homeKey] = giftCardPath(homeKey);
+
+  const nonHome = hrefCodes
+    .map((c) => c.toLowerCase())
+    .filter((c) => c !== homeKey)
+    .sort((a, b) => a.localeCompare(b));
+  for (const code of nonHome) {
+    ordered[code] = giftCardPath(code);
+  }
+
+  ordered["x-default"] = giftCardPath(homeKey);
+
+  return {
+    canonical: giftCardPath(currentHrefCode),
+    languages: ordered,
+  };
+}
+
 export function buildLocaleAlternates(
   currentLanguage: string,
   currentCountry: string,

@@ -13,6 +13,7 @@ import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
 import ProductDetailsView from "@/components/pages/ProductDetailsView";
 import CompetitorView from "@/components/pages/CompetitorView";
+import GiftCardView from "@/components/pages/GiftCardView";
 import { getContent, getImageContent } from "@/content";
 import {
   getSeoLanguages,
@@ -29,9 +30,16 @@ import {
   getCompetitorSlugsForLocale,
   type CompetitorPageEntry,
 } from "@/content/competitors";
+import {
+  getGiftCardContent,
+  getGiftCardEntry,
+  getGiftCardLangCountries,
+  type LangCountryEntry,
+} from "@/content/giftcard";
 import { getFeatureNav } from "@/content/features";
 import {
   buildCompetitorAlternates,
+  buildGiftCardAlternates,
   buildLocaleAlternates,
   buildProductMetadata,
   isHomeLocale,
@@ -57,6 +65,12 @@ type ResolvedSegment =
       country: string;
       competitor: string;
       entry: CompetitorPageEntry;
+    }
+  | {
+      kind: "giftcard";
+      language: string;
+      country: string;
+      entry: LangCountryEntry;
     };
 
 async function resolveSegment(segment: string): Promise<ResolvedSegment> {
@@ -87,6 +101,17 @@ async function resolveSegment(segment: string): Promise<ResolvedSegment> {
       language: HOME_LANGUAGE,
       country: HOME_COUNTRY,
       competitor,
+      entry,
+    };
+  }
+
+  if (segment === "gift-card") {
+    const entry = await getGiftCardEntry(HOME_LANGUAGE, HOME_COUNTRY);
+    if (!entry) notFound();
+    return {
+      kind: "giftcard",
+      language: HOME_LANGUAGE,
+      country: HOME_COUNTRY,
       entry,
     };
   }
@@ -127,6 +152,40 @@ export async function generateMetadata({
         language,
         country,
         pages,
+      ),
+      openGraph: {
+        title: content.meta.title,
+        description: content.meta.description,
+        images: [
+          {
+            url: "/images/bitsika-og-thumbnail.png",
+            width: 256,
+            height: 256,
+            alt: "Bitsika",
+          },
+        ],
+      },
+      twitter: {
+        card: "summary",
+        title: content.meta.title,
+        description: content.meta.description,
+        images: ["/images/bitsika-og-thumbnail.png"],
+      },
+    };
+  }
+
+  if (resolved.kind === "giftcard") {
+    const { language, country, entry } = resolved;
+    const [content, visible] = await Promise.all([
+      getGiftCardContent(entry),
+      getGiftCardLangCountries(),
+    ]);
+    return {
+      title: content.meta.title,
+      description: content.meta.description,
+      alternates: buildGiftCardAlternates(
+        `${language}-${country}`,
+        visible.map((e) => e["href-code"]),
       ),
       openGraph: {
         title: content.meta.title,
@@ -198,6 +257,16 @@ export default async function LocaleHomePage({
   if (resolved.kind === "competitor") {
     return (
       <CompetitorView
+        language={resolved.language}
+        country={resolved.country}
+        entry={resolved.entry}
+      />
+    );
+  }
+
+  if (resolved.kind === "giftcard") {
+    return (
+      <GiftCardView
         language={resolved.language}
         country={resolved.country}
         entry={resolved.entry}
