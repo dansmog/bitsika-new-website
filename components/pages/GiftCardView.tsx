@@ -10,15 +10,24 @@ import GetStarted from "@/components/sections/GetStarted";
 import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
 import { getImageContent } from "@/content";
-import { getSeoProduct, type SeoProduct } from "@/content/api";
 import { getFeatureNav } from "@/content/features";
 import {
   getGiftCardContent,
   getGiftCardCountries,
+  getGiftCardImagesBySlugs,
   getGiftCardProducts,
   getGiftCardSecondary,
   type LangCountryEntry,
 } from "@/content/giftcard";
+
+/** CTA banners (4) then GetStarted (1) artwork, in order. */
+const CTA_AND_STEP_SLUGS = [
+  "minecraft",
+  "steam",
+  "fortnite",
+  "roblox",
+  "playstation",
+];
 
 type GiftCardViewProps = {
   language: string;
@@ -36,11 +45,7 @@ export default async function GiftCardView({
     imageContent,
     products,
     secondary,
-    pubgMobileRes,
-    freeFireRes,
-    codMobileRes,
-    afkJourneyRes,
-    mlbbRes,
+    ctaAndStepImages,
     giftCardCountries,
     featureNav,
   ] = await Promise.all([
@@ -48,26 +53,13 @@ export default async function GiftCardView({
     getImageContent(),
     getGiftCardProducts(),
     getGiftCardSecondary(),
-    getSeoProduct("pubg-mobile"),
-    getSeoProduct("free-fire"),
-    getSeoProduct("call-of-duty-mobile"),
-    getSeoProduct("afk-journey"),
-    getSeoProduct("mobile-legends-bang-bang"),
+    getGiftCardImagesBySlugs(CTA_AND_STEP_SLUGS),
     getGiftCardCountries(),
     getFeatureNav(language),
   ]);
 
-  const productImage = (p: SeoProduct) => ({
-    src: p.logo_url,
-    alt: `${p.name} game icon`,
-  });
-  const ctaImages = [
-    productImage(freeFireRes.data),
-    productImage(codMobileRes.data),
-    productImage(afkJourneyRes.data),
-    productImage(mlbbRes.data),
-  ];
-  const stepsImage = productImage(pubgMobileRes.data);
+  const ctaImages = ctaAndStepImages.slice(0, 4);
+  const stepsImage = ctaAndStepImages[4];
 
   return (
     <main>

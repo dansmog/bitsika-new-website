@@ -11,9 +11,9 @@ import GetStarted from "@/components/sections/GetStarted";
 import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
 import { getImageContent } from "@/content";
-import { getSeoProduct, type SeoProduct } from "@/content/api";
 import { getFeatureNav } from "@/content/features";
 import {
+  getGiftCardImagesBySlugs,
   getGiftCardProductCountries,
   getGiftCardProductExtras,
   getGiftCardSecondary,
@@ -40,39 +40,24 @@ export default async function GiftCardProductView({
     imageContent,
     extras,
     secondary,
-    pubgMobileRes,
-    freeFireRes,
-    codMobileRes,
-    afkJourneyRes,
-    mlbbRes,
+    focusImages,
     giftCardCountries,
     featureNav,
   ] = await Promise.all([
     getImageContent(),
     getGiftCardProductExtras(slug),
     getGiftCardSecondary(),
-    getSeoProduct("pubg-mobile"),
-    getSeoProduct("free-fire"),
-    getSeoProduct("call-of-duty-mobile"),
-    getSeoProduct("afk-journey"),
-    getSeoProduct("mobile-legends-bang-bang"),
+    getGiftCardImagesBySlugs([slug]),
     getGiftCardProductCountries(slug),
     getFeatureNav(language),
   ]);
 
   const langCountry = `${language}-${country}`;
 
-  const productImage = (p: SeoProduct) => ({
-    src: p.logo_url,
-    alt: `${p.name} game icon`,
-  });
-  const ctaImages = [
-    productImage(freeFireRes.data),
-    productImage(codMobileRes.data),
-    productImage(afkJourneyRes.data),
-    productImage(mlbbRes.data),
-  ];
-  const stepsImage = productImage(pubgMobileRes.data);
+  // All four CTAs and the GetStarted image use the focus product's artwork.
+  const focusImage = focusImages[0];
+  const ctaImages = [focusImage, focusImage, focusImage, focusImage];
+  const stepsImage = focusImage;
 
   return (
     <main>

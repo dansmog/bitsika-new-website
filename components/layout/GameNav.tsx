@@ -19,13 +19,15 @@ export default function GameNav({
   if (items.length === 0) return null;
 
   return (
-    <nav aria-label="Game categories">
+    <nav aria-label="Game categories" className="pt-6">
       <Container className="flex font-google-sans flex-nowrap items-center justify-start md:justify-center gap-x-6 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {items.map((item) => {
           const isActive = item.key === activeKey;
-          const baseClass = "shrink-0 whitespace-nowrap text-sm tracking-tight";
+          const baseClass = "shrink-0 whitespace-nowrap text-base tracking-tight";
           const colorClass = isActive ? "text-bitsikaBlue" : "text-black/50";
           const href = featureHref(item.key, language, country);
+
+          console.log(href, item)
 
           if (href) {
             return (
@@ -37,6 +39,9 @@ export default function GameNav({
                 {item.label}
               </Link>
             );
+          }
+          if(item.key.toLowerCase() === 'features'){
+            return null;
           }
 
           return (

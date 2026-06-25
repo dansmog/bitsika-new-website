@@ -1,5 +1,5 @@
 import { buildContent, type Content } from "./shape";
-import type { BlogArticle, VrsCompany } from "./imageShape";
+import type { BlogArticle, RemoteImage, VrsCompany } from "./imageShape";
 import { GAME_HOMEPAGE_BASE } from "./sources";
 
 const LANG_COUNTRY_LIST_URL = `${GAME_HOMEPAGE_BASE}/general-tools/lang-country-list.json`;
@@ -237,6 +237,25 @@ export async function getGiftCardProductExtras(
   }
 
   return { skus, moreProducts };
+}
+
+/**
+ * Resolves the given product slugs to their artwork, in the order requested.
+ * Used for the level-1 CTA / GetStarted images. Alt text is "[brand-name] Game
+ * icon". Unknown slugs yield empty src/alt.
+ */
+export async function getGiftCardImagesBySlugs(
+  slugs: string[],
+): Promise<RemoteImage[]> {
+  const all = await fetchJson<RawGiftCardProduct[]>(PRODUCT_LIST_URL);
+  const bySlug = new Map(all.map((p) => [p.slug, p]));
+  return slugs.map((slug) => {
+    const p = bySlug.get(slug);
+    return {
+      src: p ? `${PRODUCT_IMAGE_BASE}/${p["image-name"]}` : "",
+      alt: p ? `${p["brand-name"]} Game icon` : "",
+    };
+  });
 }
 
 /**

@@ -35,8 +35,8 @@ export default async function Navbar({
   ]);
 
   return (
-    <nav className="pb-8.75">
-      <Container className="flex items-center gap-3 md:gap-6 pt-5 md:pt-6 pb-5 md:pb-7">
+    <nav className="pb-6">
+      <Container className="flex items-center gap-3 md:gap-6 pt-5 md:pt-6">
         <Link href="/" aria-label="Bitsika home" className="shrink-0">
           <Image
             src="/images/bitsika-logo.png"
