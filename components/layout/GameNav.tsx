@@ -18,6 +18,8 @@ export default function GameNav({
 }: GameNavProps) {
   if (items.length === 0) return null;
 
+  console.log({items})
+
   return (
     <nav aria-label="Game categories" className="pt-6">
       <Container className="flex font-google-sans flex-nowrap items-center justify-start md:justify-center gap-x-6 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">

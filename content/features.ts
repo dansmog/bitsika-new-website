@@ -29,16 +29,12 @@ export function featureHref(
   return pathForLocale(language, country, slug || undefined);
 }
 
-/** Keys to render, in display order. `top-ups` is the only clickable one. */
-export const FEATURE_NAV_KEYS = [
-  "gta-6",
-  "game-discussions",
-  "top-ups",
-  "gift-cards",
-  "features",
-] as const;
-
-export type FeatureNavKey = (typeof FEATURE_NAV_KEYS)[number];
+/**
+ * A nav item key — a property name from a feature-list entry (e.g. "top-ups",
+ * "gift-cards"). Which items appear and their order are driven by the JSON on
+ * GitHub, not by the app, so the nav can be edited there.
+ */
+export type FeatureNavKey = string;
 
 /** A single language object from the feature list. */
 type FeatureListEntry = { lang: string } & Record<string, string>;
@@ -79,8 +75,9 @@ export async function getFeatureNav(language: string): Promise<FeatureNavItem[]>
     entries.find((e) => e.lang?.toLowerCase() === FALLBACK_LANGUAGE);
   if (!entry) return [];
 
-  return FEATURE_NAV_KEYS.filter((key) => entry[key]).map((key) => ({
-    key,
-    label: entry[key],
-  }));
+  // The JSON drives the nav: every key except `lang` (with a non-empty label)
+  // becomes an item, in the order it appears in the entry.
+  return Object.entries(entry)
+    .filter(([key, label]) => key !== "lang" && Boolean(label))
+    .map(([key, label]) => ({ key, label }));
 }
