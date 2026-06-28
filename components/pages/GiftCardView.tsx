@@ -5,73 +5,61 @@ import FAQ from "@/components/sections/FAQ";
 import InsideBitsika from "@/components/sections/InsideBitsika";
 import Comparison from "@/components/sections/Comparison";
 import CtaBanner from "@/components/sections/CtaBanner";
-import GamesGrid from "@/components/sections/GamesGrid";
+import GiftCardGamesGrid from "@/components/sections/GiftCardGamesGrid";
 import GetStarted from "@/components/sections/GetStarted";
 import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
 import { getImageContent } from "@/content";
-import {
-  getCompetitorContent,
-  getCompetitorLocales,
-  getCompetitorSlugsForLocale,
-  type CompetitorPageEntry,
-} from "@/content/competitors";
-import { getSeoProduct, getSeoProducts, type SeoProduct } from "@/content/api";
 import { getFeatureNav } from "@/content/features";
-import { pathForLocale } from "@/content/seo";
+import {
+  getGiftCardContent,
+  getGiftCardCountries,
+  getGiftCardImagesBySlugs,
+  getGiftCardProducts,
+  getGiftCardSecondary,
+  type LangCountryEntry,
+} from "@/content/giftcard";
 
-type CompetitorViewProps = {
+/** CTA banners (4) then GetStarted (1) artwork, in order. */
+const CTA_AND_STEP_SLUGS = [
+  "minecraft",
+  "steam",
+  "fortnite",
+  "roblox",
+  "playstation",
+];
+
+type GiftCardViewProps = {
   language: string;
   country: string;
-  entry: CompetitorPageEntry;
+  entry: LangCountryEntry;
 };
 
-export default async function CompetitorView({
+export default async function GiftCardView({
   language,
   country,
   entry,
-}: CompetitorViewProps) {
+}: GiftCardViewProps) {
   const [
     content,
     imageContent,
-    productsRes,
-    pubgMobileRes,
-    freeFireRes,
-    codMobileRes,
-    afkJourneyRes,
-    mlbbRes,
-    linkedSlugs,
-    competitorLocales,
+    products,
+    secondary,
+    ctaAndStepImages,
+    giftCardCountries,
     featureNav,
   ] = await Promise.all([
-    getCompetitorContent(entry),
+    getGiftCardContent(entry),
     getImageContent(),
-    getSeoProducts(),
-    getSeoProduct("pubg-mobile"),
-    getSeoProduct("free-fire"),
-    getSeoProduct("call-of-duty-mobile"),
-    getSeoProduct("afk-journey"),
-    getSeoProduct("mobile-legends-bang-bang"),
-    getCompetitorSlugsForLocale(language, country),
-    getCompetitorLocales(entry.competitor),
+    getGiftCardProducts(),
+    getGiftCardSecondary(),
+    getGiftCardImagesBySlugs(CTA_AND_STEP_SLUGS),
+    getGiftCardCountries(),
     getFeatureNav(language),
   ]);
 
-  const products = productsRes.data
-    .filter((p) => p.is_popular)
-    .sort((a, b) => a.order - b.order);
-
-  const productImage = (p: SeoProduct) => ({
-    src: p.logo_url,
-    alt: `${p.name} game icon`,
-  });
-  const ctaImages = [
-    productImage(freeFireRes.data),
-    productImage(codMobileRes.data),
-    productImage(afkJourneyRes.data),
-    productImage(mlbbRes.data),
-  ];
-  const stepsImage = productImage(pubgMobileRes.data);
+  const ctaImages = ctaAndStepImages.slice(0, 4);
+  const stepsImage = ctaAndStepImages[4];
 
   return (
     <main>
@@ -79,11 +67,13 @@ export default async function CompetitorView({
         hero={content.hero}
         language={language}
         country={country}
-        h2Href={pathForLocale(language, country)}
-        competitorSlug={entry.competitor}
-        competitorLocales={competitorLocales}
+        giftCardCountries={giftCardCountries}
+        activeFeature="gift-cards"
       />
-      <GamesGrid products={products} language={language} country={country} />
+      <GiftCardGamesGrid
+        products={products}
+        langCountry={`${language}-${country}`}
+      />
       <InfoBlock cards={content.infoBoxGroups[0]} />
       <CtaBanner cta={content.ctas[0]} hero={content.hero} image={ctaImages[0]} />
       <Comparison table={content.table} />
@@ -100,12 +90,12 @@ export default async function CompetitorView({
       <CtaBanner cta={content.ctas[3]} hero={content.hero} image={ctaImages[3]} />
       <BuiltDifferent
         comparison={content.comparison}
-        vrs={imageContent.vrs}
+        vrs={secondary.vrs}
         language={language}
         country={country}
-        linkedSlugs={linkedSlugs}
+        linkedSlugs={new Set()}
       />
-      <InsideBitsika blog={content.blog} articles={imageContent.blogs} />
+      <InsideBitsika blog={content.blog} articles={secondary.blogs} />
       <FAQ faq={content.faq} />
       <Footer
         footer={content.footer}

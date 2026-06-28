@@ -13,6 +13,7 @@ import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
 import ProductDetailsView from "@/components/pages/ProductDetailsView";
 import CompetitorView from "@/components/pages/CompetitorView";
+import GiftCardView from "@/components/pages/GiftCardView";
 import { getContent, getImageContent } from "@/content";
 import {
   getSeoLanguages,
@@ -30,7 +31,15 @@ import {
   type CompetitorPageEntry,
 } from "@/content/competitors";
 import {
+  getGiftCardContent,
+  getGiftCardEntry,
+  getGiftCardLangCountries,
+  type LangCountryEntry,
+} from "@/content/giftcard";
+import { getFeatureNav } from "@/content/features";
+import {
   buildCompetitorAlternates,
+  buildGiftCardAlternates,
   buildLocaleAlternates,
   buildProductMetadata,
   isHomeLocale,
@@ -56,6 +65,12 @@ type ResolvedSegment =
       country: string;
       competitor: string;
       entry: CompetitorPageEntry;
+    }
+  | {
+      kind: "giftcard";
+      language: string;
+      country: string;
+      entry: LangCountryEntry;
     };
 
 async function resolveSegment(segment: string): Promise<ResolvedSegment> {
@@ -86,6 +101,17 @@ async function resolveSegment(segment: string): Promise<ResolvedSegment> {
       language: HOME_LANGUAGE,
       country: HOME_COUNTRY,
       competitor,
+      entry,
+    };
+  }
+
+  if (segment === "gift-card") {
+    const entry = await getGiftCardEntry(HOME_LANGUAGE, HOME_COUNTRY);
+    if (!entry) notFound();
+    return {
+      kind: "giftcard",
+      language: HOME_LANGUAGE,
+      country: HOME_COUNTRY,
       entry,
     };
   }
@@ -126,6 +152,40 @@ export async function generateMetadata({
         language,
         country,
         pages,
+      ),
+      openGraph: {
+        title: content.meta.title,
+        description: content.meta.description,
+        images: [
+          {
+            url: "/images/bitsika-og-thumbnail.png",
+            width: 256,
+            height: 256,
+            alt: "Bitsika",
+          },
+        ],
+      },
+      twitter: {
+        card: "summary",
+        title: content.meta.title,
+        description: content.meta.description,
+        images: ["/images/bitsika-og-thumbnail.png"],
+      },
+    };
+  }
+
+  if (resolved.kind === "giftcard") {
+    const { language, country, entry } = resolved;
+    const [content, visible] = await Promise.all([
+      getGiftCardContent(entry),
+      getGiftCardLangCountries(),
+    ]);
+    return {
+      title: content.meta.title,
+      description: content.meta.description,
+      alternates: buildGiftCardAlternates(
+        `${language}-${country}`,
+        visible.map((e) => e["href-code"]),
       ),
       openGraph: {
         title: content.meta.title,
@@ -204,6 +264,16 @@ export default async function LocaleHomePage({
     );
   }
 
+  if (resolved.kind === "giftcard") {
+    return (
+      <GiftCardView
+        language={resolved.language}
+        country={resolved.country}
+        entry={resolved.entry}
+      />
+    );
+  }
+
   const { language, country } = resolved;
   const [
     content,
@@ -215,6 +285,7 @@ export default async function LocaleHomePage({
     afkJourneyRes,
     mlbbRes,
     linkedSlugs,
+    featureNav,
   ] = await Promise.all([
     getContent(language, country),
     getImageContent(),
@@ -225,6 +296,7 @@ export default async function LocaleHomePage({
     getSeoProduct("afk-journey"),
     getSeoProduct("mobile-legends-bang-bang"),
     getCompetitorSlugsForLocale(language, country),
+    getFeatureNav(language),
   ]);
 
   const products = productsRes.data
@@ -245,7 +317,7 @@ export default async function LocaleHomePage({
 
   return (
     <main>
-      <Header hero={content.hero} />
+      <Header hero={content.hero} language={language} country={country} />
       <GamesGrid products={products} language={language} country={country} />
       <InfoBlock cards={content.infoBoxGroups[0]} />
       <CtaBanner
@@ -286,7 +358,13 @@ export default async function LocaleHomePage({
       />
       <InsideBitsika blog={content.blog} articles={imageContent.blogs} />
       <FAQ faq={content.faq} />
-      <Footer footer={content.footer} hero={content.hero} />
+      <Footer
+        footer={content.footer}
+        hero={content.hero}
+        featureNav={featureNav}
+        language={language}
+        country={country}
+      />
     </main>
   );
 }

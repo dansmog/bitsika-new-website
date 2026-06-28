@@ -33,7 +33,11 @@
       "Bash(python3 -c 'import json;d=json.load\\(open\\(\"/tmp/l1.json\"\\)\\);print\\(sorted\\(p[\"locale\"] for p in d if p[\"competitor\"]==\"codashop\"\\)\\)')",
       "Bash(awk '!seen[$0]++')",
       "Bash(curl -s --max-time 60 \"http://localhost:3000/codashop-alternative\" -o /tmp/cus.html)",
-      "Bash(curl -s --max-time 60 \"http://localhost:3000/\" -o /tmp/home2.html)"
+      "Bash(curl -s --max-time 60 \"http://localhost:3000/\" -o /tmp/home2.html)",
+      "Bash(curl -s \"https://bitsika.github.io/game-homepage/general-tools/feature-list.json\")",
+      "Bash(curl -s \"https://bitsika.github.io/game-homepage/general-tools/lang-country-list.json?t=$\\(date +%s\\)\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" \"https://bitsika.github.io/game-homepage/gift-card-pages/pages-by-lang-country/en-us/level-1/main-content.json\")",
+      "Bash(curl -s \"https://bitsika.github.io/game-homepage/gift-card-pages/pages-by-lang-country/en-us/level-1/main-content.json?t=$\\(date +%s\\)\")"
     ]
   }
 }

@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import type { SeoLanguage, SeoProduct } from "./api";
 import type { CompetitorPageEntry } from "./competitors";
+import type { Content } from "./shape";
 import { getSeoLanguages } from "./api";
 import { getProductContent } from "./loader";
+import { getGiftCardLangCountries } from "./giftcard";
 
 const HOME_LANGUAGE = "en";
 const HOME_COUNTRY = "us";
@@ -69,6 +71,78 @@ export function buildCompetitorAlternates(
   return {
     canonical: pathForCompetitor(currentLanguage, currentCountry, competitor),
     languages: ordered,
+  };
+}
+
+/**
+ * hreflang alternates for a gift-card page. en-us is listed first and also as
+ * x-default; the rest follow in alphabetical order by href-code. Only display-on
+ * entries are passed in, so all of them are emitted.
+ */
+export function buildGiftCardAlternates(
+  currentHrefCode: string,
+  hrefCodes: string[],
+  productSlug?: string,
+): NonNullable<Metadata["alternates"]> {
+  const homeKey = `${HOME_LANGUAGE}-${HOME_COUNTRY}`;
+  const giftCardPath = (code: string) => {
+    const base = code === homeKey ? "/gift-card" : `/${code}/gift-card`;
+    return productSlug ? `${base}/${productSlug}` : base;
+  };
+
+  const ordered: Record<string, string> = {};
+  ordered[homeKey] = giftCardPath(homeKey);
+
+  const nonHome = hrefCodes
+    .map((c) => c.toLowerCase())
+    .filter((c) => c !== homeKey)
+    .sort((a, b) => a.localeCompare(b));
+  for (const code of nonHome) {
+    ordered[code] = giftCardPath(code);
+  }
+
+  ordered["x-default"] = giftCardPath(homeKey);
+
+  return {
+    canonical: giftCardPath(currentHrefCode),
+    languages: ordered,
+  };
+}
+
+/** Full metadata (title, description, canonical + hreflang) for a level-2 page. */
+export async function buildGiftCardProductMetadata(
+  language: string,
+  country: string,
+  content: Content,
+  slug: string,
+): Promise<Metadata> {
+  const visible = await getGiftCardLangCountries();
+  return {
+    title: content.meta.title,
+    description: content.meta.description,
+    alternates: buildGiftCardAlternates(
+      `${language}-${country}`,
+      visible.map((e) => e["href-code"]),
+      slug,
+    ),
+    openGraph: {
+      title: content.meta.title,
+      description: content.meta.description,
+      images: [
+        {
+          url: "/images/bitsika-og-thumbnail.png",
+          width: 256,
+          height: 256,
+          alt: "Bitsika",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary",
+      title: content.meta.title,
+      description: content.meta.description,
+      images: ["/images/bitsika-og-thumbnail.png"],
+    },
   };
 }
 

@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import type { SeoLanguage } from "@/content/api";
+import type { GiftCardCountry } from "@/content/giftcard";
 
 const HOME_LANGUAGE = "en";
 const HOME_COUNTRY = "us";
@@ -19,11 +20,35 @@ type CountryOption = {
   locale: string;
   href: string;
   logoUrl: string | null;
+  /** Alt text for the flag image. */
+  alt: string;
+  /** SVG flags can't go through the next/image optimizer; render as <img>. */
+  svg: boolean;
 };
 
-function FlagIcon({ src, alt }: { src: string | null; alt: string }) {
+function FlagIcon({
+  src,
+  alt,
+  svg,
+}: {
+  src: string | null;
+  alt: string;
+  svg?: boolean;
+}) {
   if (!src) {
     return <div className="w-5 h-5 rounded-full bg-border-input shrink-0" />;
+  }
+  if (svg) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={src}
+        alt={alt}
+        width={20}
+        height={20}
+        className="w-5 h-5 rounded-full object-cover shrink-0"
+      />
+    );
   }
   return (
     <Image
@@ -48,6 +73,8 @@ type CountrySelectorProps = {
   competitorSlug?: string;
   /** Locales (lang-country) the competitor has a page for. */
   competitorLocales?: string[];
+  /** When set, the selector lists the gift-card lang-country pages. */
+  giftCardCountries?: GiftCardCountry[];
 };
 
 export default function CountrySelector({
@@ -55,10 +82,27 @@ export default function CountrySelector({
   productSlug,
   competitorSlug,
   competitorLocales,
+  giftCardCountries,
 }: CountrySelectorProps) {
   const pathname = usePathname();
 
   const countries = useMemo<CountryOption[]>(() => {
+    if (giftCardCountries) {
+      return giftCardCountries.map((c) => {
+        const [language, country] = c.hrefCode.split("-");
+        return {
+          id: c.hrefCode,
+          language,
+          country,
+          locale: c.hrefCode,
+          href: c.href,
+          logoUrl: c.flagUrl,
+          alt: `${c.hrefCode} flag icon`,
+          svg: true,
+        };
+      });
+    }
+
     if (competitorSlug && competitorLocales) {
       const byLocale = new Map(
         languages.map((l) => [`${l.language}-${l.country}`, l]),
@@ -76,6 +120,8 @@ export default function CountrySelector({
             locale,
             href: `${base}/${competitorSlug}-alternative`,
             logoUrl: lang?.logo_url ?? null,
+            alt: `${locale} flag`,
+            svg: false,
           };
         })
         .sort((a, b) => {
@@ -99,9 +145,17 @@ export default function CountrySelector({
           locale: `${l.language}-${l.country}`,
           href,
           logoUrl: l.logo_url ?? null,
+          alt: `${l.language}-${l.country} flag`,
+          svg: false,
         };
       });
-  }, [languages, productSlug, competitorSlug, competitorLocales]);
+  }, [
+    languages,
+    productSlug,
+    competitorSlug,
+    competitorLocales,
+    giftCardCountries,
+  ]);
 
   const activeLocale = activeLocaleFromPath(pathname ?? "/");
   const selected =
@@ -129,7 +183,7 @@ export default function CountrySelector({
         onClick={() => setOpen((o) => !o)}
         className="flex items-center gap-2.25 px-3 py-2 rounded-lg border border-border-input bg-surface-white cursor-pointer"
       >
-        <FlagIcon src={selected.logoUrl} alt={`${selected.locale} flag`} />
+        <FlagIcon src={selected.logoUrl} alt={selected.alt} svg={selected.svg} />
         <span className="hidden lg:block w-px h-4 bg-[#E1E1E1]" />
         <span className="hidden lg:block text-sm font-medium leading-none tracking-[-0.28px] text-black">
           {selected.locale}
@@ -170,7 +224,11 @@ export default function CountrySelector({
                   : "hover:bg-surface-secondary"
               }`}
             >
-              <FlagIcon src={country.logoUrl} alt={`${country.locale} flag`} />
+              <FlagIcon
+                src={country.logoUrl}
+                alt={country.alt}
+                svg={country.svg}
+              />
               <span className="border border-[#E1E1E1] h-full"></span>
               <span className="text-ink">{country.locale}</span>
             </Link>
