@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/DownloadButtons";
 import Qrcode from "@/components/ui/Qrcode";
 import type { CtaContent, HeroContent } from "@/content/shape";
-import type { RemoteImage } from "@/content/imageShape";
+import type { RemoteImage } from "@/content/refocus";
 
 type CtaBannerProps = {
   cta: CtaContent;

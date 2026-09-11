@@ -1,221 +1,103 @@
 import type { Metadata } from "next";
-import type { SeoLanguage, SeoProduct } from "./api";
-import type { CompetitorPageEntry } from "./competitors";
 import type { Content } from "./shape";
-import { getSeoLanguages } from "./api";
-import { getProductContent } from "./loader";
-import { getGiftCardLangCountries } from "./giftcard";
+import {
+  HOME_LANGUAGE,
+  getLanguages,
+  levelOnePath,
+  productPath,
+  type ProductKind,
+} from "./refocus";
 
-const HOME_LANGUAGE = "en";
-const HOME_COUNTRY = "us";
+/**
+ * Canonical origin. Hrefs are built absolute rather than leaning on
+ * `metadataBase`, so the emitted tags match the agreed SEO spec exactly —
+ * including the root canonical having no trailing slash.
+ */
+const SITE_URL = "https://www.bitsika.com";
 
-export function isHomeLocale(language: string, country: string): boolean {
-  return language === HOME_LANGUAGE && country === HOME_COUNTRY;
-}
+const OG_IMAGE = {
+  url: "/images/bitsika-og-thumbnail.png",
+  width: 256,
+  height: 256,
+  alt: "Bitsika",
+};
 
-export function pathForLocale(
-  language: string,
-  country: string,
-  productSlug?: string,
-): string {
-  const base = isHomeLocale(language, country) ? "" : `/${language}-${country}`;
-  if (productSlug) return `${base}/${productSlug}`;
-  return base || "/";
-}
-
-export function pathForCompetitor(
-  language: string,
-  country: string,
-  competitorSlug: string,
-): string {
-  const base = isHomeLocale(language, country) ? "" : `/${language}-${country}`;
-  return `${base}/${competitorSlug}-alternative`;
+function absolute(path: string): string {
+  return path === "/" ? SITE_URL : `${SITE_URL}${path}`;
 }
 
 /**
- * hreflang alternates for a competitor page. Unlike locale/product pages, a
- * competitor only exists in the lang-countries listed for it, so we build the
- * alternate set from those entries rather than from every display locale.
+ * hreflang set, ordered per spec: English first, the other languages
+ * alphabetically in the middle, and x-default (pointing at English) last. Only
+ * display-on languages are included.
  */
-export function buildCompetitorAlternates(
-  competitor: string,
+async function buildAlternates(
   currentLanguage: string,
-  currentCountry: string,
-  pages: CompetitorPageEntry[],
-): NonNullable<Metadata["alternates"]> {
-  const homeKey = `${HOME_LANGUAGE}-${HOME_COUNTRY}`;
-  const localeEntries = pages
-    .filter((p) => p.competitor === competitor)
-    .map((p) => {
-      const [language, country] = p.locale.toLowerCase().split("-");
-      return {
-        key: `${language}-${country}`,
-        language,
-        country,
-        path: pathForCompetitor(language, country, competitor),
-      };
-    });
+  pathFor: (language: string) => string,
+): Promise<NonNullable<Metadata["alternates"]>> {
+  const languages = await getLanguages();
+  const codes = languages.map((l) => l["href-code"].toLowerCase());
+  const hasHome = codes.includes(HOME_LANGUAGE);
 
   const ordered: Record<string, string> = {};
-  const home = localeEntries.find((e) => e.key === homeKey);
-  if (home) ordered[homeKey] = home.path;
+  if (hasHome) ordered[HOME_LANGUAGE] = absolute(pathFor(HOME_LANGUAGE));
 
-  for (const { key, path } of localeEntries
-    .filter((e) => e.key !== homeKey)
-    .sort((a, b) => a.key.localeCompare(b.key))) {
-    ordered[key] = path;
+  for (const code of codes
+    .filter((c) => c !== HOME_LANGUAGE)
+    .sort((a, b) => a.localeCompare(b))) {
+    ordered[code] = absolute(pathFor(code));
   }
 
-  if (home) ordered["x-default"] = home.path;
+  if (hasHome) ordered["x-default"] = absolute(pathFor(HOME_LANGUAGE));
 
   return {
-    canonical: pathForCompetitor(currentLanguage, currentCountry, competitor),
+    canonical: absolute(pathFor(currentLanguage)),
     languages: ordered,
   };
 }
 
-/**
- * hreflang alternates for a gift-card page. en-us is listed first and also as
- * x-default; the rest follow in alphabetical order by href-code. Only display-on
- * entries are passed in, so all of them are emitted.
- */
-export function buildGiftCardAlternates(
-  currentHrefCode: string,
-  hrefCodes: string[],
-  productSlug?: string,
-): NonNullable<Metadata["alternates"]> {
-  const homeKey = `${HOME_LANGUAGE}-${HOME_COUNTRY}`;
-  const giftCardPath = (code: string) => {
-    const base = code === homeKey ? "/gift-card" : `/${code}/gift-card`;
-    return productSlug ? `${base}/${productSlug}` : base;
-  };
-
-  const ordered: Record<string, string> = {};
-  ordered[homeKey] = giftCardPath(homeKey);
-
-  const nonHome = hrefCodes
-    .map((c) => c.toLowerCase())
-    .filter((c) => c !== homeKey)
-    .sort((a, b) => a.localeCompare(b));
-  for (const code of nonHome) {
-    ordered[code] = giftCardPath(code);
-  }
-
-  ordered["x-default"] = giftCardPath(homeKey);
-
+function socialMeta(content: Content) {
+  const { title, description } = content.meta;
   return {
-    canonical: giftCardPath(currentHrefCode),
-    languages: ordered,
+    openGraph: { title, description, images: [OG_IMAGE] },
+    twitter: {
+      card: "summary" as const,
+      title,
+      description,
+      images: [OG_IMAGE.url],
+    },
   };
 }
 
-/** Full metadata (title, description, canonical + hreflang) for a level-2 page. */
-export async function buildGiftCardProductMetadata(
+/** Metadata for a level-1 page. */
+export async function buildLevelOneMetadata(
+  kind: ProductKind,
   language: string,
-  country: string,
   content: Content,
-  slug: string,
 ): Promise<Metadata> {
-  const visible = await getGiftCardLangCountries();
   return {
     title: content.meta.title,
     description: content.meta.description,
-    alternates: buildGiftCardAlternates(
-      `${language}-${country}`,
-      visible.map((e) => e["href-code"]),
-      slug,
+    alternates: await buildAlternates(language, (lang) =>
+      levelOnePath(kind, lang),
     ),
-    openGraph: {
-      title: content.meta.title,
-      description: content.meta.description,
-      images: [
-        {
-          url: "/images/bitsika-og-thumbnail.png",
-          width: 256,
-          height: 256,
-          alt: "Bitsika",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary",
-      title: content.meta.title,
-      description: content.meta.description,
-      images: ["/images/bitsika-og-thumbnail.png"],
-    },
+    ...socialMeta(content),
   };
 }
 
-export function buildLocaleAlternates(
-  currentLanguage: string,
-  currentCountry: string,
-  languages: SeoLanguage[],
-  productSlug?: string,
-): NonNullable<Metadata["alternates"]> {
-  const visible = languages.filter((l) => l.is_display);
-  const homeKey = `${HOME_LANGUAGE}-${HOME_COUNTRY}`;
-  const defaultPath = pathForLocale(HOME_LANGUAGE, HOME_COUNTRY, productSlug);
-
-  const ordered: Record<string, string> = {};
-  ordered[homeKey] = defaultPath;
-
-  const nonHome = visible
-    .filter((l) => !isHomeLocale(l.language, l.country))
-    .map((l) => ({
-      key: `${l.language}-${l.country}`,
-      path: pathForLocale(l.language, l.country, productSlug),
-    }))
-    .sort((a, b) => a.key.localeCompare(b.key));
-
-  for (const { key, path } of nonHome) {
-    ordered[key] = path;
-  }
-
-  ordered["x-default"] = defaultPath;
-
-  return {
-    canonical: pathForLocale(currentLanguage, currentCountry, productSlug),
-    languages: ordered,
-  };
-}
-
-export async function buildProductMetadata(
+/** Metadata for a level-2 page. */
+export async function buildLevelTwoMetadata(
+  kind: ProductKind,
   language: string,
-  country: string,
-  product: SeoProduct,
+  slug: string,
+  content: Content,
 ): Promise<Metadata> {
-  const [productContent, languages] = await Promise.all([
-    getProductContent(product.slug, language, country),
-    getSeoLanguages(),
-  ]);
-  const title = productContent.meta.title;
-  const description = productContent.meta.description;
   return {
-    title,
-    description,
-    alternates: buildLocaleAlternates(
-      language,
-      country,
-      languages.data,
-      product.slug,
+    title: content.meta.title,
+    description: content.meta.description,
+    alternates: await buildAlternates(language, (lang) =>
+      productPath(kind, lang, slug),
     ),
-    openGraph: {
-      title,
-      description,
-      images: [
-        {
-          url: "/images/bitsika-og-thumbnail.png",
-          width: 256,
-          height: 256,
-          alt: "Bitsika",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary",
-      title,
-      description,
-      images: ["/images/bitsika-og-thumbnail.png"],
-    },
+    ...socialMeta(content),
   };
 }

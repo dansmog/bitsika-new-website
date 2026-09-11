@@ -1,26 +1,27 @@
 import Link from "next/link";
 import Container from "@/components/layout/Container";
 import GameCard from "@/components/ui/GameCard";
-import { giftCardProductPath, type GiftCardProduct } from "@/content/giftcard";
+import { productPath, type ProductKind, type RefocusProduct } from "@/content/refocus";
 
-type GiftCardGamesGridProps = {
-  products: GiftCardProduct[];
-  /** lang-country (href-code) of the current page, used to build product links. */
-  langCountry: string;
+type ProductGridProps = {
+  products: RefocusProduct[];
+  kind: ProductKind;
+  /** Language of the current page, used to build the level-2 links. */
+  language: string;
   title?: string;
 };
 
 /**
- * Product grid for the gift-card pages. Mirrors the homepage GamesGrid layout
- * but renders gift-card brands (image, alt, brand name — no in-game currency)
- * sourced from GitHub. Each card links to that product's level-2 page for the
- * current lang-country.
+ * Product grid for level-1 pages and the "more products" carousel on level-2.
+ * Blue text is the brand name; the black line under it is the in-game currency,
+ * which only top-up products have. Each card links to its level-2 page.
  */
-export default function GiftCardGamesGrid({
+export default function ProductGrid({
   products,
-  langCountry,
+  kind,
+  language,
   title,
-}: GiftCardGamesGridProps) {
+}: ProductGridProps) {
   return (
     <section className="bg-surface-white pt-5.75 md:pt-13.5 pb-13.25 md:pb-20">
       <Container>
@@ -33,12 +34,13 @@ export default function GiftCardGamesGrid({
           {products.map((product) => (
             <Link
               key={product.slug}
-              href={giftCardProductPath(langCountry, product.slug)}
+              href={productPath(kind, language, product.slug)}
             >
               <GameCard
                 image={product.image}
                 alt={product.alt}
                 title={product.brandName}
+                subtitle={product.currency}
               />
             </Link>
           ))}

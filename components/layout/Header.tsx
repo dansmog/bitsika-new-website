@@ -2,42 +2,31 @@ import Navbar from "@/components/layout/Navbar";
 import HeroBanner from "@/components/sections/HeroBanner";
 import type { HeroContent } from "@/content/shape";
 import type { FeatureNavKey } from "@/content/features";
-import type { GiftCardCountry } from "@/content/giftcard";
+import type { LanguageOption } from "@/content/refocus";
 
 type HeaderProps = {
   hero: HeroContent;
   language: string;
-  country: string;
-  productSlug?: string;
+  /** Language dropdown options, pointing at this page's equivalent per language. */
+  languageOptions: LanguageOption[];
+  /** Target for the `**bold**` span in the hero H2 — one level up. */
   h2Href?: string;
-  competitorSlug?: string;
-  competitorLocales?: string[];
-  /** When set, the country selector lists the gift-card lang-country pages. */
-  giftCardCountries?: GiftCardCountry[];
-  /** Feature whose level-1 page is currently open (highlighted in the nav). */
+  /** Feature whose page is currently open (highlighted in the nav). */
   activeFeature?: FeatureNavKey;
 };
 
 export default function Header({
   hero,
   language,
-  country,
-  productSlug,
+  languageOptions,
   h2Href,
-  competitorSlug,
-  competitorLocales,
-  giftCardCountries,
   activeFeature,
 }: HeaderProps) {
   return (
     <header className="pb-5.75 bg-surface-subtle border-b border-border-default">
       <Navbar
         language={language}
-        country={country}
-        productSlug={productSlug}
-        competitorSlug={competitorSlug}
-        competitorLocales={competitorLocales}
-        giftCardCountries={giftCardCountries}
+        languageOptions={languageOptions}
         activeFeature={activeFeature}
       />
       <HeroBanner hero={hero} h2Href={h2Href} />
