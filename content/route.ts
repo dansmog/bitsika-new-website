@@ -1,4 +1,4 @@
-import { notFound, permanentRedirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import type { Content } from "./shape";
 import {
   HOME_LANGUAGE,
@@ -74,7 +74,7 @@ export async function resolvePage(segments: string[]): Promise<ResolvedPage> {
   const rest = prefixLanguage ? tail : segments;
 
   if (prefixLanguage) {
-    if (language === HOME_LANGUAGE) permanentRedirect(`/${rest.join("/")}`);
+    if (language === HOME_LANGUAGE) notFound();
     if (!(await isSupportedLanguage(language))) notFound();
   }
 
@@ -87,23 +87,12 @@ export async function resolvePage(segments: string[]): Promise<ResolvedPage> {
     const giftCardSlug = slugFromProductSegment("gift-card", rest[0]);
     if (giftCardSlug) return levelTwo("gift-card", language, giftCardSlug);
 
-    // Top-up product pages used to sit at the root (`/free-fire`). Those URLs
-    // carry real traffic, so send the ones naming a real product to their new
-    // home rather than 404-ing them.
-    if (!prefixLanguage && (await isProduct("top-up", rest[0]))) {
-      permanentRedirect(productPath("top-up", HOME_LANGUAGE, rest[0]));
-    }
-
     notFound();
   }
 
   if (rest.length === 2 && rest[0] === TOP_UP_SEGMENT) {
     const slug = slugFromProductSegment("top-up", rest[1]);
     if (slug) return levelTwo("top-up", language, slug);
-    // `/top-up-with-crypto/<bare-slug>` — tolerate the un-prefixed form.
-    if (await isProduct("top-up", rest[1])) {
-      permanentRedirect(productPath("top-up", language, rest[1]));
-    }
   }
 
   notFound();
