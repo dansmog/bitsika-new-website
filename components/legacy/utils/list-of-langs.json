@@ -1,0 +1,37 @@
+[
+  {
+    "lang_en": "English",
+    "lang_code": "en",
+    "lang_local": "English"
+  },
+  {
+    "lang_en": "Spanish",
+    "lang_code": "es",
+    "lang_local": "Español"
+  },
+  {
+    "lang_en": "Arabic",
+    "lang_code": "ar",
+    "lang_local": "العربية"
+  },
+  {
+    "lang_en": "Portuguese",
+    "lang_code": "pt",
+    "lang_local": "Português"
+  },
+  {
+    "lang_en": "Italian",
+    "lang_code": "it",
+    "lang_local": "Italiano"
+  },
+  {
+    "lang_en": "French",
+    "lang_code": "fr",
+    "lang_local": "Français"
+  },
+  {
+    "lang_en": "German",
+    "lang_code": "de",
+    "lang_local": "Deutsch"
+  }
+]

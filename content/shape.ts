@@ -1,4 +1,5 @@
-import type { Locale } from "./sources";
+/** Page language, e.g. "en". */
+export type Locale = string;
 
 export type Meta = {
   title: string;
@@ -206,7 +207,7 @@ export function buildContent(
     },
     steps: {
       heading: get("steps-heading"),
-      description: get("steps-description"),
+      description: get("steps-text"),
       steps: stepsItems,
     },
     testimonials: {

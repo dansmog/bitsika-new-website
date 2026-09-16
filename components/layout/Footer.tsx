@@ -9,7 +9,19 @@ import {
   GooglePlayButton,
 } from "@/components/ui/DownloadButtons";
 import type { FooterContent, HeroContent } from "@/content/shape";
+import { featureHref, type FeatureNavItem } from "@/content/features";
 
+/**
+ * Footer link targets, matched to the JSON-supplied labels **by position**.
+ * URLs aren't translatable; labels are. The content JSON lists them in a fixed
+ * order across every language and page kind, so these arrays must mirror it:
+ *
+ *   resources: Terms, Privacy, KYC/AML, Sanctions & OFAC, then Blog — which
+ *              `shape.ts` moves to the end of the list.
+ *   socials:   Twitter / X, Instagram, LinkedIn.
+ *
+ * If the JSON ever reorders, these move with it.
+ */
 const RESOURCE_URLS = [
   "/terms-conditions",
   "/privacy-policy",
@@ -20,8 +32,8 @@ const RESOURCE_URLS = [
 
 const SOCIAL_URLS = [
   "https://x.com/bitsikaafrica?lang=en",
-  "https://www.linkedin.com/company/11803195",
   "https://www.instagram.com/bitsikaafrica/",
+  "https://www.linkedin.com/company/11803195",
 ];
 
 function CopyIcon() {
@@ -86,9 +98,20 @@ function CopyButton({ value }: { value: string }) {
 type FooterProps = {
   footer: FooterContent;
   hero: HeroContent;
+  featureNav: FeatureNavItem[];
+  language: string;
 };
 
-export default function Footer({ footer, hero }: FooterProps) {
+export default function Footer({
+  footer,
+  hero,
+  featureNav,
+  language,
+}: FooterProps) {
+  // The "features" entry is the column heading; the rest are its links.
+  const featureHeading = featureNav.find((item) => item.key === "features");
+  const featureItems = featureNav.filter((item) => item.key !== "features");
+
   return (
     <footer className="relative bg-ink overflow-hidden rounded-t-3xl">
       <Image
@@ -187,6 +210,31 @@ export default function Footer({ footer, hero }: FooterProps) {
               </Link>
             </div>
           </div> */}
+
+          {/* Features */}
+          {featureItems.length > 0 && (
+            <div className="flex flex-col gap-3 min-w-35">
+              <span className="text-white text-xs font-medium leading-none tracking-[-0.24px]">
+                {featureHeading?.label}
+              </span>
+              <div className="flex flex-col items-start self-stretch">
+                {featureItems.map((item) => {
+                  const href = featureHref(item.key, language);
+                  const className =
+                    "flex pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]";
+                  return href ? (
+                    <Link key={item.key} href={href} className={className}>
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <span key={item.key} className={className}>
+                      {item.label}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          )}
 
           {/* Resources */}
           <div className="flex flex-col gap-3 min-w-35">

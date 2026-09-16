@@ -1,5 +1,7 @@
 # Dynamic Content System
 
+> **Superseded.** This describes the pre-refocus lang-country pipeline (single `en-US` GitHub JSON, `CONTENT_SOURCES`, `getContent(locale)`). The mental model — *fetch once on the server, reshape into typed section objects, pass each component only the slice it renders* — still holds, and `buildContent()` is unchanged. The specifics do not. See the architecture section of [CLAUDE.md](./CLAUDE.md) for the current structure.
+
 This document explains how the Bitsika marketing site loads its copy (headings, button labels, FAQ answers, etc.) from a remote JSON file instead of hard-coding it in components. The goal is **i18n readiness**: swapping languages later should only require pointing to a different URL — no component changes.
 
 ---

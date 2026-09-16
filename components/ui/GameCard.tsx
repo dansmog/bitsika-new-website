@@ -4,7 +4,8 @@ type GameCardProps = {
   image: string;
   alt: string;
   title: string;
-  subtitle: string;
+  /** In-game currency line. Omitted on pages without one (e.g. gift cards). */
+  subtitle?: string;
 };
 
 export default function GameCard({ image, alt, title, subtitle }: GameCardProps) {
@@ -23,9 +24,11 @@ export default function GameCard({ image, alt, title, subtitle }: GameCardProps)
         <span className="text-[#008CDF] font-google-sans text-sm font-medium leading-[130%] tracking-[-0.14px]">
           {title}
         </span>
-        <span className="text-[#323232] font-google-sans text-base font-normal leading-[120%]">
-          {subtitle}
-        </span>
+        {subtitle && (
+          <span className="text-[#323232] font-google-sans text-base font-normal leading-[120%]">
+            {subtitle}
+          </span>
+        )}
       </div>
     </div>
   );

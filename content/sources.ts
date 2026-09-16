@@ -1,13 +1,5 @@
-export const DEFAULT_LOCALE = "en-US" as const;
-
-export const CONTENT_SOURCES = {
-  "en-US": "https://bitsika.github.io/game-homepage/main-content.json",
-} as const;
-
-export const IMAGE_CONTENT_SOURCES = {
-  "en-US": "https://bitsika.github.io/game-homepage/image-content.json",
-} as const;
-
-export const IMAGE_BASE_PATH = "/images/images";
-
-export type Locale = keyof typeof CONTENT_SOURCES;
+/**
+ * Root of the remote content repo. Every page's copy, product list and artwork
+ * is served from under here — see content/refocus.ts for the tree layout.
+ */
+export const GAME_HOMEPAGE_BASE = "https://bitsika.github.io/game-homepage";

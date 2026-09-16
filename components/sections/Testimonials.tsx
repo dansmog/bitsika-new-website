@@ -1,23 +1,17 @@
 "use client";
 
-import Image from "next/image";
 import { AnimatePresence, cubicBezier, motion } from "motion/react";
 import { useState } from "react";
 import Container from "../layout/Container";
 import type { TestimonialsContent } from "@/content/shape";
-import type { RemoteImage } from "@/content/imageShape";
 
 const ease = cubicBezier(0.4, 0, 0.2, 1);
 
 type TestimonialsProps = {
   testimonials: TestimonialsContent;
-  testimonialImages: RemoteImage[];
 };
 
-export default function Testimonials({
-  testimonials,
-  testimonialImages,
-}: TestimonialsProps) {
+export default function Testimonials({ testimonials }: TestimonialsProps) {
   const items = testimonials.items;
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
@@ -47,14 +41,13 @@ export default function Testimonials({
   };
 
   const t = items[current];
-  const avatar = testimonialImages[current];
 
   return (
     <section className="bg-white py-20">
       <Container>
         <div className="max-w-217 mx-auto">
           <p className="text-[#1A73E8] font-google-sans text-xl font-medium mb-6">
-            Testimonials from our Users
+            {testimonials.heading}
           </p>
           <div className=" overflow-hidden">
             <AnimatePresence mode="wait" custom={direction}>
@@ -86,25 +79,6 @@ export default function Testimonials({
                 transition={{ duration: 0.3, ease }}
                 className="flex items-center gap-3"
               >
-                <div
-                  className="bg-[#E8E8E8] shrink-0 relative overflow-hidden"
-                  style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: 10.38,
-                    border: "1.3px solid #ECECEC",
-                  }}
-                >
-                  {avatar?.src && (
-                    <Image
-                      src={avatar.src}
-                      alt={avatar.alt || t.user}
-                      fill
-                      sizes="48px"
-                      className="object-cover"
-                    />
-                  )}
-                </div>
                 <div>
                   <p className="font-google-sans font-medium text-sm text-ink leading-tight">
                     {t.user}

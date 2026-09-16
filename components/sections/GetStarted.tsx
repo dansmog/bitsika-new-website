@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import Container from "../layout/Container";
 import type { StepsContent } from "@/content/shape";
-import type { RemoteImage } from "@/content/imageShape";
+import type { RemoteImage } from "@/content/refocus";
 
 type GetStartedProps = {
   steps: StepsContent;
