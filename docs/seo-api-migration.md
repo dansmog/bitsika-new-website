@@ -1,5 +1,7 @@
 # SEO API migration
 
+> **Superseded — the SEO API is no longer used at all.** Every page now runs on the `refocus-pages` tree via [content/refocus.ts](../content/refocus.ts); `content/api.ts` and `content/loader.ts` have been deleted. Kept only as a record of what the API served. See the architecture section of [CLAUDE.md](./CLAUDE.md).
+
 This document tracks the in-progress migration of dynamic content away from
 the GitHub-hosted JSON files (see [dynamic-content.md](./dynamic-content.md))
 and onto the live SEO API.

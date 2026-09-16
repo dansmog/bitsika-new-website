@@ -1,17 +1,17 @@
 import Container from "@/components/layout/Container";
 import GameCard from "@/components/ui/GameCard";
-import type { GiftCardSku } from "@/content/giftcard";
+import type { RefocusSku } from "@/content/refocus";
 
-type GiftCardSkuGridProps = {
-  skus: GiftCardSku[];
+type SkuGridProps = {
+  skus: RefocusSku[];
 };
 
 /**
- * Top grid on a level-2 gift-card page: one card per SKU of the focus product,
- * in SKU-array order. Each card shows the product artwork, brand name and SKU
- * name; alt text is "[brand-name] Gift Card [sku-name] icon".
+ * Top grid on a level-2 page: one card per SKU of the focus product, in
+ * SKU-array order. Blue text is the brand name, black text the SKU name. The
+ * cards are not links — we are already on that product's page.
  */
-export default function GiftCardSkuGrid({ skus }: GiftCardSkuGridProps) {
+export default function SkuGrid({ skus }: SkuGridProps) {
   return (
     <section className="bg-surface-white pt-5.75 md:pt-13.5 pb-13.25 md:pb-20">
       <Container>
