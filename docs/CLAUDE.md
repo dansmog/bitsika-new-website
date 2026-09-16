@@ -41,7 +41,7 @@ The site is addressed by **language only**. There are no country pages. Two page
 
 Two route files carry all of it: [app/page.tsx](app/page.tsx) for the root and [app/[...slug]/page.tsx](app/[...slug]/page.tsx) for everything else. Both delegate to **`resolvePage(segments)`** in [content/route.ts](content/route.ts) — the single place that decides what a path means. Static routes (`privacy-policy`, `user/…`, …) take precedence over the catch-all and are unaffected.
 
-English never carries a prefix: `/en-lang/…` `permanentRedirect`s to the bare form. [proxy.ts](proxy.ts) 308s the retired lang-country URLs (`/en-ng/gift-card`, `/es-mx/gift-card/roblox`, `/gift-card`, `/game-top-ups`, …) onto their language equivalents, and a bare root segment naming a real top-up product (`/free-fire`) redirects into the top-up tree. `next.config.ts` keeps `/crypto-virtual-card-iran` → `/iran-ofac-clarification`.
+**Only the URLs above resolve — nothing is redirected.** Retired URLs from the old structure (`/en-ng/gift-card`, `/es-mx/roblox`, `/gift-card`, `/game-top-ups`, `/free-fire`, …) deliberately 404, as do non-canonical forms like `/en-lang/…` (English never carries a prefix) and `/top-up-with-crypto/<bare-slug>`. Don't add redirects for them. The one unrelated redirect is `/crypto-virtual-card-iran` → `/iran-ofac-clarification` in `next.config.ts`. [proxy.ts](proxy.ts) only sets the `x-pathname` header.
 
 ### The content pipeline (the most important thing to understand)
 
