@@ -2,34 +2,42 @@ import Image from "next/image";
 import Link from "next/link";
 import Container from "@/components/layout/Container";
 import SearchBar from "@/components/ui/SearchBar";
-import LanguageSelector from "@/components/ui/LanguageSelector";
+import CountrySelector from "@/components/ui/CountrySelector";
 import GameNav from "@/components/layout/GameNav";
+import { getSeoLanguages } from "@/content/api";
 import { getFeatureNav, type FeatureNavKey } from "@/content/features";
-import { levelOnePath, type LanguageOption } from "@/content/refocus";
+import type { GiftCardCountry } from "@/content/giftcard";
 
 type NavbarProps = {
   language: string;
-  /** Language dropdown options, pointing at this page's equivalent per language. */
-  languageOptions: LanguageOption[];
-  /** Feature whose page is currently open (highlighted in the nav). */
+  country: string;
+  productSlug?: string;
+  competitorSlug?: string;
+  competitorLocales?: string[];
+  /** When set, the country selector lists the gift-card lang-country pages. */
+  giftCardCountries?: GiftCardCountry[];
+  /** Feature whose level-1 page is currently open (highlighted in the nav). */
   activeFeature?: FeatureNavKey;
 };
 
 export default async function Navbar({
   language,
-  languageOptions,
-  activeFeature = "gift-cards",
+  country,
+  productSlug,
+  competitorSlug,
+  competitorLocales,
+  giftCardCountries,
+  activeFeature = "top-ups",
 }: NavbarProps) {
-  const featureNav = await getFeatureNav(language);
+  const [{ data: languages }, featureNav] = await Promise.all([
+    getSeoLanguages(),
+    getFeatureNav(language),
+  ]);
 
   return (
     <nav className="pb-6">
       <Container className="flex items-center gap-3 md:gap-6 pt-5 md:pt-6">
-        <Link
-          href={levelOnePath("gift-card", language)}
-          aria-label="Bitsika home"
-          className="shrink-0"
-        >
+        <Link href="/" aria-label="Bitsika home" className="shrink-0">
           <Image
             src="/images/bitsika-logo.png"
             alt="Bitsika"
@@ -44,15 +52,19 @@ export default async function Navbar({
           <SearchBar />
         </div>
 
-        <LanguageSelector
-          options={languageOptions}
-          activeLanguage={language}
+        <CountrySelector
+          languages={languages}
+          productSlug={productSlug}
+          competitorSlug={competitorSlug}
+          competitorLocales={competitorLocales}
+          giftCardCountries={giftCardCountries}
         />
       </Container>
 
       <GameNav
         items={featureNav}
         language={language}
+        country={country}
         activeKey={activeFeature}
       />
     </nav>
