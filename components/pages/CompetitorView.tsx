@@ -16,7 +16,7 @@ import {
   getCompetitorSlugsForLocale,
   type CompetitorPageEntry,
 } from "@/content/competitors";
-import { getSeoProduct, getSeoProducts, type SeoProduct } from "@/content/api";
+import { getSeoProducts, productImageBySlug } from "@/content/api";
 import { getFeatureNav } from "@/content/features";
 import { pathForLocale } from "@/content/seo";
 
@@ -35,11 +35,6 @@ export default async function CompetitorView({
     content,
     imageContent,
     productsRes,
-    pubgMobileRes,
-    freeFireRes,
-    codMobileRes,
-    afkJourneyRes,
-    mlbbRes,
     linkedSlugs,
     competitorLocales,
     featureNav,
@@ -47,11 +42,6 @@ export default async function CompetitorView({
     getCompetitorContent(entry),
     getImageContent(),
     getSeoProducts(),
-    getSeoProduct("pubg-mobile"),
-    getSeoProduct("free-fire"),
-    getSeoProduct("call-of-duty-mobile"),
-    getSeoProduct("afk-journey"),
-    getSeoProduct("mobile-legends-bang-bang"),
     getCompetitorSlugsForLocale(language, country),
     getCompetitorLocales(entry.competitor),
     getFeatureNav(language),
@@ -61,17 +51,15 @@ export default async function CompetitorView({
     .filter((p) => p.is_popular)
     .sort((a, b) => a.order - b.order);
 
-  const productImage = (p: SeoProduct) => ({
-    src: p.logo_url,
-    alt: `${p.name} game icon`,
-  });
+  const productImage = (slug: string) =>
+    productImageBySlug(productsRes.data, slug);
   const ctaImages = [
-    productImage(freeFireRes.data),
-    productImage(codMobileRes.data),
-    productImage(afkJourneyRes.data),
-    productImage(mlbbRes.data),
+    productImage("free-fire"),
+    productImage("call-of-duty-mobile"),
+    productImage("genshin-impact"),
+    productImage("mobile-legends-bang-bang"),
   ];
-  const stepsImage = productImage(pubgMobileRes.data);
+  const stepsImage = productImage("pubg-mobile");
 
   return (
     <main>
