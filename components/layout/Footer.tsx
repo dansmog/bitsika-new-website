@@ -11,17 +11,6 @@ import {
 import type { FooterContent, HeroContent } from "@/content/shape";
 import { featureHref, type FeatureNavItem } from "@/content/features";
 
-/**
- * Footer link targets, matched to the JSON-supplied labels **by position**.
- * URLs aren't translatable; labels are. The content JSON lists them in a fixed
- * order across every language and page kind, so these arrays must mirror it:
- *
- *   resources: Terms, Privacy, KYC/AML, Sanctions & OFAC, then Blog — which
- *              `shape.ts` moves to the end of the list.
- *   socials:   Twitter / X, Instagram, LinkedIn.
- *
- * If the JSON ever reorders, these move with it.
- */
 const RESOURCE_URLS = [
   "/terms-conditions",
   "/privacy-policy",
@@ -32,8 +21,8 @@ const RESOURCE_URLS = [
 
 const SOCIAL_URLS = [
   "https://x.com/bitsikaafrica?lang=en",
-  "https://www.instagram.com/bitsikaafrica/",
   "https://www.linkedin.com/company/11803195",
+  "https://www.instagram.com/bitsikaafrica/",
 ];
 
 function CopyIcon() {
@@ -100,6 +89,7 @@ type FooterProps = {
   hero: HeroContent;
   featureNav: FeatureNavItem[];
   language: string;
+  country: string;
 };
 
 export default function Footer({
@@ -107,6 +97,7 @@ export default function Footer({
   hero,
   featureNav,
   language,
+  country,
 }: FooterProps) {
   // The "features" entry is the column heading; the rest are its links.
   const featureHeading = featureNav.find((item) => item.key === "features");
@@ -219,7 +210,7 @@ export default function Footer({
               </span>
               <div className="flex flex-col items-start self-stretch">
                 {featureItems.map((item) => {
-                  const href = featureHref(item.key, language);
+                  const href = featureHref(item.key, language, country);
                   const className =
                     "flex pt-2 pb-1.5 text-ink-muted text-xs font-normal leading-none tracking-[-0.12px]";
                   return href ? (

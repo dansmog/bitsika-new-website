@@ -38,15 +38,11 @@ export const metadata: Metadata = {
   },
 };
 
-const LANGUAGE_SEGMENT = /^([a-z]{2})-lang$/;
+const LOCALE_PATTERN = /^[a-z]{2}-[a-z]{2}$/;
 
-/**
- * The page's language declaration. Non-English pages are prefixed with a
- * `<lang>-lang` segment; everything else is English.
- */
-function languageFromPathname(pathname: string): string {
+function localeFromPathname(pathname: string): string {
   const seg = pathname.split("/").filter(Boolean)[0] ?? "";
-  return LANGUAGE_SEGMENT.exec(seg)?.[1] ?? "en";
+  return LOCALE_PATTERN.test(seg) ? seg : "en-us";
 }
 
 export default async function RootLayout({
@@ -56,7 +52,7 @@ export default async function RootLayout({
 }>) {
   const hdrs = await headers();
   const pathname = hdrs.get("x-pathname") ?? "/";
-  const lang = languageFromPathname(pathname);
+  const lang = localeFromPathname(pathname);
 
   return (
     <html

@@ -1,5 +1,4 @@
-/** Page language, e.g. "en". */
-export type Locale = string;
+import type { Locale } from "./sources";
 
 export type Meta = {
   title: string;
