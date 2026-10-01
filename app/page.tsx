@@ -11,12 +11,7 @@ import GetStarted from "@/components/sections/GetStarted";
 import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
 import { getContent, getImageContent } from "@/content";
-import {
-  getSeoLanguages,
-  getSeoProduct,
-  getSeoProducts,
-  type SeoProduct,
-} from "@/content/api";
+import { getSeoLanguages, getSeoProducts } from "@/content/api";
 import { getCompetitorSlugsForLocale } from "@/content/competitors";
 import { getFeatureNav } from "@/content/features";
 import { buildLocaleAlternates } from "@/content/seo";
@@ -59,45 +54,34 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HomePage() {
-  const [
-    content,
-    imageContent,
-    productsRes,
-    pubgMobileRes,
-    freeFireRes,
-    codMobileRes,
-    afkJourneyRes,
-    mlbbRes,
-    linkedSlugs,
-    featureNav,
-  ] = await Promise.all([
-    getContent(HOME_LANGUAGE, HOME_COUNTRY),
-    getImageContent(),
-    getSeoProducts(),
-    getSeoProduct("pubg-mobile"),
-    getSeoProduct("free-fire"),
-    getSeoProduct("call-of-duty-mobile"),
-    getSeoProduct("afk-journey"),
-    getSeoProduct("mobile-legends-bang-bang"),
-    getCompetitorSlugsForLocale(HOME_LANGUAGE, HOME_COUNTRY),
-    getFeatureNav(HOME_LANGUAGE),
-  ]);
+  const [content, imageContent, productsRes, linkedSlugs, featureNav] =
+    await Promise.all([
+      getContent(HOME_LANGUAGE, HOME_COUNTRY),
+      getImageContent(),
+      getSeoProducts(),
+      getCompetitorSlugsForLocale(HOME_LANGUAGE, HOME_COUNTRY),
+      getFeatureNav(HOME_LANGUAGE),
+    ]);
 
   const products = productsRes.data
     .filter((p) => p.is_popular)
     .sort((a, b) => a.order - b.order);
 
-  const productImage = (p: SeoProduct) => ({
-    src: p.logo_url,
-    alt: `${p.name} game icon`,
-  });
+  // Look images up from the product list rather than fetching each slug, so a
+  // product removed from the API just hides its image instead of 500ing the page.
+  const productImage = (slug: string) => {
+    const p = productsRes.data.find((p) => p.slug === slug);
+    return p
+      ? { src: p.logo_url, alt: `${p.name} game icon` }
+      : { src: "", alt: "" };
+  };
   const ctaImages = [
-    productImage(freeFireRes.data),
-    productImage(codMobileRes.data),
-    productImage(afkJourneyRes.data),
-    productImage(mlbbRes.data),
+    productImage("free-fire"),
+    productImage("call-of-duty-mobile"),
+    productImage("genshin-impact"),
+    productImage("mobile-legends-bang-bang"),
   ];
-  const stepsImage = productImage(pubgMobileRes.data);
+  const stepsImage = productImage("pubg-mobile");
 
   return (
     <main>
