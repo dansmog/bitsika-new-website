@@ -11,7 +11,11 @@ import GetStarted from "@/components/sections/GetStarted";
 import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
 import { getContent, getImageContent } from "@/content";
-import { getSeoLanguages, getSeoProducts } from "@/content/api";
+import {
+  getSeoLanguages,
+  getSeoProducts,
+  productImageBySlug,
+} from "@/content/api";
 import { getCompetitorSlugsForLocale } from "@/content/competitors";
 import { getFeatureNav } from "@/content/features";
 import { buildLocaleAlternates } from "@/content/seo";
@@ -67,14 +71,8 @@ export default async function HomePage() {
     .filter((p) => p.is_popular)
     .sort((a, b) => a.order - b.order);
 
-  // Look images up from the product list rather than fetching each slug, so a
-  // product removed from the API just hides its image instead of 500ing the page.
-  const productImage = (slug: string) => {
-    const p = productsRes.data.find((p) => p.slug === slug);
-    return p
-      ? { src: p.logo_url, alt: `${p.name} game icon` }
-      : { src: "", alt: "" };
-  };
+  const productImage = (slug: string) =>
+    productImageBySlug(productsRes.data, slug);
   const ctaImages = [
     productImage("free-fire"),
     productImage("call-of-duty-mobile"),

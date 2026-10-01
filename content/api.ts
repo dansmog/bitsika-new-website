@@ -79,7 +79,16 @@ export function getSeoProducts() {
   return fetchJson<SeoProduct[]>("/seo/products");
 }
 
-export type SeoProductResponse = ApiEnvelope<SeoProduct> & {
+// Look images up from the product list rather than fetching each slug, so a
+// product removed from the API just hides its image instead of 500ing the page.
+export function productImageBySlug(products: SeoProduct[], slug: string) {
+  const p = products.find((p) => p.slug === slug);
+  return p
+    ? { src: p.logo_url, alt: `${p.name} game icon` }
+    : { src: "", alt: "" };
+}
+
+export type SeoProductResponse =ApiEnvelope<SeoProduct> & {
   other_products?: SeoProduct[];
 };
 

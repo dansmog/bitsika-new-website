@@ -19,6 +19,7 @@ import {
   getSeoLanguages,
   getSeoProduct,
   getSeoProducts,
+  productImageBySlug,
   type SeoLanguage,
   type SeoProduct,
 } from "@/content/api";
@@ -275,45 +276,28 @@ export default async function LocaleHomePage({
   }
 
   const { language, country } = resolved;
-  const [
-    content,
-    imageContent,
-    productsRes,
-    pubgMobileRes,
-    freeFireRes,
-    codMobileRes,
-    afkJourneyRes,
-    mlbbRes,
-    linkedSlugs,
-    featureNav,
-  ] = await Promise.all([
-    getContent(language, country),
-    getImageContent(),
-    getSeoProducts(),
-    getSeoProduct("pubg-mobile"),
-    getSeoProduct("free-fire"),
-    getSeoProduct("call-of-duty-mobile"),
-    getSeoProduct("afk-journey"),
-    getSeoProduct("mobile-legends-bang-bang"),
-    getCompetitorSlugsForLocale(language, country),
-    getFeatureNav(language),
-  ]);
+  const [content, imageContent, productsRes, linkedSlugs, featureNav] =
+    await Promise.all([
+      getContent(language, country),
+      getImageContent(),
+      getSeoProducts(),
+      getCompetitorSlugsForLocale(language, country),
+      getFeatureNav(language),
+    ]);
 
   const products = productsRes.data
     .filter((p) => p.is_popular)
     .sort((a, b) => a.order - b.order);
 
-  const productImage = (p: SeoProduct) => ({
-    src: p.logo_url,
-    alt: `${p.name} game icon`,
-  });
+  const productImage = (slug: string) =>
+    productImageBySlug(productsRes.data, slug);
   const ctaImages = [
-    productImage(freeFireRes.data),
-    productImage(codMobileRes.data),
-    productImage(afkJourneyRes.data),
-    productImage(mlbbRes.data),
+    productImage("free-fire"),
+    productImage("call-of-duty-mobile"),
+    productImage("genshin-impact"),
+    productImage("mobile-legends-bang-bang"),
   ];
-  const stepsImage = productImage(pubgMobileRes.data);
+  const stepsImage = productImage("pubg-mobile");
 
   return (
     <main>
