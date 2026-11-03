@@ -5,7 +5,8 @@ import type { FeatureNavKey } from "@/content/features";
 import type { GiftCardCountry } from "@/content/giftcard";
 
 type HeaderProps = {
-  hero: HeroContent;
+  /** Omit for pages without the hero banner (e.g. blog posts). */
+  hero?: HeroContent;
   language: string;
   country: string;
   productSlug?: string;
@@ -40,7 +41,7 @@ export default function Header({
         giftCardCountries={giftCardCountries}
         activeFeature={activeFeature}
       />
-      <HeroBanner hero={hero} h2Href={h2Href} />
+      {hero && <HeroBanner hero={hero} h2Href={h2Href} />}
     </header>
   );
 }

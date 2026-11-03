@@ -17,6 +17,11 @@ import {
   getSeoProduct,
   type SeoProduct,
 } from "@/content/api";
+import {
+  blogPostCards,
+  getBlogPosts,
+  latestBlogPosts,
+} from "@/content/blog";
 import { getCompetitorSlugsForLocale } from "@/content/competitors";
 import { getFeatureNav } from "@/content/features";
 import { pathForLocale } from "@/content/seo";
@@ -32,14 +37,21 @@ export default async function ProductDetailsView({
   country,
   product,
 }: ProductDetailsViewProps) {
-  const [imageContent, productRes, languageProductRes, linkedSlugs, featureNav] =
-    await Promise.all([
-      getImageContent(),
-      getSeoProduct(product.slug),
-      getSeoLanguageProduct(product.slug, language, country),
-      getCompetitorSlugsForLocale(language, country),
-      getFeatureNav(language),
-    ]);
+  const [
+    imageContent,
+    productRes,
+    languageProductRes,
+    linkedSlugs,
+    featureNav,
+    blogPosts,
+  ] = await Promise.all([
+    getImageContent(),
+    getSeoProduct(product.slug),
+    getSeoLanguageProduct(product.slug, language, country),
+    getCompetitorSlugsForLocale(language, country),
+    getFeatureNav(language),
+    getBlogPosts("top-up", `${language}-${country}`, product.slug),
+  ]);
 
   const products = productRes.other_products || [];
 
@@ -56,6 +68,16 @@ export default async function ProductDetailsView({
 
   const ctaImages = [productImage, productImage, productImage, productImage];
   const stepsImage = productImage;
+
+  // Pages with posts show their latest ones; the rest keep the default cards.
+  const blogArticles =
+    blogPosts.length > 0
+      ? blogPostCards(
+          latestBlogPosts(blogPosts),
+          pathForLocale(language, country, product.slug),
+          productImage.src,
+        )
+      : imageContent.blogs;
 
   return (
     <main>
@@ -116,7 +138,7 @@ export default async function ProductDetailsView({
         country={country}
         linkedSlugs={linkedSlugs}
       />
-      <InsideBitsika blog={content.blog} articles={imageContent.blogs} />
+      <InsideBitsika blog={content.blog} articles={blogArticles} />
       <FAQ faq={content.faq} />
       <Footer
         footer={content.footer}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { SeoLanguage, SeoProduct } from "./api";
+import type { BlogPostPage } from "./blog";
 import type { CompetitorPageEntry } from "./competitors";
 import type { Content } from "./shape";
 import { getSeoLanguages } from "./api";
@@ -142,6 +143,42 @@ export async function buildGiftCardProductMetadata(
       title: content.meta.title,
       description: content.meta.description,
       images: ["/images/bitsika-og-thumbnail.png"],
+    },
+  };
+}
+
+/**
+ * Metadata for a blog post. A post exists in a single lang-country, so its
+ * canonical and its one hreflang alternate both point at itself. The parent
+ * product's artwork doubles as the link-preview image.
+ */
+export function buildBlogPostMetadata(page: BlogPostPage): Metadata {
+  const { post, path, imageSrc, imageAlt } = page;
+  const title = post.content.meta.title || post.title;
+  const description = post.content.meta.description;
+  const hreflang = (
+    post.content.meta.hreflang || `${page.language}-${page.country}`
+  ).toLowerCase();
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: path,
+      languages: { [hreflang]: path },
+    },
+    openGraph: {
+      type: "article",
+      url: path,
+      title,
+      description,
+      publishedTime: post.createdAt || undefined,
+      images: [{ url: imageSrc, alt: imageAlt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageSrc],
     },
   };
 }

@@ -21,6 +21,8 @@ export type VrsCompany = {
 export type BlogArticle = {
   title: string;
   image: RemoteImage;
+  /** Set for real posts; placeholder articles aren't linked. */
+  href?: string;
 };
 
 export type ImageContent = {

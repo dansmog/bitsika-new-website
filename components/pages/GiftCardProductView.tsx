@@ -11,6 +11,11 @@ import GetStarted from "@/components/sections/GetStarted";
 import InfoBlock from "@/components/sections/InfoBox";
 import Testimonials from "@/components/sections/Testimonials";
 import { getImageContent } from "@/content";
+import {
+  blogPostCards,
+  getBlogPosts,
+  latestBlogPosts,
+} from "@/content/blog";
 import { getFeatureNav } from "@/content/features";
 import {
   getGiftCardImagesBySlugs,
@@ -18,6 +23,7 @@ import {
   getGiftCardProductExtras,
   getGiftCardSecondary,
   giftCardPath,
+  giftCardProductPath,
 } from "@/content/giftcard";
 import type { Content } from "@/content/shape";
 
@@ -36,6 +42,8 @@ export default async function GiftCardProductView({
   content,
   moreGamesHeading,
 }: GiftCardProductViewProps) {
+  const langCountry = `${language}-${country}`;
+
   const [
     imageContent,
     extras,
@@ -43,6 +51,7 @@ export default async function GiftCardProductView({
     focusImages,
     giftCardCountries,
     featureNav,
+    blogPosts,
   ] = await Promise.all([
     getImageContent(),
     getGiftCardProductExtras(slug),
@@ -50,14 +59,23 @@ export default async function GiftCardProductView({
     getGiftCardImagesBySlugs([slug]),
     getGiftCardProductCountries(slug),
     getFeatureNav(language),
+    getBlogPosts("gift-card", langCountry, slug),
   ]);
-
-  const langCountry = `${language}-${country}`;
 
   // All four CTAs and the GetStarted image use the focus product's artwork.
   const focusImage = focusImages[0];
   const ctaImages = [focusImage, focusImage, focusImage, focusImage];
   const stepsImage = focusImage;
+
+  // Pages with posts show their latest ones; the rest keep the default cards.
+  const blogArticles =
+    blogPosts.length > 0
+      ? blogPostCards(
+          latestBlogPosts(blogPosts),
+          giftCardProductPath(langCountry, slug),
+          focusImage.src,
+        )
+      : secondary.blogs;
 
   return (
     <main>
@@ -96,7 +114,7 @@ export default async function GiftCardProductView({
         country={country}
         linkedSlugs={new Set()}
       />
-      <InsideBitsika blog={content.blog} articles={secondary.blogs} />
+      <InsideBitsika blog={content.blog} articles={blogArticles} />
       <FAQ faq={content.faq} />
       <Footer
         footer={content.footer}

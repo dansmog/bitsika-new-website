@@ -3,14 +3,19 @@ import { splitBold } from "@/lib/formatText";
 type DownloadButtonProps = {
   desktopLabel: string;
   mobileLabel: string;
+  className?: string;
 };
 
-function AppStoreButton({ desktopLabel, mobileLabel }: DownloadButtonProps) {
+function AppStoreButton({
+  desktopLabel,
+  mobileLabel,
+  className = "",
+}: DownloadButtonProps) {
   const mobile = splitBold(mobileLabel);
   return (
     <span
       aria-disabled="true"
-      className="flex items-center whitespace-nowrap tracking-[-0.02em] gap-2 px-3.75 py-2.5 bg-surface-white text-ink text-sm font-medium rounded-xl  max-md:border max-md:border-[#E0E0E0] max-md:px-2.75 max-md:py-2.75 max-md:gap-3">
+      className={`flex items-center whitespace-nowrap tracking-[-0.02em] gap-2 px-3.75 py-2.5 bg-surface-white text-ink text-sm font-medium rounded-xl  max-md:border max-md:border-[#E0E0E0] max-md:px-2.75 max-md:py-2.75 max-md:gap-3 ${className}`}>
       <svg
         className="order-first md:order-last w-3.75 h-4.25 max-md:w-6.25 max-md:h-7"
         viewBox="0 0 15 17"
@@ -44,14 +49,18 @@ function AppStoreButton({ desktopLabel, mobileLabel }: DownloadButtonProps) {
   );
 }
 
-function GooglePlayButton({ desktopLabel, mobileLabel }: DownloadButtonProps) {
+function GooglePlayButton({
+  desktopLabel,
+  mobileLabel,
+  className = "",
+}: DownloadButtonProps) {
   const mobile = splitBold(mobileLabel);
   return (
     <a
       href="https://play.google.com/store/apps/details?id=africa.bitsika.bitsika_mobile&hl=en_GB&gl=gh"
       target="_blank"
       rel="noopener noreferrer"
-      className="flex cursor-pointer items-center whitespace-nowrap gap-2 tracking-[-0.02em] px-3.75 py-2.5 bg-ink text-white text-sm font-medium border border-[#3A3A3A] rounded-xl  max-md:px-2.75 max-md:py-2.75 max-md:gap-3">
+      className={`flex cursor-pointer items-center whitespace-nowrap gap-2 tracking-[-0.02em] px-3.75 py-2.5 bg-ink text-white text-sm font-medium border border-[#3A3A3A] rounded-xl  max-md:px-2.75 max-md:py-2.75 max-md:gap-3 ${className}`}>
       {/* Icon — shown left on mobile, right on desktop */}
       <svg
         className="order-first md:order-last w-4.25 h-4 max-md:w-7.25 max-md:h-7"
