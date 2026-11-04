@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Container from "@/components/layout/Container";
 import type { BlogContent } from "@/content/shape";
 import type { BlogArticle } from "@/content/imageShape";
@@ -8,8 +9,8 @@ type ArticleCardProps = {
 };
 
 function ArticleCard({ article }: ArticleCardProps) {
-  return (
-    <div className="flex flex-col gap-4 cursor-pointer group">
+  const body = (
+    <>
       <div className="relative w-full aspect-3/2 rounded-2xl overflow-hidden">
         <Image
           src={article.image.src}
@@ -22,8 +23,18 @@ function ArticleCard({ article }: ArticleCardProps) {
       <p className="font-google-sans font-normal text-[17px] leading-[130%] tracking-[-0.01em] text-white">
         {article.title}
       </p>
-    </div>
+    </>
   );
+
+  if (article.href) {
+    return (
+      <Link href={article.href} className="flex flex-col gap-4 group">
+        {body}
+      </Link>
+    );
+  }
+
+  return <div className="flex flex-col gap-4 cursor-pointer group">{body}</div>;
 }
 
 type InsideBitsikaProps = {

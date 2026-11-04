@@ -4,11 +4,13 @@ import ProductDetailsView from "@/components/pages/ProductDetailsView";
 import CompetitorView from "@/components/pages/CompetitorView";
 import GiftCardView from "@/components/pages/GiftCardView";
 import GiftCardProductView from "@/components/pages/GiftCardProductView";
+import BlogPostView from "@/components/pages/BlogPostView";
 import {
   getSeoLanguages,
   getSeoProduct,
   type SeoProduct,
 } from "@/content/api";
+import { getTopUpBlogPostPage, type BlogPostPage } from "@/content/blog";
 import {
   competitorSlugFromRoute,
   getCompetitorContent,
@@ -26,6 +28,7 @@ import {
 } from "@/content/giftcard";
 import type { Content } from "@/content/shape";
 import {
+  buildBlogPostMetadata,
   buildCompetitorAlternates,
   buildGiftCardAlternates,
   buildGiftCardProductMetadata,
@@ -61,7 +64,8 @@ type ResolvedRoute =
       slug: string;
       content: Content;
       moreGamesHeading: string;
-    };
+    }
+  | { kind: "blog-post"; page: BlogPostPage };
 
 async function resolveLocaleAndSegment(
   rawLocale: string,
@@ -88,7 +92,17 @@ async function resolveLocaleAndSegment(
   }
 
   const match = LOCALE_PATTERN.exec(rawLocale);
-  if (!match) notFound();
+  if (!match) {
+    // en-us top-up blog post: /<product-slug>/<post-slug>
+    const page = await getTopUpBlogPostPage(
+      HOME_LANGUAGE,
+      HOME_COUNTRY,
+      rawLocale,
+      segment,
+    );
+    if (!page) notFound();
+    return { kind: "blog-post", page };
+  }
 
   const [, language, country] = match;
 
@@ -206,6 +220,10 @@ export async function generateMetadata({
     };
   }
 
+  if (resolved.kind === "blog-post") {
+    return buildBlogPostMetadata(resolved.page);
+  }
+
   if (resolved.kind === "giftcard-product") {
     return buildGiftCardProductMetadata(
       resolved.language,
@@ -248,6 +266,10 @@ export default async function LocaleProductPage({
         entry={resolved.entry}
       />
     );
+  }
+
+  if (resolved.kind === "blog-post") {
+    return <BlogPostView page={resolved.page} />;
   }
 
   if (resolved.kind === "giftcard-product") {
