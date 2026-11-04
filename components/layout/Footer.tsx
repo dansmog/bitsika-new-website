@@ -90,6 +90,8 @@ type FooterProps = {
   featureNav: FeatureNavItem[];
   language: string;
   country: string;
+  /** Round the top corners; off where the footer meets a dark section. */
+  roundedTop?: boolean;
 };
 
 export default function Footer({
@@ -98,13 +100,16 @@ export default function Footer({
   featureNav,
   language,
   country,
+  roundedTop = true,
 }: FooterProps) {
   // The "features" entry is the column heading; the rest are its links.
   const featureHeading = featureNav.find((item) => item.key === "features");
   const featureItems = featureNav.filter((item) => item.key !== "features");
 
   return (
-    <footer className="relative bg-ink overflow-hidden rounded-t-3xl">
+    <footer
+      className={`relative bg-ink overflow-hidden ${roundedTop ? "rounded-t-3xl" : ""}`}
+    >
       <Image
         src="/images/mobile_star.svg"
         alt=""

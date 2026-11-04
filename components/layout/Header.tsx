@@ -31,7 +31,7 @@ export default function Header({
   activeFeature,
 }: HeaderProps) {
   return (
-    <header className="pb-5.75 bg-surface-subtle border-b border-border-default">
+    <header className=" bg-surface-subtle border-b border-border-default">
       <Navbar
         language={language}
         country={country}

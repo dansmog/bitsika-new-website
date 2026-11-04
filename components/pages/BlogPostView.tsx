@@ -94,6 +94,7 @@ export default async function BlogPostView({ page }: BlogPostViewProps) {
         featureNav={featureNav}
         language={language}
         country={country}
+        roundedTop={false}
       />
     </main>
   );
